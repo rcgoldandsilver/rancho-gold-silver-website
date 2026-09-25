@@ -6,8 +6,7 @@ backend:
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 media_processing:
-  max_width: 2000
-  max_height: 2000
+  enabled: true
 
 collections:
   - name: "site"
