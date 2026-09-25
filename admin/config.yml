@@ -1,0 +1,54 @@
+backend:
+  name: github
+  repo: REPLACE_WITH_GITHUB_USERNAME/REPLACE_WITH_REPOSITORY
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+media_processing:
+  max_width: 2000
+  max_height: 2000
+
+collections:
+  - name: "site"
+    label: "Website Content"
+    files:
+      - name: "general"
+        label: "General Information"
+        file: "content/settings/general.json"
+        format: "json"
+        fields:
+          - {label: "Homepage Intro", name: "homepage_intro", widget: "text"}
+          - {label: "Rancho Phone", name: "rancho_phone", widget: "string"}
+          - {label: "San Bernardino Phone", name: "sb_phone", widget: "string"}
+          - {label: "Rancho Address", name: "rancho_address", widget: "string"}
+          - {label: "San Bernardino Address", name: "sb_address", widget: "string"}
+          - {label: "XRF Text", name: "xrf_text", widget: "text"}
+          - {label: "Melting Text", name: "melting_text", widget: "text"}
+          - {label: "XRF Video", name: "xrf_video", widget: "file", required: false}
+          - {label: "Melting Video", name: "melting_video", widget: "file", required: false}
+          - {label: "Hero Image", name: "hero_image", widget: "image", required: false}
+  - name: "products"
+    label: "Products"
+    label_singular: "Product"
+    folder: "content/products"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json"
+    identifier_field: "name"
+    slug: "{{slug}}"
+    summary: "{{name}} — {{category}}"
+    fields:
+      - {label: "Show on Website", name: "visible", widget: "boolean", default: true}
+      - {label: "Product Name", name: "name", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["Gold Coins", "Gold Bars", "Silver Coins & Rounds", "Silver Bars"]}
+      - {label: "Main Photo", name: "image", widget: "image"}
+      - {label: "Second Photo", name: "image2", widget: "image", required: false}
+      - {label: "Description", name: "description", widget: "text", required: false}
+      - {label: "Weight", name: "weight", widget: "string", required: false}
+      - {label: "Purity", name: "purity", widget: "string", required: false}
+      - {label: "Precious Metal Content", name: "metal_content", widget: "string", required: false}
+      - {label: "Mint / Country", name: "mint_country", widget: "string", required: false}
+      - {label: "Available Sizes", name: "sizes", widget: "string", required: false}
+      - {label: "Display Order", name: "order", widget: "number", value_type: "int", default: 100}
