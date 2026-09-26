@@ -203,11 +203,14 @@ Last Updated:
 
 <script>
 
-const API='https://api.gold-api.com/price/';
+const API=
+  'https://api.gold-api.com/price/';
 
-const TROY_OUNCE_GRAMS=31.1034768;
+const DIRECTION_API=
+  'https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction';
 
-let previousPrices={};
+const TROY_OUNCE_GRAMS=
+  31.1034768;
 
 
 /* FORMAT MONEY */
@@ -225,7 +228,7 @@ function money(value){
 }
 
 
-/* GET PRICE */
+/* GET LIVE PRICE */
 
 async function getPrice(symbol){
 
@@ -251,28 +254,53 @@ async function getPrice(symbol){
 }
 
 
-/* UP / DOWN ARROW */
+/* GET MARKET DIRECTION */
 
-function updateArrow(id,current,previous){
+async function getDirections(){
 
-  const el=document.getElementById(id);
+  try{
+
+    const r=await fetch(
+      DIRECTION_API,
+      {cache:'no-store'}
+    );
+
+    if(!r.ok){
+      return {};
+    }
+
+    return await r.json();
+
+  }catch(e){
+
+    return {};
+
+  }
+
+}
+
+
+/* MARKET DIRECTION ARROW */
+
+function updateArrow(id,direction){
+
+  const el=
+    document.getElementById(id);
 
   if(!el)return;
 
   el.textContent='';
   el.className='price-move';
 
-  if(previous===undefined)return;
 
-
-  if(current>previous){
+  if(direction==='up'){
 
     el.textContent='▲';
     el.classList.add('price-up');
 
   }
 
-  else if(current<previous){
+  else if(direction==='down'){
 
     el.textContent='▼';
     el.classList.add('price-down');
@@ -318,46 +346,54 @@ async function updatePrices(){
 
   try{
 
-    const [gold,silver,platinum]=
-      await Promise.all([
+    const [
+      gold,
+      silver,
+      platinum,
+      directions
+    ]=await Promise.all([
 
-        getPrice('XAU'),
-        getPrice('XAG'),
-        getPrice('XPT')
+      getPrice('XAU'),
+      getPrice('XAG'),
+      getPrice('XPT'),
+      getDirections()
 
-      ]);
+    ]);
 
 
-    /* ARROWS */
+    /* MARKET DIRECTION ARROWS */
 
     updateArrow(
       'gold-arrow',
-      gold,
-      previousPrices.XAU
+      directions?.XAU?.direction
     );
 
     updateArrow(
       'silver-arrow',
-      silver,
-      previousPrices.XAG
+      directions?.XAG?.direction
     );
 
     updateArrow(
       'platinum-arrow',
-      platinum,
-      previousPrices.XPT
+      directions?.XPT?.direction
     );
 
 
     /* OUNCE */
 
-    document.getElementById('gold-oz').textContent=
+    document.getElementById(
+      'gold-oz'
+    ).textContent=
       money(gold);
 
-    document.getElementById('silver-oz').textContent=
+    document.getElementById(
+      'silver-oz'
+    ).textContent=
       money(silver);
 
-    document.getElementById('platinum-oz').textContent=
+    document.getElementById(
+      'platinum-oz'
+    ).textContent=
       money(platinum);
 
 
@@ -373,13 +409,19 @@ async function updatePrices(){
       platinum/TROY_OUNCE_GRAMS;
 
 
-    document.getElementById('gold-gram').textContent=
+    document.getElementById(
+      'gold-gram'
+    ).textContent=
       money(goldGram);
 
-    document.getElementById('silver-gram').textContent=
+    document.getElementById(
+      'silver-gram'
+    ).textContent=
       money(silverGram);
 
-    document.getElementById('platinum-gram').textContent=
+    document.getElementById(
+      'platinum-gram'
+    ).textContent=
       money(platinumGram);
 
 
@@ -390,17 +432,10 @@ async function updatePrices(){
 
     /* LAST UPDATED */
 
-    document.getElementById('last-updated').textContent=
+    document.getElementById(
+      'last-updated'
+    ).textContent=
       new Date().toLocaleString();
-
-
-    previousPrices={
-
-      XAU:gold,
-      XAG:silver,
-      XPT:platinum
-
-    };
 
 
   }catch(e){
@@ -416,7 +451,9 @@ async function updatePrices(){
 
 function updateClock(){
 
-  document.getElementById('clock').textContent=
+  document.getElementById(
+    'clock'
+  ).textContent=
     new Date().toLocaleString();
 
 }
