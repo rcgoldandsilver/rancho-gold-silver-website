@@ -1,1 +1,445 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="styles.css"><title>Precious Metals Price Board</title></head><body class="fullscreen-board"><div class="wrap center" style="padding:22px"><div style="display:flex;justify-content:space-between;align-items:center"><h2>RANCHO CUCAMONGA GOLD & SILVER<br><small>SAN BERNARDINO GOLD & SILVER</small></h2><a class="btn alt" href="prices.html">Exit Full Screen</a></div><div class="priceboxes"><div class="pricebox"><h1>GOLD</h1><div class="pricebig">— / oz</div><h3>— / gram</h3></div><div class="pricebox"><h1>SILVER</h1><div class="pricebig">— / oz</div><h3>— / gram</h3></div><div class="pricebox"><h1>PLATINUM</h1><div class="pricebig">— / oz</div><h3>— / gram</h3></div></div><div style="max-width:500px;margin:25px auto;text-align:left"><h2>Gold Price by Karat</h2><table><tr><th>24K</th><td>— / gram</td></tr><tr><th>22K</th><td>— / gram</td></tr><tr><th>21K</th><td>— / gram</td></tr><tr><th>18K</th><td>— / gram</td></tr><tr><th>14K</th><td>— / gram</td></tr><tr><th>10K</th><td>— / gram</td></tr><tr><th>9K</th><td>— / gram</td></tr><tr><th>8K</th><td>— / gram</td></tr></table></div><p>Current Time: <span id="clock"></span> • Last Updated: —</p></div><script>setInterval(()=>document.getElementById('clock').textContent=new Date().toLocaleString(),1000)</script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel="stylesheet" href="styles.css">
+
+<title>Precious Metals Price Board</title>
+
+<style>
+
+.price-move{
+  font-size:.65em;
+  margin-left:8px;
+  vertical-align:middle;
+  font-weight:bold;
+}
+
+.price-up{
+  color:#188038;
+}
+
+.price-down{
+  color:#c5221f;
+}
+
+.board-time{
+  margin-top:22px;
+  font-size:16px;
+}
+
+</style>
+
+</head>
+
+
+<body class="fullscreen-board">
+
+<div class="wrap center" style="padding:22px">
+
+
+<div style="display:flex;justify-content:space-between;align-items:center">
+
+<h2>
+RANCHO CUCAMONGA GOLD & SILVER
+<br>
+<small>SAN BERNARDINO GOLD & SILVER</small>
+</h2>
+
+<a class="btn alt" href="prices.html">
+Exit Full Screen
+</a>
+
+</div>
+
+
+<div class="priceboxes">
+
+
+<div class="pricebox">
+
+<h1>GOLD</h1>
+
+<div class="pricebig">
+
+<span id="gold-oz">—</span>
+
+<span
+id="gold-arrow"
+class="price-move">
+</span>
+
+/ oz
+
+</div>
+
+<h3>
+<span id="gold-gram">—</span> / gram
+</h3>
+
+</div>
+
+
+<div class="pricebox">
+
+<h1>SILVER</h1>
+
+<div class="pricebig">
+
+<span id="silver-oz">—</span>
+
+<span
+id="silver-arrow"
+class="price-move">
+</span>
+
+/ oz
+
+</div>
+
+<h3>
+<span id="silver-gram">—</span> / gram
+</h3>
+
+</div>
+
+
+<div class="pricebox">
+
+<h1>PLATINUM</h1>
+
+<div class="pricebig">
+
+<span id="platinum-oz">—</span>
+
+<span
+id="platinum-arrow"
+class="price-move">
+</span>
+
+/ oz
+
+</div>
+
+<h3>
+<span id="platinum-gram">—</span> / gram
+</h3>
+
+</div>
+
+
+</div>
+
+
+<div style="max-width:500px;margin:25px auto;text-align:left">
+
+<h2>Gold Price by Karat</h2>
+
+<table>
+
+<tr>
+<th>24K</th>
+<td id="k24">—</td>
+</tr>
+
+<tr>
+<th>22K</th>
+<td id="k22">—</td>
+</tr>
+
+<tr>
+<th>21K</th>
+<td id="k21">—</td>
+</tr>
+
+<tr>
+<th>18K</th>
+<td id="k18">—</td>
+</tr>
+
+<tr>
+<th>14K</th>
+<td id="k14">—</td>
+</tr>
+
+<tr>
+<th>10K</th>
+<td id="k10">—</td>
+</tr>
+
+<tr>
+<th>9K</th>
+<td id="k9">—</td>
+</tr>
+
+<tr>
+<th>8K</th>
+<td id="k8">—</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<p class="board-time">
+
+Current Time:
+<span id="clock"></span>
+
+&nbsp; • &nbsp;
+
+Last Updated:
+<span id="last-updated">Loading...</span>
+
+</p>
+
+
+</div>
+
+
+<script>
+
+const API='https://api.gold-api.com/price/';
+
+const TROY_OUNCE_GRAMS=31.1034768;
+
+let previousPrices={};
+
+
+/* FORMAT MONEY */
+
+function money(value){
+
+  return '$'+Number(value).toLocaleString(
+    'en-US',
+    {
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+/* GET PRICE */
+
+async function getPrice(symbol){
+
+  const r=await fetch(
+    API+symbol,
+    {cache:'no-store'}
+  );
+
+  if(!r.ok){
+    throw new Error('Price unavailable');
+  }
+
+  const data=await r.json();
+
+  const price=Number(data.price);
+
+  if(!Number.isFinite(price)){
+    throw new Error('Invalid price');
+  }
+
+  return price;
+
+}
+
+
+/* UP / DOWN ARROW */
+
+function updateArrow(id,current,previous){
+
+  const el=document.getElementById(id);
+
+  if(!el)return;
+
+  el.textContent='';
+  el.className='price-move';
+
+  if(previous===undefined)return;
+
+
+  if(current>previous){
+
+    el.textContent='▲';
+    el.classList.add('price-up');
+
+  }
+
+  else if(current<previous){
+
+    el.textContent='▼';
+    el.classList.add('price-down');
+
+  }
+
+}
+
+
+/* GOLD KARATS */
+
+function updateKarats(goldGram){
+
+  const karats={
+
+    k24:24/24,
+    k22:22/24,
+    k21:21/24,
+    k18:18/24,
+    k14:14/24,
+    k10:10/24,
+    k9:9/24,
+    k8:8/24
+
+  };
+
+
+  Object.entries(karats).forEach(
+    ([id,purity])=>{
+
+      document.getElementById(id).textContent=
+        money(goldGram*purity)+' / gram';
+
+    }
+  );
+
+}
+
+
+/* UPDATE PRICES */
+
+async function updatePrices(){
+
+  try{
+
+    const [gold,silver,platinum]=
+      await Promise.all([
+
+        getPrice('XAU'),
+        getPrice('XAG'),
+        getPrice('XPT')
+
+      ]);
+
+
+    /* ARROWS */
+
+    updateArrow(
+      'gold-arrow',
+      gold,
+      previousPrices.XAU
+    );
+
+    updateArrow(
+      'silver-arrow',
+      silver,
+      previousPrices.XAG
+    );
+
+    updateArrow(
+      'platinum-arrow',
+      platinum,
+      previousPrices.XPT
+    );
+
+
+    /* OUNCE */
+
+    document.getElementById('gold-oz').textContent=
+      money(gold);
+
+    document.getElementById('silver-oz').textContent=
+      money(silver);
+
+    document.getElementById('platinum-oz').textContent=
+      money(platinum);
+
+
+    /* GRAMS */
+
+    const goldGram=
+      gold/TROY_OUNCE_GRAMS;
+
+    const silverGram=
+      silver/TROY_OUNCE_GRAMS;
+
+    const platinumGram=
+      platinum/TROY_OUNCE_GRAMS;
+
+
+    document.getElementById('gold-gram').textContent=
+      money(goldGram);
+
+    document.getElementById('silver-gram').textContent=
+      money(silverGram);
+
+    document.getElementById('platinum-gram').textContent=
+      money(platinumGram);
+
+
+    /* KARATS */
+
+    updateKarats(goldGram);
+
+
+    /* LAST UPDATED */
+
+    document.getElementById('last-updated').textContent=
+      new Date().toLocaleString();
+
+
+    previousPrices={
+
+      XAU:gold,
+      XAG:silver,
+      XPT:platinum
+
+    };
+
+
+  }catch(e){
+
+    /* Keep last successful prices */
+
+  }
+
+}
+
+
+/* CLOCK */
+
+function updateClock(){
+
+  document.getElementById('clock').textContent=
+    new Date().toLocaleString();
+
+}
+
+updateClock();
+
+setInterval(
+  updateClock,
+  1000
+);
+
+
+/* PRICES */
+
+updatePrices();
+
+setInterval(
+  updatePrices,
+  5*60*1000
+);
+
+</script>
+
+
+</body>
+</html>
