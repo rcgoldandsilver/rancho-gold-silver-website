@@ -50,9 +50,14 @@ function pickDir(){
       if(el.textContent.includes('909')) el.textContent=SITE_INFO.rancho_phone;
     });
 
-    document.querySelectorAll('a[href^="tel:19096562600"]').forEach(el=>{
-      el.href=phoneLink(SITE_INFO.sb_phone);
-      if(el.textContent.includes('909')) el.textContent=SITE_INFO.sb_phone;
-    });
+   document.querySelectorAll('a[href^="tel:19096562600"]').forEach(el=>{
+  el.href=phoneLink(SITE_INFO.sb_phone);
+  if(el.textContent.includes('909')) el.textContent=SITE_INFO.sb_phone;
+});
+
+document.body.innerHTML=document.body.innerHTML
+  .replaceAll('9836 Foothill Blvd, Suite 6', SITE_INFO.rancho_address.split(', Rancho Cucamonga')[0])
+  .replaceAll('1292 W Mill St, Suite 107', SITE_INFO.sb_address.split(', San Bernardino')[0]);
+
   }catch(e){}
 })();
