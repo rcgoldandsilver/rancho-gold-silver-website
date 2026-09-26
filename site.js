@@ -265,6 +265,10 @@ const DIRECTION_API=
   'https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction';
 
 
+const TICKER_CACHE_KEY=
+  'ranchoMetalTicker';
+
+
 async function getMetalPrice(symbol){
 
   const r=await fetch(
@@ -363,6 +367,161 @@ function tickerArrow(direction){
 
 
 /* =========================================
+   DISPLAY TICKER
+   ========================================= */
+
+function displayMetalTicker(
+  gold,
+  silver,
+  platinum,
+  directions={}
+){
+
+  const ticker=
+    document.querySelector('.ticker');
+
+  if(!ticker)return;
+
+
+  const goldArrow=
+    tickerArrow(
+      directions?.XAU?.direction
+    );
+
+
+  const silverArrow=
+    tickerArrow(
+      directions?.XAG?.direction
+    );
+
+
+  const platinumArrow=
+    tickerArrow(
+      directions?.XPT?.direction
+    );
+
+
+  ticker.innerHTML=
+
+    '<span>GOLD <b>$'+
+
+    Number(gold).toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    )+
+
+    '</b>'+
+    goldArrow+
+    '</span>'+
+
+
+    '<span>SILVER <b>$'+
+
+    Number(silver).toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    )+
+
+    '</b>'+
+    silverArrow+
+    '</span>'+
+
+
+    '<span>PLATINUM <b>$'+
+
+    Number(platinum).toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    )+
+
+    '</b>'+
+    platinumArrow+
+    '</span>';
+
+}
+
+
+/* =========================================
+   SHOW SAVED PRICES IMMEDIATELY
+   ========================================= */
+
+function loadSavedTicker(){
+
+  try{
+
+    const saved=
+      localStorage.getItem(
+        TICKER_CACHE_KEY
+      );
+
+    if(!saved)return;
+
+
+    const data=
+      JSON.parse(saved);
+
+
+    if(
+      Number.isFinite(data.gold) &&
+      Number.isFinite(data.silver) &&
+      Number.isFinite(data.platinum)
+    ){
+
+      displayMetalTicker(
+        data.gold,
+        data.silver,
+        data.platinum,
+        data.directions || {}
+      );
+
+    }
+
+  }catch(e){}
+
+}
+
+
+/* =========================================
+   SAVE LAST SUCCESSFUL TICKER
+   ========================================= */
+
+function saveTicker(
+  gold,
+  silver,
+  platinum,
+  directions
+){
+
+  try{
+
+    localStorage.setItem(
+      TICKER_CACHE_KEY,
+      JSON.stringify({
+
+        gold,
+        silver,
+        platinum,
+        directions,
+        savedAt:Date.now()
+
+      })
+    );
+
+  }catch(e){}
+
+}
+
+
+/* =========================================
    UPDATE TOP TICKER
    ========================================= */
 
@@ -375,10 +534,6 @@ async function updateMetalTicker(){
 
 
   try{
-
-    /*
-      Get live prices and market direction.
-    */
 
     const [
       gold,
@@ -398,76 +553,27 @@ async function updateMetalTicker(){
     ]);
 
 
-    const goldArrow=
-      tickerArrow(
-        directions?.XAU?.direction
-      );
+    displayMetalTicker(
+      gold,
+      silver,
+      platinum,
+      directions
+    );
 
 
-    const silverArrow=
-      tickerArrow(
-        directions?.XAG?.direction
-      );
-
-
-    const platinumArrow=
-      tickerArrow(
-        directions?.XPT?.direction
-      );
-
-
-    ticker.innerHTML=
-
-      '<span>GOLD <b>$'+
-
-      gold.toLocaleString(
-        'en-US',
-        {
-          minimumFractionDigits:2,
-          maximumFractionDigits:2
-        }
-      )+
-
-      '</b>'+
-      goldArrow+
-      '</span>'+
-
-
-      '<span>SILVER <b>$'+
-
-      silver.toLocaleString(
-        'en-US',
-        {
-          minimumFractionDigits:2,
-          maximumFractionDigits:2
-        }
-      )+
-
-      '</b>'+
-      silverArrow+
-      '</span>'+
-
-
-      '<span>PLATINUM <b>$'+
-
-      platinum.toLocaleString(
-        'en-US',
-        {
-          minimumFractionDigits:2,
-          maximumFractionDigits:2
-        }
-      )+
-
-      '</b>'+
-      platinumArrow+
-      '</span>';
+    saveTicker(
+      gold,
+      silver,
+      platinum,
+      directions
+    );
 
 
   }catch(e){
 
     /*
-      If the API temporarily fails,
-      leave the existing ticker unchanged.
+      Saved prices remain visible if
+      the API is temporarily unavailable.
     */
 
   }
@@ -476,7 +582,14 @@ async function updateMetalTicker(){
 
 
 /* =========================================
-   LOAD PRICES NOW
+   SHOW SAVED PRICE FIRST
+   ========================================= */
+
+loadSavedTicker();
+
+
+/* =========================================
+   GET FRESH PRICE
    ========================================= */
 
 updateMetalTicker();
