@@ -54,7 +54,7 @@ function pickDir(){
 }
 
 
-/* Safely replace visible text without rebuilding the page */
+/* SAFE TEXT REPLACEMENT */
 
 function replacePageText(oldText,newText){
 
@@ -76,7 +76,7 @@ function replacePageText(oldText,newText){
 }
 
 
-/* Split address into the two lines used on the website */
+/* ADDRESS PARTS */
 
 function addressParts(address){
 
@@ -90,6 +90,8 @@ function addressParts(address){
   };
 }
 
+
+/* WEBSITE SETTINGS */
 
 (async()=>{
 
@@ -117,7 +119,7 @@ function addressParts(address){
     });
 
 
-    /* RANCHO PHONE LINKS */
+    /* RANCHO PHONE */
 
     document.querySelectorAll(
       'a[href^="tel:19096762900"], a[href^="tel:+19096762900"]'
@@ -132,7 +134,7 @@ function addressParts(address){
     });
 
 
-    /* SAN BERNARDINO PHONE LINKS */
+    /* SAN BERNARDINO PHONE */
 
     document.querySelectorAll(
       'a[href^="tel:19096562600"], a[href^="tel:+19096562600"]'
@@ -210,7 +212,126 @@ function addressParts(address){
 
     });
 
-
   }catch(e){}
 
 })();
+
+
+/* =========================================
+   LIVE PRECIOUS METAL TICKER
+   ========================================= */
+
+const METAL_API='https://api.gold-api.com/price/';
+
+let previousMetalPrices={};
+
+async function getMetalPrice(symbol){
+
+  const r=await fetch(
+    METAL_API+symbol,
+    {cache:'no-store'}
+  );
+
+  if(!r.ok){
+    throw new Error('Price unavailable');
+  }
+
+  const data=await r.json();
+
+  const price=Number(data.price);
+
+  if(!Number.isFinite(price)){
+    throw new Error('Invalid price');
+  }
+
+  return price;
+}
+
+
+function tickerArrow(symbol,price){
+
+  const previous=previousMetalPrices[symbol];
+
+  if(previous===undefined){
+    return '';
+  }
+
+  if(price>previous){
+    return ' ▲';
+  }
+
+  if(price<previous){
+    return ' ▼';
+  }
+
+  return '';
+}
+
+
+async function updateMetalTicker(){
+
+  const ticker=document.querySelector('.ticker');
+
+  if(!ticker)return;
+
+  try{
+
+    const [gold,silver,platinum]=await Promise.all([
+      getMetalPrice('XAU'),
+      getMetalPrice('XAG'),
+      getMetalPrice('XPT')
+    ]);
+
+    const goldArrow=tickerArrow('XAU',gold);
+    const silverArrow=tickerArrow('XAG',silver);
+    const platinumArrow=tickerArrow('XPT',platinum);
+
+    ticker.innerHTML=
+      '<span>GOLD <b>$'+
+      gold.toLocaleString('en-US',{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      })+
+      '</b>'+goldArrow+'</span>'+
+
+      '<span>SILVER <b>$'+
+      silver.toLocaleString('en-US',{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      })+
+      '</b>'+silverArrow+'</span>'+
+
+      '<span>PLATINUM <b>$'+
+      platinum.toLocaleString('en-US',{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      })+
+      '</b>'+platinumArrow+'</span>';
+
+    previousMetalPrices={
+      XAU:gold,
+      XAG:silver,
+      XPT:platinum
+    };
+
+  }catch(e){
+
+    /* Keep the existing ticker if the API
+       is temporarily unavailable. */
+
+  }
+
+}
+
+
+/* Load immediately */
+
+updateMetalTicker();
+
+
+/* Refresh every 5 minutes */
+
+setInterval(
+  updateMetalTicker,
+  5*60*1000
+);
