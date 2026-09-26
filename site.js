@@ -14,6 +14,7 @@ document.querySelectorAll('[data-details]').forEach(b=>{
   };
 });
 
+
 let SITE_INFO={
   rancho_phone:'(909) 676-2900',
   sb_phone:'(909) 656-2600',
@@ -21,13 +22,17 @@ let SITE_INFO={
   sb_address:'1292 W Mill St, Suite 107, San Bernardino, CA 92410'
 };
 
+
 function phoneLink(phone){
+
   return 'tel:+1'+String(phone)
     .replace(/\D/g,'')
     .replace(/^1/,'');
 }
 
+
 function pickCall(){
+
   const x=confirm(
     'OK = Rancho Cucamonga\nCancel = San Bernardino'
   );
@@ -37,7 +42,9 @@ function pickCall(){
   );
 }
 
+
 function pickDir(){
+
   const x=confirm(
     'OK = Rancho Cucamonga\nCancel = San Bernardino'
   );
@@ -54,7 +61,9 @@ function pickDir(){
 }
 
 
-/* SAFE TEXT REPLACEMENT */
+/* =========================================
+   SAFE TEXT REPLACEMENT
+   ========================================= */
 
 function replacePageText(oldText,newText){
 
@@ -68,15 +77,22 @@ function replacePageText(oldText,newText){
   while((node=walker.nextNode())){
 
     if(node.nodeValue.includes(oldText)){
+
       node.nodeValue=
-        node.nodeValue.replaceAll(oldText,newText);
+        node.nodeValue.replaceAll(
+          oldText,
+          newText
+        );
+
     }
 
   }
 }
 
 
-/* ADDRESS PARTS */
+/* =========================================
+   ADDRESS PARTS
+   ========================================= */
 
 function addressParts(address){
 
@@ -91,7 +107,9 @@ function addressParts(address){
 }
 
 
-/* WEBSITE SETTINGS */
+/* =========================================
+   WEBSITE SETTINGS
+   ========================================= */
 
 (async()=>{
 
@@ -115,7 +133,10 @@ function addressParts(address){
     /* HEADER PHONE */
 
     document.querySelectorAll('.phone').forEach(el=>{
-      el.textContent=SITE_INFO.rancho_phone;
+
+      el.textContent=
+        SITE_INFO.rancho_phone;
+
     });
 
 
@@ -125,10 +146,14 @@ function addressParts(address){
       'a[href^="tel:19096762900"], a[href^="tel:+19096762900"]'
     ).forEach(el=>{
 
-      el.href=phoneLink(SITE_INFO.rancho_phone);
+      el.href=
+        phoneLink(SITE_INFO.rancho_phone);
 
       if(el.textContent.includes('909')){
-        el.textContent=SITE_INFO.rancho_phone;
+
+        el.textContent=
+          SITE_INFO.rancho_phone;
+
       }
 
     });
@@ -140,10 +165,14 @@ function addressParts(address){
       'a[href^="tel:19096562600"], a[href^="tel:+19096562600"]'
     ).forEach(el=>{
 
-      el.href=phoneLink(SITE_INFO.sb_phone);
+      el.href=
+        phoneLink(SITE_INFO.sb_phone);
 
       if(el.textContent.includes('909')){
-        el.textContent=SITE_INFO.sb_phone;
+
+        el.textContent=
+          SITE_INFO.sb_phone;
+
       }
 
     });
@@ -151,13 +180,12 @@ function addressParts(address){
 
     /* ADDRESSES */
 
-    const rancho=addressParts(
-      SITE_INFO.rancho_address
-    );
+    const rancho=
+      addressParts(SITE_INFO.rancho_address);
 
-    const sb=addressParts(
-      SITE_INFO.sb_address
-    );
+    const sb=
+      addressParts(SITE_INFO.sb_address);
+
 
     replacePageText(
       '9836 Foothill Blvd, Suite 6',
@@ -182,9 +210,13 @@ function addressParts(address){
 
     /* GOOGLE MAPS */
 
-    document.querySelectorAll('iframe.map').forEach(frame=>{
+    document.querySelectorAll(
+      'iframe.map'
+    ).forEach(frame=>{
 
-      const src=frame.getAttribute('src') || '';
+      const src=
+        frame.getAttribute('src') || '';
+
 
       if(
         src.includes('9836+Foothill') ||
@@ -193,7 +225,9 @@ function addressParts(address){
 
         frame.src=
           'https://www.google.com/maps?q='+
-          encodeURIComponent(SITE_INFO.rancho_address)+
+          encodeURIComponent(
+            SITE_INFO.rancho_address
+          )+
           '&output=embed';
 
       }
@@ -205,7 +239,9 @@ function addressParts(address){
 
         frame.src=
           'https://www.google.com/maps?q='+
-          encodeURIComponent(SITE_INFO.sb_address)+
+          encodeURIComponent(
+            SITE_INFO.sb_address
+          )+
           '&output=embed';
 
       }
@@ -218,30 +254,16 @@ function addressParts(address){
 
 
 /* =========================================
-   LIVE PRECIOUS METAL TICKER
+   LIVE PRECIOUS METAL PRICES
    ========================================= */
 
-const METAL_API='https://api.gold-api.com/price/';
+const METAL_API=
+  'https://api.gold-api.com/price/';
 
 
-/* LOAD PREVIOUS PRICES */
+const DIRECTION_API=
+  'https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction';
 
-let previousMetalPrices={};
-
-try{
-
-  const saved=
-    localStorage.getItem('metalPrices');
-
-  if(saved){
-    previousMetalPrices=
-      JSON.parse(saved);
-  }
-
-}catch(e){}
-
-
-/* GET LIVE PRICE */
 
 async function getMetalPrice(symbol){
 
@@ -251,45 +273,98 @@ async function getMetalPrice(symbol){
   );
 
   if(!r.ok){
-    throw new Error('Price unavailable');
+
+    throw new Error(
+      'Price unavailable'
+    );
+
   }
 
-  const data=await r.json();
+  const data=
+    await r.json();
 
-  const price=Number(data.price);
+  const price=
+    Number(data.price);
 
   if(!Number.isFinite(price)){
-    throw new Error('Invalid price');
+
+    throw new Error(
+      'Invalid price'
+    );
+
   }
 
   return price;
 }
 
 
-/* ARROW */
+/* =========================================
+   GET MARKET DIRECTION
+   ========================================= */
 
-function tickerArrow(symbol,price){
+async function getMetalDirections(){
 
-  const previous=
-    previousMetalPrices[symbol];
+  try{
 
-  if(previous===undefined){
-    return '';
+    const r=await fetch(
+      DIRECTION_API,
+      {cache:'no-store'}
+    );
+
+    if(!r.ok){
+      return {};
+    }
+
+    return await r.json();
+
+  }catch(e){
+
+    return {};
+
   }
 
-  if(price>previous){
-    return '<span style="color:#20a447;font-weight:bold"> ▲</span>';
+}
+
+
+/* =========================================
+   DIRECTION ARROW
+   ========================================= */
+
+function tickerArrow(direction){
+
+  if(direction==='up'){
+
+    return (
+      '<span style="'+
+      'color:#188038;'+
+      'font-weight:800;'+
+      'margin-left:4px;'+
+      '">▲</span>'
+    );
+
   }
 
-  if(price<previous){
-    return '<span style="color:#d93025;font-weight:bold"> ▼</span>';
+
+  if(direction==='down'){
+
+    return (
+      '<span style="'+
+      'color:#c5221f;'+
+      'font-weight:800;'+
+      'margin-left:4px;'+
+      '">▼</span>'
+    );
+
   }
+
 
   return '';
 }
 
 
-/* UPDATE TICKER */
+/* =========================================
+   UPDATE TOP TICKER
+   ========================================= */
 
 async function updateMetalTicker(){
 
@@ -298,86 +373,118 @@ async function updateMetalTicker(){
 
   if(!ticker)return;
 
+
   try{
 
-    const [gold,silver,platinum]=
-      await Promise.all([
+    /*
+      Get live prices and market direction.
+    */
 
-        getMetalPrice('XAU'),
-        getMetalPrice('XAG'),
-        getMetalPrice('XPT')
+    const [
+      gold,
+      silver,
+      platinum,
+      directions
+    ]=await Promise.all([
 
-      ]);
+      getMetalPrice('XAU'),
+
+      getMetalPrice('XAG'),
+
+      getMetalPrice('XPT'),
+
+      getMetalDirections()
+
+    ]);
 
 
     const goldArrow=
-      tickerArrow('XAU',gold);
+      tickerArrow(
+        directions?.XAU?.direction
+      );
+
 
     const silverArrow=
-      tickerArrow('XAG',silver);
+      tickerArrow(
+        directions?.XAG?.direction
+      );
+
 
     const platinumArrow=
-      tickerArrow('XPT',platinum);
+      tickerArrow(
+        directions?.XPT?.direction
+      );
 
 
     ticker.innerHTML=
 
       '<span>GOLD <b>$'+
-      gold.toLocaleString('en-US',{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      })+
-      '</b>'+goldArrow+'</span>'+
+
+      gold.toLocaleString(
+        'en-US',
+        {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        }
+      )+
+
+      '</b>'+
+      goldArrow+
+      '</span>'+
+
 
       '<span>SILVER <b>$'+
-      silver.toLocaleString('en-US',{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      })+
-      '</b>'+silverArrow+'</span>'+
+
+      silver.toLocaleString(
+        'en-US',
+        {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        }
+      )+
+
+      '</b>'+
+      silverArrow+
+      '</span>'+
+
 
       '<span>PLATINUM <b>$'+
-      platinum.toLocaleString('en-US',{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      })+
-      '</b>'+platinumArrow+'</span>';
 
+      platinum.toLocaleString(
+        'en-US',
+        {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        }
+      )+
 
-    /* SAVE CURRENT PRICES */
-
-    previousMetalPrices={
-      XAU:gold,
-      XAG:silver,
-      XPT:platinum
-    };
-
-    try{
-
-      localStorage.setItem(
-        'metalPrices',
-        JSON.stringify(previousMetalPrices)
-      );
-
-    }catch(e){}
+      '</b>'+
+      platinumArrow+
+      '</span>';
 
 
   }catch(e){
 
-    /* Keep last successful display
-       if API is temporarily unavailable */
+    /*
+      If the API temporarily fails,
+      leave the existing ticker unchanged.
+    */
 
   }
 
 }
 
 
-/* LOAD IMMEDIATELY */
+/* =========================================
+   LOAD PRICES NOW
+   ========================================= */
 
 updateMetalTicker();
 
 
-/* REFRESH EVERY 5 MINUTES */
+/* =========================================
+   REFRESH EVERY 5 MINUTES
+   ========================================= */
 
 setInterval(
   updateMetalTicker,
