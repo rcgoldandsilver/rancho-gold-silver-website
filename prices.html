@@ -1,21 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Live Gold, Silver & Platinum Prices | Rancho Cucamonga</title>
+<meta charset="UTF-8">
 
-<meta name="description" content="Live gold, silver and platinum prices from Rancho Cucamonga Gold & Silver and San Bernardino Gold & Silver.">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Live Gold & Silver Prices | Rancho Cucamonga Gold & Silver
+</title>
 
 <link rel="stylesheet" href="styles.css">
 
 <style>
+
+.live-price-wrap{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.live-price-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:28px;
+}
+
+.live-price-card{
+  background:#fff;
+  border:1px solid #ddd5c8;
+  border-radius:14px;
+  padding:28px 20px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+
+.live-price-card h2{
+  margin:0 0 10px;
+  color:#132238;
+  font-size:24px;
+}
+
+.live-price-main{
+  font-size:36px;
+  font-weight:800;
+  color:#132238;
+  margin:8px 0;
+}
+
+.live-price-gram{
+  font-size:17px;
+  color:#555;
+}
+
 .price-move{
   font-size:.7em;
   margin-left:6px;
   vertical-align:middle;
-  font-weight:bold;
+  font-weight:800;
 }
 
 .price-up{
@@ -26,260 +70,371 @@
   color:#c5221f;
 }
 
-.last-update{
-  margin-top:18px;
-  text-align:center;
-  font-size:14px;
-  opacity:.8;
+.karat-box{
+  margin-top:32px;
+  background:#fff;
+  border:1px solid #ddd5c8;
+  border-radius:14px;
+  overflow:hidden;
 }
+
+.karat-box h2{
+  margin:0;
+  padding:22px;
+  text-align:center;
+  background:#132238;
+  color:#fff;
+}
+
+.karat-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.karat-table th,
+.karat-table td{
+  padding:14px 18px;
+  border-bottom:1px solid #eee7dd;
+  text-align:center;
+}
+
+.karat-table th{
+  background:#f5efe5;
+  color:#132238;
+}
+
+.karat-table tr:last-child td{
+  border-bottom:0;
+}
+
+.last-update{
+  text-align:center;
+  margin-top:22px;
+  font-size:14px;
+  color:#666;
+}
+
+.board-button{
+  text-align:center;
+  margin-top:24px;
+}
+
+@media(max-width:750px){
+
+  .live-price-grid{
+    grid-template-columns:1fr;
+  }
+
+  .live-price-main{
+    font-size:32px;
+  }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header class="header">
-<div class="wrap head">
 
-<a class="brand" href="index.html">
-<img src="assets/IMG_9487.jpeg" alt="Rancho Cucamonga Gold & Silver">
-<span>RANCHO CUCAMONGA<br>GOLD & SILVER</span>
-</a>
+  <a href="index.html" class="brand">
 
-<button class="menuBtn btn">☰</button>
+    <img
+      src="assets/logo.png"
+      alt="Rancho Cucamonga Gold & Silver">
 
-<nav class="nav">
-<a href="index.html">Home</a>
-<a href="buy.html">What We Buy</a>
-<a href="sell.html">What We Sell</a>
-<a href="testing.html">Testing & Verification</a>
-<a href="about.html">About Us</a>
-<a href="locations.html">Locations</a>
-<a href="prices.html">Live Prices</a>
-</nav>
+  </a>
 
-<span class="phone">(909) 676-2900</span>
 
-</div>
+  <button class="menuBtn"
+  aria-label="Menu">
+    ☰
+  </button>
+
+
+  <nav class="nav">
+
+    <a href="index.html">Home</a>
+
+    <a href="buy.html">
+      What We Buy
+    </a>
+
+    <a href="sell.html">
+      What We Sell
+    </a>
+
+    <a href="testing.html">
+      Testing & Verification
+    </a>
+
+    <a href="about.html">
+      About Us
+    </a>
+
+    <a href="locations.html">
+      Locations
+    </a>
+
+    <a href="prices.html">
+      Live Prices
+    </a>
+
+  </nav>
+
+
+  <a
+    class="phone"
+    href="tel:19096762900">
+
+    (909) 676-2900
+
+  </a>
+
 </header>
 
 
-<a href="prices.html" class="ticker" style="display:block;text-decoration:none">
-<span>GOLD <b>Live Bid</b></span>
-<span>SILVER <b>Live Bid</b></span>
-<span>PLATINUM <b>Live Bid</b></span>
-</a>
+<div class="ticker">
 
+  <span>
+    GOLD <b>Loading...</b>
+  </span>
 
-<section class="pagehero">
-<div class="wrap">
+  <span>
+    SILVER <b>Loading...</b>
+  </span>
 
-<h1>Live Precious Metal Prices</h1>
-
-<p class="lead">
-Bid prices • Troy ounce and gram display
-</p>
+  <span>
+    PLATINUM <b>Loading...</b>
+  </span>
 
 </div>
-</section>
+
+
+<main>
 
 
 <section class="section">
-<div class="wrap">
+
+<div class="live-price-wrap">
 
 
-<div class="priceboxes">
+  <div class="sectionTitle">
 
-<div class="pricebox">
-<h2>GOLD</h2>
+    <h1>
+      Live Precious Metal Prices
+    </h1>
 
-<div class="pricebig">
-<span id="gold-oz">—</span>
-<span id="gold-arrow" class="price-move"></span>
- / oz
+    <p>
+      Current gold, silver and platinum
+      market prices.
+    </p>
+
+  </div>
+
+
+  <div class="live-price-grid">
+
+
+    <!-- GOLD -->
+
+    <div class="live-price-card">
+
+      <h2>Gold</h2>
+
+      <div class="live-price-main">
+
+        <span id="gold-oz">—</span>
+
+        <span
+          id="gold-arrow"
+          class="price-move">
+        </span>
+
+      </div>
+
+      <div class="live-price-gram">
+
+        <span id="gold-gram">—</span>
+        / gram
+
+      </div>
+
+    </div>
+
+
+    <!-- SILVER -->
+
+    <div class="live-price-card">
+
+      <h2>Silver</h2>
+
+      <div class="live-price-main">
+
+        <span id="silver-oz">—</span>
+
+        <span
+          id="silver-arrow"
+          class="price-move">
+        </span>
+
+      </div>
+
+      <div class="live-price-gram">
+
+        <span id="silver-gram">—</span>
+        / gram
+
+      </div>
+
+    </div>
+
+
+    <!-- PLATINUM -->
+
+    <div class="live-price-card">
+
+      <h2>Platinum</h2>
+
+      <div class="live-price-main">
+
+        <span id="platinum-oz">—</span>
+
+        <span
+          id="platinum-arrow"
+          class="price-move">
+        </span>
+
+      </div>
+
+      <div class="live-price-gram">
+
+        <span id="platinum-gram">—</span>
+        / gram
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- GOLD KARAT TABLE -->
+
+  <div class="karat-box">
+
+    <h2>
+      Gold Price Per Gram by Karat
+    </h2>
+
+
+    <table class="karat-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Karat</th>
+
+          <th>Purity</th>
+
+          <th>Market Value / Gram</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        <tr>
+          <td>24K</td>
+          <td>99.9%</td>
+          <td id="k24">—</td>
+        </tr>
+
+        <tr>
+          <td>22K</td>
+          <td>91.7%</td>
+          <td id="k22">—</td>
+        </tr>
+
+        <tr>
+          <td>21K</td>
+          <td>87.5%</td>
+          <td id="k21">—</td>
+        </tr>
+
+        <tr>
+          <td>18K</td>
+          <td>75.0%</td>
+          <td id="k18">—</td>
+        </tr>
+
+        <tr>
+          <td>14K</td>
+          <td>58.3%</td>
+          <td id="k14">—</td>
+        </tr>
+
+        <tr>
+          <td>10K</td>
+          <td>41.7%</td>
+          <td id="k10">—</td>
+        </tr>
+
+        <tr>
+          <td>9K</td>
+          <td>37.5%</td>
+          <td id="k9">—</td>
+        </tr>
+
+        <tr>
+          <td>8K</td>
+          <td>33.3%</td>
+          <td id="k8">—</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div
+    id="last-updated"
+    class="last-update">
+
+    Last Updated: —
+
+  </div>
+
+
+  <div class="board-button">
+
+    <a
+      href="price-board.html"
+      class="btn primary">
+
+      Open Full Screen Price Board
+
+    </a>
+
+  </div>
+
+
 </div>
 
-<div>
-<span id="gold-gram">—</span> / gram
-</div>
-</div>
-
-
-<div class="pricebox">
-<h2>SILVER</h2>
-
-<div class="pricebig">
-<span id="silver-oz">—</span>
-<span id="silver-arrow" class="price-move"></span>
- / oz
-</div>
-
-<div>
-<span id="silver-gram">—</span> / gram
-</div>
-</div>
-
-
-<div class="pricebox">
-<h2>PLATINUM</h2>
-
-<div class="pricebig">
-<span id="platinum-oz">—</span>
-<span id="platinum-arrow" class="price-move"></span>
- / oz
-</div>
-
-<div>
-<span id="platinum-gram">—</span> / gram
-</div>
-</div>
-
-</div>
-
-
-<div class="last-update">
-Last Updated: <span id="last-updated">Loading...</span>
-</div>
-
-
-<div class="grid2" style="margin-top:24px">
-
-
-<div>
-
-<h2>Gold Price by Karat</h2>
-
-<table>
-
-<tr>
-<th>Karat</th>
-<th>Bid Value / Gram</th>
-</tr>
-
-<tr>
-<td>24K</td>
-<td id="k24">—</td>
-</tr>
-
-<tr>
-<td>22K</td>
-<td id="k22">—</td>
-</tr>
-
-<tr>
-<td>21K</td>
-<td id="k21">—</td>
-</tr>
-
-<tr>
-<td>18K</td>
-<td id="k18">—</td>
-</tr>
-
-<tr>
-<td>14K</td>
-<td id="k14">—</td>
-</tr>
-
-<tr>
-<td>10K</td>
-<td id="k10">—</td>
-</tr>
-
-<tr>
-<td>9K</td>
-<td id="k9">—</td>
-</tr>
-
-<tr>
-<td>8K</td>
-<td id="k8">—</td>
-</tr>
-
-</table>
-
-</div>
-
-
-<div>
-
-<h2>Price Board</h2>
-
-<p>
-View Gold, Silver and Platinum prices on a clean full-screen display for the store.
-</p>
-
-<a class="btn" href="price-board.html">
-Open Full Screen Price Board
-</a>
-
-</div>
-
-
-</div>
-</div>
 </section>
 
 
-<footer class="footer">
-
-<div class="wrap footgrid">
-
-<div>
-
-<h3>Our Locations</h3>
-
-<b>Rancho Cucamonga Gold & Silver</b><br>
-9836 Foothill Blvd, Suite 6<br>
-Rancho Cucamonga, CA 91730<br>
-<a href="tel:19096762900">(909) 676-2900</a>
-
-<br><br>
-
-<b>San Bernardino Gold & Silver</b><br>
-1292 W Mill St, Suite 107<br>
-San Bernardino, CA 92410<br>
-<a href="tel:19096562600">(909) 656-2600</a>
-
-</div>
-
-
-<div>
-
-<h3>Quick Links</h3>
-
-<a href="buy.html">What We Buy</a><br>
-<a href="sell.html">What We Sell</a><br>
-<a href="testing.html">Testing</a><br>
-<a href="prices.html">Live Prices</a>
-
-</div>
-
-
-<div>
-
-<h3>Hours</h3>
-
-Rancho: Mon–Thu 10–7<br>
-Fri 10–1, 2–7<br>
-Sat 10–7<br>
-Sun Closed
-
-<br><br>
-
-San Bernardino: Mon–Thu 11–7<br>
-Fri 11–1, 3–7<br>
-Sat 11–7<br>
-Sun Closed
-
-</div>
-
-</div>
-
-<div class="wrap center" style="margin-top:28px">
-© 2026 Rancho Cucamonga Gold & Silver • San Bernardino Gold & Silver
-</div>
-
-</footer>
+</main>
 
 
 <script src="site.js"></script>
@@ -287,78 +442,115 @@ Sun Closed
 
 <script>
 
-const TROY_OUNCE_GRAMS=31.1034768;
+const TROY_OUNCE_GRAMS=
+  31.1034768;
 
-let pagePreviousPrices={};
 
-
-/* MONEY FORMAT */
+/* =========================================
+   MONEY FORMAT
+   ========================================= */
 
 function money(value){
 
-  return '$'+Number(value).toLocaleString(
-    'en-US',
-    {
-      minimumFractionDigits:2,
-      maximumFractionDigits:2
-    }
-  );
+  return '$'+
+    Number(value).toLocaleString(
+      'en-US',
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    );
 
 }
 
 
-/* ARROW */
+/* =========================================
+   MARKET DIRECTION ARROW
+   ========================================= */
 
-function showArrow(id,current,previous){
+function showMarketArrow(
+  id,
+  direction
+){
 
-  const el=document.getElementById(id);
+  const el=
+    document.getElementById(id);
 
   if(!el)return;
 
+
   el.textContent='';
+
   el.className='price-move';
 
-  if(previous===undefined)return;
 
-  if(current>previous){
+  if(direction==='up'){
 
     el.textContent='▲';
-    el.classList.add('price-up');
+
+    el.classList.add(
+      'price-up'
+    );
 
   }
 
-  else if(current<previous){
+
+  else if(direction==='down'){
 
     el.textContent='▼';
-    el.classList.add('price-down');
+
+    el.classList.add(
+      'price-down'
+    );
 
   }
 
 }
 
 
-/* KARAT CALCULATION */
+/* =========================================
+   GOLD KARAT VALUES
+   ========================================= */
 
-function updateKaratPrices(goldPerGram){
+function updateKaratPrices(
+  goldPerGram
+){
 
   const karats={
-    k24:24/24,
+
+    k24:1,
+
     k22:22/24,
+
     k21:21/24,
+
     k18:18/24,
+
     k14:14/24,
+
     k10:10/24,
+
     k9:9/24,
+
     k8:8/24
+
   };
 
-  Object.entries(karats).forEach(([id,purity])=>{
 
-    const el=document.getElementById(id);
+  Object.entries(
+    karats
+  ).forEach(([id,purity])=>{
+
+    const el=
+      document.getElementById(id);
 
     if(el){
+
       el.textContent=
-        money(goldPerGram*purity)+' / gram';
+        money(
+          goldPerGram*purity
+        );
+
     }
 
   });
@@ -366,53 +558,67 @@ function updateKaratPrices(goldPerGram){
 }
 
 
-/* LOAD LIVE PRICES */
+/* =========================================
+   UPDATE LIVE PRICE PAGE
+   ========================================= */
 
 async function updateLivePricePage(){
 
   try{
 
-    const [gold,silver,platinum]=await Promise.all([
+    const [
+      gold,
+      silver,
+      platinum,
+      directions
+    ]=await Promise.all([
 
       getMetalPrice('XAU'),
 
       getMetalPrice('XAG'),
 
-      getMetalPrice('XPT')
+      getMetalPrice('XPT'),
+
+      getMetalDirections()
 
     ]);
 
 
-    /* ARROWS */
+    /* DIRECTION ARROWS */
 
-    showArrow(
+    showMarketArrow(
       'gold-arrow',
-      gold,
-      pagePreviousPrices.XAU
+      directions?.XAU?.direction
     );
 
-    showArrow(
+    showMarketArrow(
       'silver-arrow',
-      silver,
-      pagePreviousPrices.XAG
+      directions?.XAG?.direction
     );
 
-    showArrow(
+    showMarketArrow(
       'platinum-arrow',
-      platinum,
-      pagePreviousPrices.XPT
+      directions?.XPT?.direction
     );
 
 
     /* PER OUNCE */
 
-    document.getElementById('gold-oz').textContent=
+    document.getElementById(
+      'gold-oz'
+    ).textContent=
       money(gold);
 
-    document.getElementById('silver-oz').textContent=
+
+    document.getElementById(
+      'silver-oz'
+    ).textContent=
       money(silver);
 
-    document.getElementById('platinum-oz').textContent=
+
+    document.getElementById(
+      'platinum-oz'
+    ).textContent=
       money(platinum);
 
 
@@ -428,37 +634,46 @@ async function updateLivePricePage(){
       platinum/TROY_OUNCE_GRAMS;
 
 
-    document.getElementById('gold-gram').textContent=
+    document.getElementById(
+      'gold-gram'
+    ).textContent=
       money(goldGram);
 
-    document.getElementById('silver-gram').textContent=
+
+    document.getElementById(
+      'silver-gram'
+    ).textContent=
       money(silverGram);
 
-    document.getElementById('platinum-gram').textContent=
+
+    document.getElementById(
+      'platinum-gram'
+    ).textContent=
       money(platinumGram);
 
 
-    /* GOLD KARATS */
+    /* GOLD KARAT TABLE */
 
-    updateKaratPrices(goldGram);
+    updateKaratPrices(
+      goldGram
+    );
 
 
     /* LAST UPDATED */
 
-    document.getElementById('last-updated').textContent=
+    document.getElementById(
+      'last-updated'
+    ).textContent=
+      'Last Updated: '+
       new Date().toLocaleString();
-
-
-    pagePreviousPrices={
-      XAU:gold,
-      XAG:silver,
-      XPT:platinum
-    };
 
 
   }catch(e){
 
-    /* Keep last successful prices */
+    /*
+      Keep the existing values
+      if an API request fails.
+    */
 
   }
 
@@ -478,6 +693,7 @@ setInterval(
 );
 
 </script>
+
 
 </body>
 </html>
