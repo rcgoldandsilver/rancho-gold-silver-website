@@ -1,14 +1,14 @@
 {
-  "visible": true,
-  "name": "American Gold Buffalo",
-  "category": "Gold Coins",
-  "image": "/assets/IMG_8099(3).jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
   "purity": "",
   "metal_content": "",
-  "mint_country": "",
+  "name": "American Gold Buffalo",
+  "order": 20,
+  "visible": true,
   "sizes": "",
-  "order": 20
+  "image2": "",
+  "weight": "",
+  "mint_country": "",
+  "image": "/assets/uploads/whatsapp-image-2026-06-06-at-12.12.52-pm-3-.jpeg",
+  "description": "",
+  "category": "Gold Coins"
 }
