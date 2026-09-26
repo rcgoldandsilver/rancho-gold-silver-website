@@ -1,14 +1,14 @@
 {
-  "visible": true,
-  "name": "American Gold Eagle",
-  "category": "Gold Coins",
-  "image": "/assets/IMG_9492.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
   "purity": "",
   "metal_content": "",
-  "mint_country": "",
+  "name": "American Gold Eagle",
+  "order": 10,
+  "visible": true,
   "sizes": "",
-  "order": 10
+  "image2": "",
+  "weight": "",
+  "mint_country": "",
+  "image": "/assets/uploads/whatsapp-image-2026-07-24-at-6.31.06-pm.jpeg",
+  "description": "",
+  "category": "Gold Coins"
 }
