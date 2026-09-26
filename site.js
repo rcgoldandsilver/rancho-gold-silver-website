@@ -223,7 +223,25 @@ function addressParts(address){
 
 const METAL_API='https://api.gold-api.com/price/';
 
+
+/* LOAD PREVIOUS PRICES */
+
 let previousMetalPrices={};
+
+try{
+
+  const saved=
+    localStorage.getItem('metalPrices');
+
+  if(saved){
+    previousMetalPrices=
+      JSON.parse(saved);
+  }
+
+}catch(e){}
+
+
+/* GET LIVE PRICE */
 
 async function getMetalPrice(symbol){
 
@@ -248,45 +266,62 @@ async function getMetalPrice(symbol){
 }
 
 
+/* ARROW */
+
 function tickerArrow(symbol,price){
 
-  const previous=previousMetalPrices[symbol];
+  const previous=
+    previousMetalPrices[symbol];
 
   if(previous===undefined){
     return '';
   }
 
   if(price>previous){
-    return ' ▲';
+    return '<span style="color:#20a447;font-weight:bold"> ▲</span>';
   }
 
   if(price<previous){
-    return ' ▼';
+    return '<span style="color:#d93025;font-weight:bold"> ▼</span>';
   }
 
   return '';
 }
 
 
+/* UPDATE TICKER */
+
 async function updateMetalTicker(){
 
-  const ticker=document.querySelector('.ticker');
+  const ticker=
+    document.querySelector('.ticker');
 
   if(!ticker)return;
 
   try{
 
-    const [gold,silver,platinum]=await Promise.all([
-      getMetalPrice('XAU'),
-      getMetalPrice('XAG'),
-      getMetalPrice('XPT')
-    ]);
+    const [gold,silver,platinum]=
+      await Promise.all([
 
-    const goldArrow=tickerArrow('XAU',gold);
-    const silverArrow=tickerArrow('XAG',silver);
-    const platinumArrow=tickerArrow('XPT',platinum);
+        getMetalPrice('XAU'),
+        getMetalPrice('XAG'),
+        getMetalPrice('XPT')
+
+      ]);
+
+
+    const goldArrow=
+      tickerArrow('XAU',gold);
+
+    const silverArrow=
+      tickerArrow('XAG',silver);
+
+    const platinumArrow=
+      tickerArrow('XPT',platinum);
+
 
     ticker.innerHTML=
+
       '<span>GOLD <b>$'+
       gold.toLocaleString('en-US',{
         minimumFractionDigits:2,
@@ -308,28 +343,41 @@ async function updateMetalTicker(){
       })+
       '</b>'+platinumArrow+'</span>';
 
+
+    /* SAVE CURRENT PRICES */
+
     previousMetalPrices={
       XAU:gold,
       XAG:silver,
       XPT:platinum
     };
 
+    try{
+
+      localStorage.setItem(
+        'metalPrices',
+        JSON.stringify(previousMetalPrices)
+      );
+
+    }catch(e){}
+
+
   }catch(e){
 
-    /* Keep the existing ticker if the API
-       is temporarily unavailable. */
+    /* Keep last successful display
+       if API is temporarily unavailable */
 
   }
 
 }
 
 
-/* Load immediately */
+/* LOAD IMMEDIATELY */
 
 updateMetalTicker();
 
 
-/* Refresh every 5 minutes */
+/* REFRESH EVERY 5 MINUTES */
 
 setInterval(
   updateMetalTicker,
