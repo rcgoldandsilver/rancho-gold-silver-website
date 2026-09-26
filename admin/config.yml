@@ -2,7 +2,7 @@ backend:
   name: github
   repo: rcgoldandsilver/rancho-gold-silver-website
   branch: main
-  base_url: https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev
+    base_url: https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
