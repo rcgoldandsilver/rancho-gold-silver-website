@@ -1,14 +1,14 @@
 {
-  "purity": "",
-  "metal_content": "",
+  "purity": "22K",
+  "metal_content": "90%",
   "name": "American Gold Eagle $50",
-  "order": 10,
+  "order": 0,
   "visible": true,
-  "sizes": "",
-  "image2": "",
-  "weight": "",
-  "mint_country": "",
+  "sizes": "1oz, 1/2oz, 1/4oz, 1/10oz",
+  "image2": "/assets/uploads/whatsapp-image-2026-06-03-at-3.50.40-pm-4-.jpeg",
+  "weight": "33.4G",
+  "mint_country": "USA",
   "image": "/assets/uploads/whatsapp-image-2026-07-24-at-6.31.06-pm.jpeg",
-  "description": "",
+  "description": "Gold American Eagle from 1986-Present",
   "category": "Gold Coins"
 }
