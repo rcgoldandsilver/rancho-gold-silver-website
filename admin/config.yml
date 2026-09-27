@@ -303,6 +303,57 @@ collections:
             default: "Location gallery placeholders will be replaced with the final 4–6 photos you provide."
 
 
+          # ==================================
+          # SAN BERNARDINO LOCATION PAGE
+          # ==================================
+
+          - label: "San Bernardino Page - Heading"
+            name: "sb_page_heading"
+            widget: "string"
+            default: "San Bernardino Gold & Silver"
+
+          - label: "San Bernardino Page - Intro"
+            name: "sb_page_intro"
+            widget: "text"
+            default: "Buy Gold & Silver • Sell Gold & Silver • Free Appraisals • Professional Testing"
+
+          - label: "San Bernardino Page - Visit Us Heading"
+            name: "sb_visit_heading"
+            widget: "string"
+            default: "Visit Us"
+
+          - label: "San Bernardino Page - Gallery Heading"
+            name: "sb_gallery_heading"
+            widget: "string"
+            default: "Store Gallery"
+
+          - label: "San Bernardino Page - Gallery Photo 1"
+            name: "sb_gallery_image_1"
+            widget: "image"
+            required: false
+
+          - label: "San Bernardino Page - Gallery Photo 2"
+            name: "sb_gallery_image_2"
+            widget: "image"
+            required: false
+
+          - label: "San Bernardino Page - Gallery Photo 3"
+            name: "sb_gallery_image_3"
+            widget: "image"
+            required: false
+
+          - label: "San Bernardino Page - Gallery Photo 4"
+            name: "sb_gallery_image_4"
+            widget: "image"
+            required: false
+
+          - label: "San Bernardino Page - Gallery Note"
+            name: "sb_gallery_note"
+            widget: "text"
+            required: false
+            default: "Location gallery placeholders will be replaced with the final 4–6 photos you provide."
+
+
   # ==================================
   # PRODUCTS / WHAT WE SELL
   # ==================================
