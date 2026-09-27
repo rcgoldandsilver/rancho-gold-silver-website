@@ -1,1 +1,340 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Locations | Rancho Cucamonga & San Bernardino Gold & Silver</title><meta name="description" content="Gold & Silver Buyer & Seller in Rancho Cucamonga and San Bernardino, California."><link rel="stylesheet" href="styles.css"></head><body><header class="header"><div class="wrap head"><a class="brand" href="index.html"><img src="assets/IMG_9487.jpeg" alt="Rancho Cucamonga Gold & Silver"><span>RANCHO CUCAMONGA<br>GOLD & SILVER</span></a><button class="menuBtn btn">☰</button><nav class="nav"><a href="index.html">Home</a><a href="buy.html">What We Buy</a><a href="sell.html">What We Sell</a><a href="testing.html">Testing & Verification</a><a href="about.html">About Us</a><a href="locations.html">Locations</a><a href="prices.html">Live Prices</a></nav><span class="phone">(909) 676-2900</span></div></header><a href="prices.html" class="ticker" style="display:block;text-decoration:none"><span>GOLD <b>Live Bid</b> ▲</span><span>SILVER <b>Live Bid</b> ▲</span><span>PLATINUM <b>Live Bid</b> ▲</span></a><section class="pagehero"><div class="wrap"><h1>Our Locations</h1><p class="lead">Walk-ins welcome. No appointment needed.</p></div></section><section class="section"><div class="wrap grid2"><div class="location"><h2>Rancho Cucamonga Gold & Silver</h2><p>9836 Foothill Blvd, Suite 6<br>Rancho Cucamonga, CA 91730<br><a href="tel:19096762900"><b>(909) 676-2900</b></a></p><iframe class="map" loading="lazy" src="https://www.google.com/maps?q=9836+Foothill+Blvd+Suite+6+Rancho+Cucamonga+CA+91730&output=embed"></iframe><p><a class="btn" href="rancho-cucamonga.html">View Location</a></p></div><div class="location"><h2>San Bernardino Gold & Silver</h2><p>1292 W Mill St, Suite 107<br>San Bernardino, CA 92410<br><a href="tel:19096562600"><b>(909) 656-2600</b></a></p><iframe class="map" loading="lazy" src="https://www.google.com/maps?q=1292+W+Mill+St+Suite+107+San+Bernardino+CA+92410&output=embed"></iframe><p><a class="btn" href="san-bernardino.html">View Location</a></p></div></div></section><footer class="footer"><div class="wrap footgrid"><div><h3>Our Locations</h3><b>Rancho Cucamonga Gold & Silver</b><br>9836 Foothill Blvd, Suite 6<br>Rancho Cucamonga, CA 91730<br><a href="tel:19096762900">(909) 676-2900</a><br><br><b>San Bernardino Gold & Silver</b><br>1292 W Mill St, Suite 107<br>San Bernardino, CA 92410<br><a href="tel:19096562600">(909) 656-2600</a></div><div><h3>Quick Links</h3><a href="buy.html">What We Buy</a><br><a href="sell.html">What We Sell</a><br><a href="testing.html">Testing</a><br><a href="prices.html">Live Prices</a></div><div><h3>Hours</h3>Rancho: Mon–Thu 10–7<br>Fri 10–1, 2–7<br>Sat 10–7<br>Sun Closed<br><br>San Bernardino: Mon–Thu 11–7<br>Fri 11–1, 3–7<br>Sat 11–7<br>Sun Closed</div></div><div class="wrap center" style="margin-top:28px">© 2026 Rancho Cucamonga Gold & Silver • San Bernardino Gold & Silver</div></footer><script src="site.js"></script></body></html>
+backend:
+  name: github
+  repo: rcgoldandsilver/rancho-gold-silver-website
+  branch: main
+  base_url: https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+media_processing:
+  enabled: true
+
+collections:
+
+  - name: "site"
+    label: "Website Content"
+
+    files:
+
+      - name: "general"
+        label: "General Information"
+        file: "content/settings/general.json"
+        format: "json"
+
+        fields:
+
+          # ==================================
+          # GENERAL
+          # ==================================
+
+          - label: "Homepage Intro"
+            name: "homepage_intro"
+            widget: "text"
+
+          - label: "Rancho Phone"
+            name: "rancho_phone"
+            widget: "string"
+
+          - label: "San Bernardino Phone"
+            name: "sb_phone"
+            widget: "string"
+
+          - label: "Rancho Address"
+            name: "rancho_address"
+            widget: "string"
+
+          - label: "San Bernardino Address"
+            name: "sb_address"
+            widget: "string"
+
+
+          # ==================================
+          # HEADER
+          # ==================================
+
+          - label: "Header Logo"
+            name: "header_logo"
+            widget: "image"
+            required: false
+
+
+          # ==================================
+          # HOMEPAGE
+          # ==================================
+
+          - label: "Homepage Hero Image"
+            name: "hero_image"
+            widget: "image"
+            required: false
+
+          - label: "Homepage WE BUY Photo"
+            name: "homepage_buy_image"
+            widget: "image"
+            required: false
+
+          - label: "Homepage WE SELL Photo"
+            name: "homepage_sell_image"
+            widget: "image"
+            required: false
+
+
+          # ==================================
+          # WHAT WE BUY
+          # ==================================
+
+          - label: "What We Buy - Gold Jewelry Photo"
+            name: "buy_gold_jewelry_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Gold & Silver Coins Photo"
+            name: "buy_coins_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Bars & Bullion Photo"
+            name: "buy_bullion_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Sterling Silver & Silverware Photo"
+            name: "buy_silverware_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Dental Gold Photo"
+            name: "buy_dental_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Scrap Gold & Silver Photo"
+            name: "buy_scrap_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Other Precious Metals Photo"
+            name: "buy_other_metals_image"
+            widget: "image"
+            required: false
+
+
+          # ==================================
+          # TESTING & VERIFICATION
+          # ==================================
+
+          - label: "XRF Testing Photo"
+            name: "xrf_image"
+            widget: "image"
+            required: false
+
+          - label: "XRF Text"
+            name: "xrf_text"
+            widget: "text"
+
+          - label: "XRF Video"
+            name: "xrf_video"
+            widget: "file"
+            required: false
+
+          - label: "Sigma Metalytics Photo"
+            name: "sigma_image"
+            widget: "image"
+            required: false
+
+          - label: "Traditional Acid Testing Photo"
+            name: "acid_image"
+            widget: "image"
+            required: false
+
+          - label: "Assay & Melting Photo"
+            name: "melting_image"
+            widget: "image"
+            required: false
+
+          - label: "Melting Text"
+            name: "melting_text"
+            widget: "text"
+
+          - label: "Melting Video"
+            name: "melting_video"
+            widget: "file"
+            required: false
+
+
+          # ==================================
+          # ABOUT US
+          # ==================================
+
+          - label: "About Us - Intro"
+            name: "about_intro"
+            widget: "text"
+            default: "Family-owned. Three generations of precious-metals experience."
+
+          - label: "About Us - Main Heading"
+            name: "about_heading"
+            widget: "string"
+            default: "A Straightforward Way to Buy & Sell Precious Metals"
+
+          - label: "About Us - First Description"
+            name: "about_description_1"
+            widget: "text"
+            default: "Our family brings three generations of precious-metals knowledge to Rancho Cucamonga and San Bernardino. We focus on efficient local offices, professional testing and clear evaluations without commissioned salespeople pushing customers."
+
+          - label: "About Us - Second Description"
+            name: "about_description_2"
+            widget: "text"
+            default: "Items are tested and weighed in front of you whenever practical. For appropriate larger lots, our in-house precious metal assay and melting process can help create a consistent sample before an offer."
+
+          - label: "About Us - Trust Label 1"
+            name: "about_trust_1"
+            widget: "string"
+            default: "Three Generations"
+
+          - label: "About Us - Trust Label 2"
+            name: "about_trust_2"
+            widget: "string"
+            default: "Family-Owned"
+
+          - label: "About Us - Trust Label 3"
+            name: "about_trust_3"
+            widget: "string"
+            default: "Transparent Testing"
+
+          - label: "About Us - Trust Label 4"
+            name: "about_trust_4"
+            widget: "string"
+            default: "Competitive Offers"
+
+          - label: "About Us - Photo 1"
+            name: "about_image_1"
+            widget: "image"
+            required: false
+
+          - label: "About Us - Photo 2"
+            name: "about_image_2"
+            widget: "image"
+            required: false
+
+
+          # ==================================
+          # LOCATIONS PAGE
+          # ==================================
+
+          - label: "Locations - Page Heading"
+            name: "locations_heading"
+            widget: "string"
+            default: "Our Locations"
+
+          - label: "Locations - Intro"
+            name: "locations_intro"
+            widget: "text"
+            default: "Walk-ins welcome. No appointment needed."
+
+          - label: "Rancho Location - Name"
+            name: "rancho_location_name"
+            widget: "string"
+            default: "Rancho Cucamonga Gold & Silver"
+
+          - label: "Rancho Location - View Button"
+            name: "rancho_location_button"
+            widget: "string"
+            default: "View Location"
+
+          - label: "San Bernardino Location - Name"
+            name: "sb_location_name"
+            widget: "string"
+            default: "San Bernardino Gold & Silver"
+
+          - label: "San Bernardino Location - View Button"
+            name: "sb_location_button"
+            widget: "string"
+            default: "View Location"
+
+
+  # ==================================
+  # PRODUCTS / WHAT WE SELL
+  # ==================================
+
+  - name: "products"
+    label: "Products"
+    label_singular: "Product"
+
+    folder: "content/products"
+
+    create: true
+    delete: true
+
+    extension: "json"
+    format: "json"
+
+    identifier_field: "name"
+
+    slug: "{{slug}}"
+
+    summary: "{{name}} — {{category}}"
+
+    fields:
+
+      - label: "Show on Website"
+        name: "visible"
+        widget: "boolean"
+        default: true
+
+      - label: "Product Name"
+        name: "name"
+        widget: "string"
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Gold Coins"
+          - "Gold Bars"
+          - "Silver Coins & Rounds"
+          - "Silver Bars"
+
+      - label: "Main Photo"
+        name: "image"
+        widget: "image"
+
+      - label: "Second Photo"
+        name: "image2"
+        widget: "image"
+        required: false
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "Weight"
+        name: "weight"
+        widget: "string"
+        required: false
+
+      - label: "Purity"
+        name: "purity"
+        widget: "string"
+        required: false
+
+      - label: "Precious Metal Content"
+        name: "metal_content"
+        widget: "string"
+        required: false
+
+      - label: "Mint / Country"
+        name: "mint_country"
+        widget: "string"
+        required: false
+
+      - label: "Available Sizes"
+        name: "sizes"
+        widget: "string"
+        required: false
+
+      - label: "Display Order"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+        default: 100
