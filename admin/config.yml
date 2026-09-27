@@ -254,40 +254,174 @@ collections:
           # WHAT WE BUY
           # ==================================
 
-          - label: "What We Buy - Gold Jewelry Photo"
+          - label: "What We Buy - Page Heading"
+            name: "buy_page_heading"
+            widget: "string"
+            default: "What We Buy"
+
+          - label: "What We Buy - Page Intro"
+            name: "buy_page_intro"
+            widget: "text"
+            default: "Bring your precious metals to either location for professional testing and a clear offer."
+
+
+          # GOLD JEWELRY
+
+          - label: "Gold Jewelry - Photo"
             name: "buy_gold_jewelry_image"
             widget: "image"
             required: false
 
-          - label: "What We Buy - Gold & Silver Coins Photo"
+          - label: "Gold Jewelry - Heading"
+            name: "buy_gold_jewelry_heading"
+            widget: "string"
+            default: "Gold Jewelry"
+
+          - label: "Gold Jewelry - Description"
+            name: "buy_gold_jewelry_description"
+            widget: "text"
+            default: "8K, 9K, 10K, 14K, 18K, 21K, 22K and 24K solid gold; yellow, white and rose gold; broken or unwanted jewelry."
+
+
+          # GOLD & SILVER COINS
+
+          - label: "Gold & Silver Coins - Photo"
             name: "buy_coins_image"
             widget: "image"
             required: false
 
-          - label: "What We Buy - Bars & Bullion Photo"
+          - label: "Gold & Silver Coins - Heading"
+            name: "buy_coins_heading"
+            widget: "string"
+            default: "Gold & Silver Coins"
+
+          - label: "Gold & Silver Coins - Description"
+            name: "buy_coins_description"
+            widget: "text"
+            default: "American Eagles, Buffalos, Maple Leafs, Krugerrands, Mexican gold, Silver Eagles, Morgan and Peace dollars, constitutional silver and world bullion coins."
+
+
+          # BARS & BULLION
+
+          - label: "Bars & Bullion - Photo"
             name: "buy_bullion_image"
             widget: "image"
             required: false
 
-          - label: "What We Buy - Sterling Silver & Silverware Photo"
+          - label: "Bars & Bullion - Heading"
+            name: "buy_bullion_heading"
+            widget: "string"
+            default: "Bars & Bullion"
+
+          - label: "Bars & Bullion - Description"
+            name: "buy_bullion_description"
+            widget: "text"
+            default: "Gold and silver bars, rounds and bullion in recognized or unbranded forms, various sizes and weights."
+
+
+          # STERLING SILVER & SILVERWARE
+
+          - label: "Sterling Silver & Silverware - Photo"
             name: "buy_silverware_image"
             widget: "image"
             required: false
 
-          - label: "What We Buy - Dental Gold Photo"
+          - label: "Sterling Silver & Silverware - Heading"
+            name: "buy_silverware_heading"
+            widget: "string"
+            default: "Sterling Silver & Silverware"
+
+          - label: "Sterling Silver & Silverware - Description"
+            name: "buy_silverware_description"
+            widget: "text"
+            default: "Sterling and other real silver including .925 and .800; flatware, tea sets, trays, bowls and household silver."
+
+
+          # DENTAL GOLD
+
+          - label: "Dental Gold - Photo"
             name: "buy_dental_image"
             widget: "image"
             required: false
 
-          - label: "What We Buy - Scrap Gold & Silver Photo"
+          - label: "Dental Gold - Heading"
+            name: "buy_dental_heading"
+            widget: "string"
+            default: "Dental Gold"
+
+          - label: "Dental Gold - Description"
+            name: "buy_dental_description"
+            widget: "text"
+            default: "Dental gold, crowns, bridges and other precious-metal dental material."
+
+
+          # SCRAP GOLD & SILVER
+
+          - label: "Scrap Gold & Silver - Photo"
             name: "buy_scrap_image"
             widget: "image"
             required: false
 
-          - label: "What We Buy - Other Precious Metals Photo"
+          - label: "Scrap Gold & Silver - Heading"
+            name: "buy_scrap_heading"
+            widget: "string"
+            default: "Scrap Gold & Silver"
+
+          - label: "Scrap Gold & Silver - Description"
+            name: "buy_scrap_description"
+            widget: "text"
+            default: "Broken jewelry, clippings, filings, casting scrap, melted pieces, nuggets and other testable precious-metal scrap."
+
+
+          # OTHER PRECIOUS METALS
+
+          - label: "Other Precious Metals - Photo"
             name: "buy_other_metals_image"
             widget: "image"
             required: false
+
+          - label: "Other Precious Metals - Heading"
+            name: "buy_other_metals_heading"
+            widget: "string"
+            default: "Other Precious Metals"
+
+          - label: "Other Precious Metals - Description"
+            name: "buy_other_metals_description"
+            widget: "text"
+            default: "Platinum, palladium and rhodium items can be evaluated when appropriate."
+
+
+          # SELLING PROCESS
+
+          - label: "Selling Process - Heading"
+            name: "buy_process_heading"
+            widget: "string"
+            default: "Simple Selling Process"
+
+          - label: "Selling Process - Step 1"
+            name: "buy_process_step_1"
+            widget: "string"
+            default: "1. Bring Your Items"
+
+          - label: "Selling Process - Step 2"
+            name: "buy_process_step_2"
+            widget: "string"
+            default: "2. We Test & Weigh"
+
+          - label: "Selling Process - Step 3"
+            name: "buy_process_step_3"
+            widget: "string"
+            default: "3. Receive Our Offer"
+
+          - label: "Selling Process - Step 4"
+            name: "buy_process_step_4"
+            widget: "string"
+            default: "4. Immediate Payment"
+
+          - label: "Selling Process - Payment Methods"
+            name: "buy_payment_methods"
+            widget: "string"
+            default: "Cash • Business Check • Zelle • Wire Transfer"
 
 
           # ==================================
