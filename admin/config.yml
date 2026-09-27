@@ -24,7 +24,9 @@ collections:
 
         fields:
 
+          # ==================================
           # GENERAL
+          # ==================================
 
           - label: "Homepage Intro"
             name: "homepage_intro"
@@ -47,7 +49,9 @@ collections:
             widget: "string"
 
 
+          # ==================================
           # HEADER
+          # ==================================
 
           - label: "Header Logo"
             name: "header_logo"
@@ -56,7 +60,9 @@ collections:
             hint: "Logo shown at the top of the website."
 
 
+          # ==================================
           # HOMEPAGE
+          # ==================================
 
           - label: "Homepage Hero Image"
             name: "hero_image"
@@ -74,7 +80,9 @@ collections:
             required: false
 
 
+          # ==================================
           # WHAT WE BUY
+          # ==================================
 
           - label: "What We Buy - Gold Jewelry Photo"
             name: "buy_gold_jewelry_image"
@@ -112,7 +120,9 @@ collections:
             required: false
 
 
+          # ==================================
           # TESTING & VERIFICATION
+          # ==================================
 
           - label: "XRF Testing Photo"
             name: "xrf_image"
@@ -153,7 +163,66 @@ collections:
             required: false
 
 
-  # PRODUCTS
+          # ==================================
+          # ABOUT US
+          # ==================================
+
+          - label: "About Us - Intro"
+            name: "about_intro"
+            widget: "text"
+            default: "Family-owned. Three generations of precious-metals experience."
+
+          - label: "About Us - Main Heading"
+            name: "about_heading"
+            widget: "string"
+            default: "A Straightforward Way to Buy & Sell Precious Metals"
+
+          - label: "About Us - First Description"
+            name: "about_description_1"
+            widget: "text"
+            default: "Our family brings three generations of precious-metals knowledge to Rancho Cucamonga and San Bernardino. We focus on efficient local offices, professional testing and clear evaluations without commissioned salespeople pushing customers."
+
+          - label: "About Us - Second Description"
+            name: "about_description_2"
+            widget: "text"
+            default: "Items are tested and weighed in front of you whenever practical. For appropriate larger lots, our in-house precious metal assay and melting process can help create a consistent sample before an offer."
+
+          - label: "About Us - Trust Label 1"
+            name: "about_trust_1"
+            widget: "string"
+            default: "Three Generations"
+
+          - label: "About Us - Trust Label 2"
+            name: "about_trust_2"
+            widget: "string"
+            default: "Family-Owned"
+
+          - label: "About Us - Trust Label 3"
+            name: "about_trust_3"
+            widget: "string"
+            default: "Transparent Testing"
+
+          - label: "About Us - Trust Label 4"
+            name: "about_trust_4"
+            widget: "string"
+            default: "Competitive Offers"
+
+          - label: "About Us - Photo 1"
+            name: "about_image_1"
+            widget: "image"
+            required: false
+            hint: "First photo shown on the About Us page."
+
+          - label: "About Us - Photo 2"
+            name: "about_image_2"
+            widget: "image"
+            required: false
+            hint: "Second photo shown on the About Us page."
+
+
+  # ==================================
+  # PRODUCTS / WHAT WE SELL
+  # ==================================
 
   - name: "products"
     label: "Products"
