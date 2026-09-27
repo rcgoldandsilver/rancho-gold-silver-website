@@ -1,340 +1,739 @@
-backend:
-  name: github
-  repo: rcgoldandsilver/rancho-gold-silver-website
-  branch: main
-  base_url: https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev
+<!doctype html>
+<html lang="en">
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-media_processing:
-  enabled: true
+<title>Locations | Rancho Cucamonga & San Bernardino Gold & Silver</title>
 
-collections:
+<meta
+  name="description"
+  content="Gold & Silver Buyer & Seller in Rancho Cucamonga and San Bernardino, California."
+>
 
-  - name: "site"
-    label: "Website Content"
+<link rel="stylesheet" href="styles.css">
+</head>
 
-    files:
+<body>
 
-      - name: "general"
-        label: "General Information"
-        file: "content/settings/general.json"
-        format: "json"
 
-        fields:
+<!-- HEADER -->
 
-          # ==================================
-          # GENERAL
-          # ==================================
+<header class="header">
 
-          - label: "Homepage Intro"
-            name: "homepage_intro"
-            widget: "text"
+<div class="wrap head">
 
-          - label: "Rancho Phone"
-            name: "rancho_phone"
-            widget: "string"
+<a class="brand" href="index.html">
 
-          - label: "San Bernardino Phone"
-            name: "sb_phone"
-            widget: "string"
+<img
+  id="header-logo"
+  src="assets/IMG_9487.jpeg"
+  alt="Rancho Cucamonga Gold & Silver"
+>
 
-          - label: "Rancho Address"
-            name: "rancho_address"
-            widget: "string"
+<span>
+RANCHO CUCAMONGA<br>
+GOLD & SILVER
+</span>
 
-          - label: "San Bernardino Address"
-            name: "sb_address"
-            widget: "string"
+</a>
 
+<button class="menuBtn btn">
+☰
+</button>
 
-          # ==================================
-          # HEADER
-          # ==================================
+<nav class="nav">
 
-          - label: "Header Logo"
-            name: "header_logo"
-            widget: "image"
-            required: false
+<a href="index.html">Home</a>
+<a href="buy.html">What We Buy</a>
+<a href="sell.html">What We Sell</a>
+<a href="testing.html">Testing & Verification</a>
+<a href="about.html">About Us</a>
+<a href="locations.html">Locations</a>
+<a href="prices.html">Live Prices</a>
 
+</nav>
 
-          # ==================================
-          # HOMEPAGE
-          # ==================================
+<span class="phone">
+(909) 676-2900
+</span>
 
-          - label: "Homepage Hero Image"
-            name: "hero_image"
-            widget: "image"
-            required: false
+</div>
 
-          - label: "Homepage WE BUY Photo"
-            name: "homepage_buy_image"
-            widget: "image"
-            required: false
+</header>
 
-          - label: "Homepage WE SELL Photo"
-            name: "homepage_sell_image"
-            widget: "image"
-            required: false
 
 
-          # ==================================
-          # WHAT WE BUY
-          # ==================================
+<!-- LIVE PRICES -->
 
-          - label: "What We Buy - Gold Jewelry Photo"
-            name: "buy_gold_jewelry_image"
-            widget: "image"
-            required: false
-
-          - label: "What We Buy - Gold & Silver Coins Photo"
-            name: "buy_coins_image"
-            widget: "image"
-            required: false
-
-          - label: "What We Buy - Bars & Bullion Photo"
-            name: "buy_bullion_image"
-            widget: "image"
-            required: false
-
-          - label: "What We Buy - Sterling Silver & Silverware Photo"
-            name: "buy_silverware_image"
-            widget: "image"
-            required: false
-
-          - label: "What We Buy - Dental Gold Photo"
-            name: "buy_dental_image"
-            widget: "image"
-            required: false
-
-          - label: "What We Buy - Scrap Gold & Silver Photo"
-            name: "buy_scrap_image"
-            widget: "image"
-            required: false
-
-          - label: "What We Buy - Other Precious Metals Photo"
-            name: "buy_other_metals_image"
-            widget: "image"
-            required: false
-
-
-          # ==================================
-          # TESTING & VERIFICATION
-          # ==================================
-
-          - label: "XRF Testing Photo"
-            name: "xrf_image"
-            widget: "image"
-            required: false
-
-          - label: "XRF Text"
-            name: "xrf_text"
-            widget: "text"
-
-          - label: "XRF Video"
-            name: "xrf_video"
-            widget: "file"
-            required: false
-
-          - label: "Sigma Metalytics Photo"
-            name: "sigma_image"
-            widget: "image"
-            required: false
-
-          - label: "Traditional Acid Testing Photo"
-            name: "acid_image"
-            widget: "image"
-            required: false
-
-          - label: "Assay & Melting Photo"
-            name: "melting_image"
-            widget: "image"
-            required: false
-
-          - label: "Melting Text"
-            name: "melting_text"
-            widget: "text"
-
-          - label: "Melting Video"
-            name: "melting_video"
-            widget: "file"
-            required: false
-
-
-          # ==================================
-          # ABOUT US
-          # ==================================
-
-          - label: "About Us - Intro"
-            name: "about_intro"
-            widget: "text"
-            default: "Family-owned. Three generations of precious-metals experience."
-
-          - label: "About Us - Main Heading"
-            name: "about_heading"
-            widget: "string"
-            default: "A Straightforward Way to Buy & Sell Precious Metals"
-
-          - label: "About Us - First Description"
-            name: "about_description_1"
-            widget: "text"
-            default: "Our family brings three generations of precious-metals knowledge to Rancho Cucamonga and San Bernardino. We focus on efficient local offices, professional testing and clear evaluations without commissioned salespeople pushing customers."
-
-          - label: "About Us - Second Description"
-            name: "about_description_2"
-            widget: "text"
-            default: "Items are tested and weighed in front of you whenever practical. For appropriate larger lots, our in-house precious metal assay and melting process can help create a consistent sample before an offer."
-
-          - label: "About Us - Trust Label 1"
-            name: "about_trust_1"
-            widget: "string"
-            default: "Three Generations"
-
-          - label: "About Us - Trust Label 2"
-            name: "about_trust_2"
-            widget: "string"
-            default: "Family-Owned"
-
-          - label: "About Us - Trust Label 3"
-            name: "about_trust_3"
-            widget: "string"
-            default: "Transparent Testing"
-
-          - label: "About Us - Trust Label 4"
-            name: "about_trust_4"
-            widget: "string"
-            default: "Competitive Offers"
-
-          - label: "About Us - Photo 1"
-            name: "about_image_1"
-            widget: "image"
-            required: false
-
-          - label: "About Us - Photo 2"
-            name: "about_image_2"
-            widget: "image"
-            required: false
-
-
-          # ==================================
-          # LOCATIONS PAGE
-          # ==================================
-
-          - label: "Locations - Page Heading"
-            name: "locations_heading"
-            widget: "string"
-            default: "Our Locations"
-
-          - label: "Locations - Intro"
-            name: "locations_intro"
-            widget: "text"
-            default: "Walk-ins welcome. No appointment needed."
-
-          - label: "Rancho Location - Name"
-            name: "rancho_location_name"
-            widget: "string"
-            default: "Rancho Cucamonga Gold & Silver"
-
-          - label: "Rancho Location - View Button"
-            name: "rancho_location_button"
-            widget: "string"
-            default: "View Location"
-
-          - label: "San Bernardino Location - Name"
-            name: "sb_location_name"
-            widget: "string"
-            default: "San Bernardino Gold & Silver"
-
-          - label: "San Bernardino Location - View Button"
-            name: "sb_location_button"
-            widget: "string"
-            default: "View Location"
-
-
-  # ==================================
-  # PRODUCTS / WHAT WE SELL
-  # ==================================
-
-  - name: "products"
-    label: "Products"
-    label_singular: "Product"
-
-    folder: "content/products"
-
-    create: true
-    delete: true
-
-    extension: "json"
-    format: "json"
-
-    identifier_field: "name"
-
-    slug: "{{slug}}"
-
-    summary: "{{name}} — {{category}}"
-
-    fields:
-
-      - label: "Show on Website"
-        name: "visible"
-        widget: "boolean"
-        default: true
-
-      - label: "Product Name"
-        name: "name"
-        widget: "string"
-
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options:
-          - "Gold Coins"
-          - "Gold Bars"
-          - "Silver Coins & Rounds"
-          - "Silver Bars"
-
-      - label: "Main Photo"
-        name: "image"
-        widget: "image"
-
-      - label: "Second Photo"
-        name: "image2"
-        widget: "image"
-        required: false
-
-      - label: "Description"
-        name: "description"
-        widget: "text"
-        required: false
-
-      - label: "Weight"
-        name: "weight"
-        widget: "string"
-        required: false
-
-      - label: "Purity"
-        name: "purity"
-        widget: "string"
-        required: false
-
-      - label: "Precious Metal Content"
-        name: "metal_content"
-        widget: "string"
-        required: false
-
-      - label: "Mint / Country"
-        name: "mint_country"
-        widget: "string"
-        required: false
-
-      - label: "Available Sizes"
-        name: "sizes"
-        widget: "string"
-        required: false
-
-      - label: "Display Order"
-        name: "order"
-        widget: "number"
-        value_type: "int"
-        default: 100
+<a
+  href="prices.html"
+  class="ticker"
+  style="display:block;text-decoration:none"
+>
+
+<span>
+GOLD <b>Live Bid</b>
+</span>
+
+<span>
+SILVER <b>Live Bid</b>
+</span>
+
+<span>
+PLATINUM <b>Live Bid</b>
+</span>
+
+</a>
+
+
+
+<!-- PAGE HEADER -->
+
+<section class="pagehero">
+
+<div class="wrap">
+
+<h1 id="locations-heading">
+Our Locations
+</h1>
+
+<p
+  class="lead"
+  id="locations-intro"
+>
+Walk-ins welcome. No appointment needed.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- LOCATIONS -->
+
+<section class="section">
+
+<div class="wrap grid2">
+
+
+<!-- RANCHO CUCAMONGA -->
+
+<div class="location">
+
+<h2 id="rancho-location-name">
+Rancho Cucamonga Gold & Silver
+</h2>
+
+
+<p>
+
+<span id="rancho-location-address">
+9836 Foothill Blvd, Suite 6<br>
+Rancho Cucamonga, CA 91730
+</span>
+
+<br>
+
+<a
+  id="rancho-location-phone-link"
+  href="tel:19096762900"
+>
+
+<b id="rancho-location-phone">
+(909) 676-2900
+</b>
+
+</a>
+
+</p>
+
+
+<iframe
+  id="rancho-map"
+  class="map"
+  loading="lazy"
+  src="https://www.google.com/maps?q=9836+Foothill+Blvd+Suite+6+Rancho+Cucamonga+CA+91730&output=embed"
+></iframe>
+
+
+<p>
+
+<a
+  id="rancho-location-button"
+  class="btn"
+  href="rancho-cucamonga.html"
+>
+View Location
+</a>
+
+</p>
+
+</div>
+
+
+
+<!-- SAN BERNARDINO -->
+
+<div class="location">
+
+<h2 id="sb-location-name">
+San Bernardino Gold & Silver
+</h2>
+
+
+<p>
+
+<span id="sb-location-address">
+1292 W Mill St, Suite 107<br>
+San Bernardino, CA 92410
+</span>
+
+<br>
+
+<a
+  id="sb-location-phone-link"
+  href="tel:19096562600"
+>
+
+<b id="sb-location-phone">
+(909) 656-2600
+</b>
+
+</a>
+
+</p>
+
+
+<iframe
+  id="sb-map"
+  class="map"
+  loading="lazy"
+  src="https://www.google.com/maps?q=1292+W+Mill+St+Suite+107+San+Bernardino+CA+92410&output=embed"
+></iframe>
+
+
+<p>
+
+<a
+  id="sb-location-button"
+  class="btn"
+  href="san-bernardino.html"
+>
+View Location
+</a>
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="wrap footgrid">
+
+
+<div>
+
+<h3>
+Our Locations
+</h3>
+
+
+<b id="footer-rancho-name">
+Rancho Cucamonga Gold & Silver
+</b>
+
+<br>
+
+<span id="footer-rancho-address">
+9836 Foothill Blvd, Suite 6<br>
+Rancho Cucamonga, CA 91730
+</span>
+
+<br>
+
+<a
+  id="footer-rancho-phone"
+  href="tel:19096762900"
+>
+(909) 676-2900
+</a>
+
+
+<br><br>
+
+
+<b id="footer-sb-name">
+San Bernardino Gold & Silver
+</b>
+
+<br>
+
+<span id="footer-sb-address">
+1292 W Mill St, Suite 107<br>
+San Bernardino, CA 92410
+</span>
+
+<br>
+
+<a
+  id="footer-sb-phone"
+  href="tel:19096562600"
+>
+(909) 656-2600
+</a>
+
+</div>
+
+
+
+<div>
+
+<h3>
+Quick Links
+</h3>
+
+<a href="buy.html">
+What We Buy
+</a>
+
+<br>
+
+<a href="sell.html">
+What We Sell
+</a>
+
+<br>
+
+<a href="testing.html">
+Testing
+</a>
+
+<br>
+
+<a href="prices.html">
+Live Prices
+</a>
+
+</div>
+
+
+
+<div>
+
+<h3>
+Hours
+</h3>
+
+Rancho: Mon–Thu 10–7
+<br>
+Fri 10–1, 2–7
+<br>
+Sat 10–7
+<br>
+Sun Closed
+
+<br><br>
+
+San Bernardino: Mon–Thu 11–7
+<br>
+Fri 11–1, 3–7
+<br>
+Sat 11–7
+<br>
+Sun Closed
+
+</div>
+
+
+</div>
+
+
+<div
+  class="wrap center"
+  style="margin-top:28px"
+>
+
+© 2026 Rancho Cucamonga Gold & Silver
+•
+San Bernardino Gold & Silver
+
+</div>
+
+</footer>
+
+
+
+<script src="site.js"></script>
+
+
+<script>
+
+(async()=>{
+
+try{
+
+
+/* LOAD ADMIN SETTINGS */
+
+const r=
+  await fetch(
+    "content/settings/general.json",
+    {
+      cache:"no-store"
+    }
+  );
+
+if(!r.ok)return;
+
+const g=
+  await r.json();
+
+
+
+/* HELPER FOR PHONE LINKS */
+
+function cleanPhone(phone){
+
+  return String(phone || "")
+    .replace(/\D/g,"");
+
+}
+
+
+
+/* HELPER FOR ADDRESS DISPLAY */
+
+function showAddress(element,address){
+
+  if(!element || !address)return;
+
+  const parts=
+    String(address)
+      .split(",")
+      .map(part=>part.trim());
+
+  if(parts.length >= 3){
+
+    element.innerHTML=
+      parts.slice(0,-2).join(", ")
+      +
+      "<br>"
+      +
+      parts.slice(-2).join(", ");
+
+  }else{
+
+    element.textContent=address;
+
+  }
+
+}
+
+
+
+/* HEADER LOGO */
+
+if(g.header_logo){
+
+  const logo=
+    document.getElementById("header-logo");
+
+  if(logo){
+    logo.src=g.header_logo;
+  }
+
+}
+
+
+
+/* PAGE HEADING */
+
+if(g.locations_heading){
+
+  document.getElementById(
+    "locations-heading"
+  ).textContent=
+    g.locations_heading;
+
+}
+
+
+
+/* PAGE INTRO */
+
+if(g.locations_intro){
+
+  document.getElementById(
+    "locations-intro"
+  ).textContent=
+    g.locations_intro;
+
+}
+
+
+
+/* =========================================
+   RANCHO
+   ========================================= */
+
+if(g.rancho_location_name){
+
+  document.getElementById(
+    "rancho-location-name"
+  ).textContent=
+    g.rancho_location_name;
+
+
+  document.getElementById(
+    "footer-rancho-name"
+  ).textContent=
+    g.rancho_location_name;
+
+}
+
+
+
+if(g.rancho_address){
+
+  const address=
+    document.getElementById(
+      "rancho-location-address"
+    );
+
+  const footerAddress=
+    document.getElementById(
+      "footer-rancho-address"
+    );
+
+  showAddress(
+    address,
+    g.rancho_address
+  );
+
+  showAddress(
+    footerAddress,
+    g.rancho_address
+  );
+
+
+  const map=
+    document.getElementById(
+      "rancho-map"
+    );
+
+  if(map){
+
+    map.src=
+      "https://www.google.com/maps?q="
+      +
+      encodeURIComponent(
+        g.rancho_address
+      )
+      +
+      "&output=embed";
+
+  }
+
+}
+
+
+
+if(g.rancho_phone){
+
+  const phone=
+    document.getElementById(
+      "rancho-location-phone"
+    );
+
+  const link=
+    document.getElementById(
+      "rancho-location-phone-link"
+    );
+
+  const footerPhone=
+    document.getElementById(
+      "footer-rancho-phone"
+    );
+
+
+  phone.textContent=
+    g.rancho_phone;
+
+
+  link.href=
+    "tel:"
+    +
+    cleanPhone(
+      g.rancho_phone
+    );
+
+
+  footerPhone.textContent=
+    g.rancho_phone;
+
+
+  footerPhone.href=
+    "tel:"
+    +
+    cleanPhone(
+      g.rancho_phone
+    );
+
+}
+
+
+
+if(g.rancho_location_button){
+
+  document.getElementById(
+    "rancho-location-button"
+  ).textContent=
+    g.rancho_location_button;
+
+}
+
+
+
+/* =========================================
+   SAN BERNARDINO
+   ========================================= */
+
+if(g.sb_location_name){
+
+  document.getElementById(
+    "sb-location-name"
+  ).textContent=
+    g.sb_location_name;
+
+
+  document.getElementById(
+    "footer-sb-name"
+  ).textContent=
+    g.sb_location_name;
+
+}
+
+
+
+if(g.sb_address){
+
+  const address=
+    document.getElementById(
+      "sb-location-address"
+    );
+
+  const footerAddress=
+    document.getElementById(
+      "footer-sb-address"
+    );
+
+  showAddress(
+    address,
+    g.sb_address
+  );
+
+  showAddress(
+    footerAddress,
+    g.sb_address
+  );
+
+
+  const map=
+    document.getElementById(
+      "sb-map"
+    );
+
+  if(map){
+
+    map.src=
+      "https://www.google.com/maps?q="
+      +
+      encodeURIComponent(
+        g.sb_address
+      )
+      +
+      "&output=embed";
+
+  }
+
+}
+
+
+
+if(g.sb_phone){
+
+  const phone=
+    document.getElementById(
+      "sb-location-phone"
+    );
+
+  const link=
+    document.getElementById(
+      "sb-location-phone-link"
+    );
+
+  const footerPhone=
+    document.getElementById(
+      "footer-sb-phone"
+    );
+
+
+  phone.textContent=
+    g.sb_phone;
+
+
+  link.href=
+    "tel:"
+    +
+    cleanPhone(
+      g.sb_phone
+    );
+
+
+  footerPhone.textContent=
+    g.sb_phone;
+
+
+  footerPhone.href=
+    "tel:"
+    +
+    cleanPhone(
+      g.sb_phone
+    );
+
+}
+
+
+
+if(g.sb_location_button){
+
+  document.getElementById(
+    "sb-location-button"
+  ).textContent=
+    g.sb_location_button;
+
+}
+
+
+}catch(e){}
+
+
+})();
+
+</script>
+
+
+</body>
+</html>
