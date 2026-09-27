@@ -39,7 +39,7 @@ GOLD & SILVER
 
 </a>
 
-<button class="menuBtn btn">
+<button class="menuBtn btn" aria-label="Menu">
 ☰
 </button>
 
@@ -95,7 +95,7 @@ PLATINUM <b>Live Bid</b>
 
 <div class="wrap">
 
-<h1>
+<h1 id="about-page-heading">
 About Us
 </h1>
 
@@ -119,8 +119,6 @@ Family-owned. Three generations of precious-metals experience.
 <div class="wrap grid2">
 
 
-<!-- ABOUT TEXT -->
-
 <div>
 
 <h2 id="about-heading">
@@ -138,8 +136,6 @@ Items are tested and weighed in front of you whenever practical. For appropriate
 </p>
 
 
-
-<!-- TRUST LABELS -->
 
 <div class="trust">
 
@@ -165,8 +161,6 @@ Competitive Offers
 
 
 
-<!-- ABOUT PHOTOS -->
-
 <div class="grid2">
 
 <img
@@ -175,7 +169,6 @@ Competitive Offers
   alt="Rancho Cucamonga Gold & Silver"
   style="width:100%;border-radius:10px"
 >
-
 
 <img
   id="about-image-2"
@@ -206,19 +199,23 @@ Competitive Offers
 Our Locations
 </h3>
 
-<b>
+<b id="footer-rancho-name">
 Rancho Cucamonga Gold & Silver
 </b>
 
 <br>
-9836 Foothill Blvd, Suite 6
 
-<br>
+<span id="footer-rancho-address">
+9836 Foothill Blvd, Suite 6<br>
 Rancho Cucamonga, CA 91730
+</span>
 
 <br>
 
-<a href="tel:19096762900">
+<a
+  id="footer-rancho-phone"
+  href="tel:19096762900"
+>
 (909) 676-2900
 </a>
 
@@ -226,19 +223,23 @@ Rancho Cucamonga, CA 91730
 <br><br>
 
 
-<b>
+<b id="footer-sb-name">
 San Bernardino Gold & Silver
 </b>
 
 <br>
-1292 W Mill St, Suite 107
 
-<br>
+<span id="footer-sb-address">
+1292 W Mill St, Suite 107<br>
 San Bernardino, CA 92410
+</span>
 
 <br>
 
-<a href="tel:19096562600">
+<a
+  id="footer-sb-phone"
+  href="tel:19096562600"
+>
 (909) 656-2600
 </a>
 
@@ -284,31 +285,53 @@ Live Prices
 Hours
 </h3>
 
+<span id="footer-rancho-hours-mon-thu">
 Rancho: Mon–Thu 10–7
+</span>
+
 <br>
 
+<span id="footer-rancho-hours-fri">
 Fri 10–1, 2–7
+</span>
+
 <br>
 
+<span id="footer-rancho-hours-sat">
 Sat 10–7
+</span>
+
 <br>
 
+<span id="footer-rancho-hours-sun">
 Sun Closed
+</span>
 
 
 <br><br>
 
 
+<span id="footer-sb-hours-mon-thu">
 San Bernardino: Mon–Thu 11–7
+</span>
+
 <br>
 
+<span id="footer-sb-hours-fri">
 Fri 11–1, 3–7
+</span>
+
 <br>
 
+<span id="footer-sb-hours-sat">
 Sat 11–7
+</span>
+
 <br>
 
+<span id="footer-sb-hours-sun">
 Sun Closed
+</span>
 
 </div>
 
@@ -340,10 +363,7 @@ San Bernardino Gold & Silver
 
 try{
 
-
-/* LOAD ADMIN SETTINGS */
-
-const r=
+const response =
   await fetch(
     "content/settings/general.json",
     {
@@ -351,179 +371,119 @@ const r=
     }
   );
 
-if(!r.ok)return;
+if(!response.ok)return;
 
-const g=
-  await r.json();
-
-
-
-/* HEADER LOGO */
-
-if(g.header_logo){
-
-  const image=
-    document.getElementById("header-logo");
-
-  if(image){
-    image.src=g.header_logo;
-  }
-
-}
+const g =
+  await response.json();
 
 
 
-/* ABOUT INTRO */
+function setText(id,value){
 
-if(g.about_intro){
+  if(!value)return;
 
-  const element=
-    document.getElementById("about-intro");
+  const element =
+    document.getElementById(id);
 
   if(element){
-    element.textContent=g.about_intro;
+    element.textContent=value;
   }
 
 }
 
 
 
-/* ABOUT MAIN HEADING */
+function setImage(id,value){
 
-if(g.about_heading){
+  if(!value)return;
 
-  const element=
-    document.getElementById("about-heading");
+  const element =
+    document.getElementById(id);
 
   if(element){
-    element.textContent=g.about_heading;
+    element.src=value;
   }
 
 }
 
 
 
-/* DESCRIPTION 1 */
+/* HEADER */
 
-if(g.about_description_1){
-
-  const element=
-    document.getElementById("about-description-1");
-
-  if(element){
-    element.textContent=g.about_description_1;
-  }
-
-}
+setImage(
+  "header-logo",
+  g.header_logo
+);
 
 
 
-/* DESCRIPTION 2 */
+/* ABOUT PAGE */
 
-if(g.about_description_2){
+setText(
+  "about-page-heading",
+  g.about_page_heading
+);
 
-  const element=
-    document.getElementById("about-description-2");
+setText(
+  "about-intro",
+  g.about_intro
+);
 
-  if(element){
-    element.textContent=g.about_description_2;
-  }
+setText(
+  "about-heading",
+  g.about_heading
+);
 
-}
+setText(
+  "about-description-1",
+  g.about_description_1
+);
 
-
-
-/* TRUST LABEL 1 */
-
-if(g.about_trust_1){
-
-  const element=
-    document.getElementById("about-trust-1");
-
-  if(element){
-    element.textContent=g.about_trust_1;
-  }
-
-}
-
-
-
-/* TRUST LABEL 2 */
-
-if(g.about_trust_2){
-
-  const element=
-    document.getElementById("about-trust-2");
-
-  if(element){
-    element.textContent=g.about_trust_2;
-  }
-
-}
+setText(
+  "about-description-2",
+  g.about_description_2
+);
 
 
 
-/* TRUST LABEL 3 */
+/* TRUST LABELS */
 
-if(g.about_trust_3){
+setText(
+  "about-trust-1",
+  g.about_trust_1
+);
 
-  const element=
-    document.getElementById("about-trust-3");
+setText(
+  "about-trust-2",
+  g.about_trust_2
+);
 
-  if(element){
-    element.textContent=g.about_trust_3;
-  }
+setText(
+  "about-trust-3",
+  g.about_trust_3
+);
 
-}
-
-
-
-/* TRUST LABEL 4 */
-
-if(g.about_trust_4){
-
-  const element=
-    document.getElementById("about-trust-4");
-
-  if(element){
-    element.textContent=g.about_trust_4;
-  }
-
-}
+setText(
+  "about-trust-4",
+  g.about_trust_4
+);
 
 
 
-/* ABOUT PHOTO 1 */
+/* PHOTOS */
 
-if(g.about_image_1){
+setImage(
+  "about-image-1",
+  g.about_image_1
+);
 
-  const image=
-    document.getElementById("about-image-1");
-
-  if(image){
-    image.src=g.about_image_1;
-  }
-
-}
-
-
-
-/* ABOUT PHOTO 2 */
-
-if(g.about_image_2){
-
-  const image=
-    document.getElementById("about-image-2");
-
-  if(image){
-    image.src=g.about_image_2;
-  }
-
-}
+setImage(
+  "about-image-2",
+  g.about_image_2
+);
 
 
 }catch(e){}
-
 
 })();
 
