@@ -24,9 +24,7 @@ collections:
 
         fields:
 
-          # ==============================
-          # GENERAL INFORMATION
-          # ==============================
+          # GENERAL
 
           - label: "Homepage Intro"
             name: "homepage_intro"
@@ -49,20 +47,16 @@ collections:
             widget: "string"
 
 
-          # ==============================
           # HEADER
-          # ==============================
 
           - label: "Header Logo"
             name: "header_logo"
             widget: "image"
             required: false
-            hint: "Logo shown next to Rancho Cucamonga Gold & Silver at the top of the website."
+            hint: "Logo shown at the top of the website."
 
 
-          # ==============================
           # HOMEPAGE
-          # ==============================
 
           - label: "Homepage Hero Image"
             name: "hero_image"
@@ -73,18 +67,52 @@ collections:
             name: "homepage_buy_image"
             widget: "image"
             required: false
-            hint: "Photo shown on the WE BUY card on the homepage."
 
           - label: "Homepage WE SELL Photo"
             name: "homepage_sell_image"
             widget: "image"
             required: false
-            hint: "Photo shown on the WE SELL card on the homepage."
 
 
-          # ==============================
+          # WHAT WE BUY
+
+          - label: "What We Buy - Gold Jewelry Photo"
+            name: "buy_gold_jewelry_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Gold & Silver Coins Photo"
+            name: "buy_coins_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Bars & Bullion Photo"
+            name: "buy_bullion_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Sterling Silver & Silverware Photo"
+            name: "buy_silverware_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Dental Gold Photo"
+            name: "buy_dental_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Scrap Gold & Silver Photo"
+            name: "buy_scrap_image"
+            widget: "image"
+            required: false
+
+          - label: "What We Buy - Other Precious Metals Photo"
+            name: "buy_other_metals_image"
+            widget: "image"
+            required: false
+
+
           # TESTING & VERIFICATION
-          # ==============================
 
           - label: "XRF Testing Photo"
             name: "xrf_image"
@@ -100,7 +128,6 @@ collections:
             widget: "file"
             required: false
 
-
           - label: "Sigma Metalytics Photo"
             name: "sigma_image"
             widget: "image"
@@ -110,7 +137,6 @@ collections:
             name: "acid_image"
             widget: "image"
             required: false
-
 
           - label: "Assay & Melting Photo"
             name: "melting_image"
@@ -127,9 +153,7 @@ collections:
             required: false
 
 
-  # ====================================
   # PRODUCTS
-  # ====================================
 
   - name: "products"
     label: "Products"
