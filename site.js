@@ -1,605 +1,1393 @@
-document.querySelector('.menuBtn')?.addEventListener('click',()=>{
-  document.querySelector('.nav')?.classList.toggle('show');
-});
-
-document.querySelectorAll('[data-details]').forEach(b=>{
-  b.onclick=()=>{
-    const c=b.closest('.product');
-
-    document.querySelectorAll('.product.open').forEach(x=>{
-      if(x!==c)x.classList.remove('open');
-    });
-
-    c?.classList.toggle('open');
-  };
-});
+/* =========================================================
+   RANCHO CUCAMONGA GOLD & SILVER
+   SHARED WEBSITE JAVASCRIPT
+   ========================================================= */
 
 
-let SITE_INFO={
-  rancho_phone:'(909) 676-2900',
-  sb_phone:'(909) 656-2600',
-  rancho_address:'9836 Foothill Blvd, Suite 6, Rancho Cucamonga, CA 91730',
-  sb_address:'1292 W Mill St, Suite 107, San Bernardino, CA 92410'
+/* =========================================================
+   DEFAULT SITE INFORMATION
+   These values are used if general.json cannot be loaded.
+   ========================================================= */
+
+window.SITE_INFO = {
+
+  rancho_location_name:
+    "Rancho Cucamonga Gold & Silver",
+
+  sb_location_name:
+    "San Bernardino Gold & Silver",
+
+  rancho_phone:
+    "(909) 676-2900",
+
+  sb_phone:
+    "(909) 656-2600",
+
+  rancho_address:
+    "9836 Foothill Blvd, Suite 6, Rancho Cucamonga, CA 91730",
+
+  sb_address:
+    "1292 W Mill St, Suite 107, San Bernardino, CA 92410",
+
+  rancho_hours_mon_thu:
+    "Mon–Thu 10–7",
+
+  rancho_hours_fri:
+    "Fri 10–1, 2–7",
+
+  rancho_hours_sat:
+    "Sat 10–7",
+
+  rancho_hours_sun:
+    "Sun Closed",
+
+  sb_hours_mon_thu:
+    "Mon–Thu 11–7",
+
+  sb_hours_fri:
+    "Fri 11–1, 3–7",
+
+  sb_hours_sat:
+    "Sat 11–7",
+
+  sb_hours_sun:
+    "Sun Closed"
+
 };
 
 
-function phoneLink(phone){
 
-  return 'tel:+1'+String(phone)
-    .replace(/\D/g,'')
-    .replace(/^1/,'');
+/* =========================================================
+   BASIC HELPERS
+   ========================================================= */
+
+function cleanPhone(phone){
+
+  return String(phone || "")
+    .replace(/\D/g,"");
+
 }
 
+
+
+function setText(id,value){
+
+  if(
+    value === undefined ||
+    value === null ||
+    value === ""
+  ){
+    return;
+  }
+
+
+  const element =
+    document.getElementById(id);
+
+
+  if(element){
+    element.textContent=value;
+  }
+
+}
+
+
+
+function setImage(id,value){
+
+  if(!value)return;
+
+
+  const element =
+    document.getElementById(id);
+
+
+  if(element){
+    element.src=value;
+  }
+
+}
+
+
+
+function showAddress(
+  element,
+  address
+){
+
+  if(
+    !element ||
+    !address
+  ){
+    return;
+  }
+
+
+  const parts =
+    String(address)
+      .split(",")
+      .map(
+        part=>part.trim()
+      );
+
+
+  if(parts.length>=3){
+
+    element.innerHTML =
+      parts.slice(0,-2).join(", ")
+      +
+      "<br>"
+      +
+      parts.slice(-2).join(", ");
+
+  }else{
+
+    element.textContent=
+      address;
+
+  }
+
+}
+
+
+
+function googleMapEmbed(address){
+
+  return (
+    "https://www.google.com/maps?q="
+    +
+    encodeURIComponent(address)
+    +
+    "&output=embed"
+  );
+
+}
+
+
+
+function googleDirections(address){
+
+  return (
+    "https://www.google.com/maps/search/?api=1&query="
+    +
+    encodeURIComponent(address)
+  );
+
+}
+
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const button =
+      event.target.closest(
+        ".menuBtn"
+      );
+
+
+    if(!button)return;
+
+
+    const header =
+      button.closest(
+        ".header"
+      );
+
+
+    if(!header)return;
+
+
+    const nav =
+      header.querySelector(
+        ".nav"
+      );
+
+
+    if(nav){
+
+      nav.classList.toggle(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+
+/* =========================================================
+   PRODUCT DETAILS
+   Works for static product cards.
+   Dynamic sell.html cards have their own handler.
+   ========================================================= */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const button =
+      event.target.closest(
+        "[data-details]"
+      );
+
+
+    if(!button)return;
+
+
+    /*
+      sell.html dynamically handles its own
+      product buttons. If that button is inside
+      a dynamic product, do not toggle it twice.
+    */
+
+    if(
+      button.closest(
+        "[data-dynamic-product='true']"
+      )
+    ){
+      return;
+    }
+
+
+    const product =
+      button.closest(
+        ".product"
+      );
+
+
+    if(!product)return;
+
+
+    product.classList.toggle(
+      "open"
+    );
+
+
+    button.textContent =
+      product.classList.contains(
+        "open"
+      )
+        ? "Hide Details"
+        : "View Details";
+
+  }
+);
+
+
+
+/* =========================================================
+   CALL / DIRECTIONS CHOOSER
+   ========================================================= */
 
 function pickCall(){
 
-  const x=confirm(
-    'OK = Rancho Cucamonga\nCancel = San Bernardino'
-  );
+  const info =
+    window.SITE_INFO;
 
-  location.href=phoneLink(
-    x ? SITE_INFO.rancho_phone : SITE_INFO.sb_phone
-  );
+
+  const choice =
+    window.confirm(
+      "Press OK for Rancho Cucamonga.\nPress Cancel for San Bernardino."
+    );
+
+
+  const phone =
+    choice
+      ? info.rancho_phone
+      : info.sb_phone;
+
+
+  window.location.href =
+    "tel:"
+    +
+    cleanPhone(phone);
+
 }
+
 
 
 function pickDir(){
 
-  const x=confirm(
-    'OK = Rancho Cucamonga\nCancel = San Bernardino'
-  );
+  const info =
+    window.SITE_INFO;
 
-  const address=x
-    ? SITE_INFO.rancho_address
-    : SITE_INFO.sb_address;
+
+  const choice =
+    window.confirm(
+      "Press OK for Rancho Cucamonga.\nPress Cancel for San Bernardino."
+    );
+
+
+  const address =
+    choice
+      ? info.rancho_address
+      : info.sb_address;
+
 
   window.open(
-    'https://www.google.com/maps/dir/?api=1&destination='+
-    encodeURIComponent(address),
-    '_blank'
+    googleDirections(address),
+    "_blank",
+    "noopener"
   );
+
 }
 
 
-/* =========================================
-   SAFE TEXT REPLACEMENT
-   ========================================= */
 
-function replacePageText(oldText,newText){
+/* =========================================================
+   APPLY SHARED SITE INFORMATION
+   ========================================================= */
 
-  const walker=document.createTreeWalker(
-    document.body,
-    NodeFilter.SHOW_TEXT
-  );
+function applySharedSiteInfo(){
 
-  let node;
+  const g =
+    window.SITE_INFO;
 
-  while((node=walker.nextNode())){
 
-    if(node.nodeValue.includes(oldText)){
 
-      node.nodeValue=
-        node.nodeValue.replaceAll(
-          oldText,
-          newText
-        );
+  /* -------------------------
+     HEADER LOGO
+     ------------------------- */
 
-    }
+  if(g.header_logo){
+
+    document
+      .querySelectorAll(
+        "#header-logo"
+      )
+      .forEach(
+        logo=>{
+          logo.src=
+            g.header_logo;
+        }
+      );
 
   }
+
+
+
+  /* -------------------------
+     HEADER PHONE
+     ------------------------- */
+
+  document
+    .querySelectorAll(
+      ".header .phone"
+    )
+    .forEach(
+      element=>{
+
+        element.textContent =
+          g.rancho_phone;
+
+
+        if(
+          element.tagName === "A"
+        ){
+
+          element.href =
+            "tel:"
+            +
+            cleanPhone(
+              g.rancho_phone
+            );
+
+        }
+
+      }
+    );
+
+
+
+  /* -------------------------
+     LOCATION NAMES
+     ------------------------- */
+
+  setText(
+    "footer-rancho-name",
+    g.rancho_location_name
+  );
+
+  setText(
+    "footer-sb-name",
+    g.sb_location_name
+  );
+
+
+  setText(
+    "rancho-location-name",
+    g.rancho_location_name
+  );
+
+  setText(
+    "sb-location-name",
+    g.sb_location_name
+  );
+
+
+
+  /* -------------------------
+     FOOTER ADDRESSES
+     ------------------------- */
+
+  showAddress(
+    document.getElementById(
+      "footer-rancho-address"
+    ),
+    g.rancho_address
+  );
+
+
+  showAddress(
+    document.getElementById(
+      "footer-sb-address"
+    ),
+    g.sb_address
+  );
+
+
+
+  /* -------------------------
+     PAGE ADDRESSES
+     ------------------------- */
+
+  showAddress(
+    document.getElementById(
+      "rancho-location-address"
+    ),
+    g.rancho_address
+  );
+
+
+  showAddress(
+    document.getElementById(
+      "sb-location-address"
+    ),
+    g.sb_address
+  );
+
+
+  showAddress(
+    document.getElementById(
+      "rancho-address"
+    ),
+    g.rancho_address
+  );
+
+
+  showAddress(
+    document.getElementById(
+      "sb-address"
+    ),
+    g.sb_address
+  );
+
+
+
+  /* -------------------------
+     FOOTER PHONES
+     ------------------------- */
+
+  const footerRanchoPhone =
+    document.getElementById(
+      "footer-rancho-phone"
+    );
+
+
+  if(footerRanchoPhone){
+
+    footerRanchoPhone.textContent =
+      g.rancho_phone;
+
+    footerRanchoPhone.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
+  }
+
+
+
+  const footerSBPhone =
+    document.getElementById(
+      "footer-sb-phone"
+    );
+
+
+  if(footerSBPhone){
+
+    footerSBPhone.textContent =
+      g.sb_phone;
+
+    footerSBPhone.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.sb_phone
+      );
+
+  }
+
+
+
+  /* -------------------------
+     LOCATION PAGE PHONES
+     ------------------------- */
+
+  setText(
+    "rancho-location-phone",
+    g.rancho_phone
+  );
+
+
+  const ranchoLocationPhoneLink =
+    document.getElementById(
+      "rancho-location-phone-link"
+    );
+
+
+  if(ranchoLocationPhoneLink){
+
+    ranchoLocationPhoneLink.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
+  }
+
+
+
+  setText(
+    "sb-location-phone",
+    g.sb_phone
+  );
+
+
+  const sbLocationPhoneLink =
+    document.getElementById(
+      "sb-location-phone-link"
+    );
+
+
+  if(sbLocationPhoneLink){
+
+    sbLocationPhoneLink.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.sb_phone
+      );
+
+  }
+
+
+
+  /* -------------------------
+     INDIVIDUAL STORE PHONES
+     ------------------------- */
+
+  const ranchoPhone =
+    document.getElementById(
+      "rancho-phone"
+    );
+
+
+  if(ranchoPhone){
+
+    ranchoPhone.textContent =
+      g.rancho_phone;
+
+    ranchoPhone.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
+  }
+
+
+
+  const sbPhone =
+    document.getElementById(
+      "sb-phone"
+    );
+
+
+  if(sbPhone){
+
+    sbPhone.textContent =
+      g.sb_phone;
+
+    sbPhone.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.sb_phone
+      );
+
+  }
+
+
+
+  /* -------------------------
+     CALL BUTTONS
+     ------------------------- */
+
+  const ranchoCallButton =
+    document.getElementById(
+      "rancho-call-button"
+    );
+
+
+  if(ranchoCallButton){
+
+    ranchoCallButton.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
+  }
+
+
+
+  const sbCallButton =
+    document.getElementById(
+      "sb-call-button"
+    );
+
+
+  if(sbCallButton){
+
+    sbCallButton.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.sb_phone
+      );
+
+  }
+
+
+
+  const sellCallButton =
+    document.getElementById(
+      "sell-call-button"
+    );
+
+
+  if(sellCallButton){
+
+    sellCallButton.textContent =
+      "Rancho: "
+      +
+      g.rancho_phone;
+
+
+    sellCallButton.href =
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
+  }
+
+
+
+  /* -------------------------
+     PRODUCT CALL BUTTONS
+     ------------------------- */
+
+  document
+    .querySelectorAll(
+      ".product-call"
+    )
+    .forEach(
+      link=>{
+
+        link.href =
+          "tel:"
+          +
+          cleanPhone(
+            g.rancho_phone
+          );
+
+      }
+    );
+
+
+
+  /* -------------------------
+     RANCHO HOURS
+     ------------------------- */
+
+  setText(
+    "rancho-hours-mon-thu",
+    g.rancho_hours_mon_thu
+  );
+
+  setText(
+    "rancho-hours-fri",
+    g.rancho_hours_fri
+  );
+
+  setText(
+    "rancho-hours-sat",
+    g.rancho_hours_sat
+  );
+
+  setText(
+    "rancho-hours-sun",
+    g.rancho_hours_sun
+  );
+
+
+
+  /* -------------------------
+     SAN BERNARDINO HOURS
+     ------------------------- */
+
+  setText(
+    "sb-hours-mon-thu",
+    g.sb_hours_mon_thu
+  );
+
+  setText(
+    "sb-hours-fri",
+    g.sb_hours_fri
+  );
+
+  setText(
+    "sb-hours-sat",
+    g.sb_hours_sat
+  );
+
+  setText(
+    "sb-hours-sun",
+    g.sb_hours_sun
+  );
+
+
+
+  /* -------------------------
+     FOOTER RANCHO HOURS
+     ------------------------- */
+
+  setText(
+    "footer-rancho-hours-mon-thu",
+    "Rancho: "
+    +
+    g.rancho_hours_mon_thu
+  );
+
+  setText(
+    "footer-rancho-hours-fri",
+    g.rancho_hours_fri
+  );
+
+  setText(
+    "footer-rancho-hours-sat",
+    g.rancho_hours_sat
+  );
+
+  setText(
+    "footer-rancho-hours-sun",
+    g.rancho_hours_sun
+  );
+
+
+
+  /* -------------------------
+     FOOTER SAN BERNARDINO HOURS
+     ------------------------- */
+
+  setText(
+    "footer-sb-hours-mon-thu",
+    "San Bernardino: "
+    +
+    g.sb_hours_mon_thu
+  );
+
+  setText(
+    "footer-sb-hours-fri",
+    g.sb_hours_fri
+  );
+
+  setText(
+    "footer-sb-hours-sat",
+    g.sb_hours_sat
+  );
+
+  setText(
+    "footer-sb-hours-sun",
+    g.sb_hours_sun
+  );
+
+
+
+  /* -------------------------
+     MAPS
+     ------------------------- */
+
+  const ranchoMap =
+    document.getElementById(
+      "rancho-map"
+    );
+
+
+  if(ranchoMap){
+
+    ranchoMap.src =
+      googleMapEmbed(
+        g.rancho_address
+      );
+
+  }
+
+
+
+  const sbMap =
+    document.getElementById(
+      "sb-map"
+    );
+
+
+  if(sbMap){
+
+    sbMap.src =
+      googleMapEmbed(
+        g.sb_address
+      );
+
+  }
+
+
+
+  /* -------------------------
+     DIRECTIONS BUTTONS
+     ------------------------- */
+
+  const ranchoDirections =
+    document.getElementById(
+      "rancho-directions"
+    );
+
+
+  if(ranchoDirections){
+
+    ranchoDirections.href =
+      googleDirections(
+        g.rancho_address
+      );
+
+  }
+
+
+
+  const sbDirections =
+    document.getElementById(
+      "sb-directions"
+    );
+
+
+  if(sbDirections){
+
+    sbDirections.href =
+      googleDirections(
+        g.sb_address
+      );
+
+  }
+
 }
 
 
-/* =========================================
-   ADDRESS PARTS
-   ========================================= */
 
-function addressParts(address){
+/* =========================================================
+   LOAD GENERAL SETTINGS
+   ========================================================= */
 
-  const parts=String(address)
-    .split(',')
-    .map(x=>x.trim());
+async function loadSiteSettings(){
 
-  return {
-    street:parts.slice(0,2).join(', '),
-    city:parts.slice(2).join(', ')
-  };
+try{
+
+const response =
+  await fetch(
+    "content/settings/general.json",
+    {
+      cache:"no-store"
+    }
+  );
+
+
+if(!response.ok){
+
+  applySharedSiteInfo();
+  return;
+
 }
 
 
-/* =========================================
-   WEBSITE SETTINGS
-   ========================================= */
-
-(async()=>{
-
-  try{
-
-    const r=await fetch(
-      'content/settings/general.json',
-      {cache:'no-store'}
-    );
-
-    if(!r.ok)return;
-
-    const g=await r.json();
-
-    SITE_INFO={
-      ...SITE_INFO,
-      ...g
-    };
+const settings =
+  await response.json();
 
 
-    /* HEADER PHONE */
+window.SITE_INFO = {
 
-    document.querySelectorAll('.phone').forEach(el=>{
+  ...window.SITE_INFO,
 
-      el.textContent=
-        SITE_INFO.rancho_phone;
+  ...settings
 
-    });
-
-
-    /* RANCHO PHONE */
-
-    document.querySelectorAll(
-      'a[href^="tel:19096762900"], a[href^="tel:+19096762900"]'
-    ).forEach(el=>{
-
-      el.href=
-        phoneLink(SITE_INFO.rancho_phone);
-
-      if(el.textContent.includes('909')){
-
-        el.textContent=
-          SITE_INFO.rancho_phone;
-
-      }
-
-    });
+};
 
 
-    /* SAN BERNARDINO PHONE */
-
-    document.querySelectorAll(
-      'a[href^="tel:19096562600"], a[href^="tel:+19096562600"]'
-    ).forEach(el=>{
-
-      el.href=
-        phoneLink(SITE_INFO.sb_phone);
-
-      if(el.textContent.includes('909')){
-
-        el.textContent=
-          SITE_INFO.sb_phone;
-
-      }
-
-    });
+applySharedSiteInfo();
 
 
-    /* ADDRESSES */
+}catch(error){
 
-    const rancho=
-      addressParts(SITE_INFO.rancho_address);
+applySharedSiteInfo();
 
-    const sb=
-      addressParts(SITE_INFO.sb_address);
+}
 
-
-    replacePageText(
-      '9836 Foothill Blvd, Suite 6',
-      rancho.street
-    );
-
-    replacePageText(
-      'Rancho Cucamonga, CA 91730',
-      rancho.city
-    );
-
-    replacePageText(
-      '1292 W Mill St, Suite 107',
-      sb.street
-    );
-
-    replacePageText(
-      'San Bernardino, CA 92410',
-      sb.city
-    );
+}
 
 
-    /* GOOGLE MAPS */
 
-    document.querySelectorAll(
-      'iframe.map'
-    ).forEach(frame=>{
-
-      const src=
-        frame.getAttribute('src') || '';
+loadSiteSettings();
 
 
-      if(
-        src.includes('9836+Foothill') ||
-        src.includes('Rancho+Cucamonga')
-      ){
 
-        frame.src=
-          'https://www.google.com/maps?q='+
-          encodeURIComponent(
-            SITE_INFO.rancho_address
-          )+
-          '&output=embed';
+/* =========================================================
+   LIVE METAL TICKER
+   ========================================================= */
 
-      }
+const METAL_API =
+  "https://api.gold-api.com/price/";
 
-      else if(
-        src.includes('1292+W+Mill') ||
-        src.includes('San+Bernardino')
-      ){
+const DIRECTION_API =
+  "https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction";
 
-        frame.src=
-          'https://www.google.com/maps?q='+
-          encodeURIComponent(
-            SITE_INFO.sb_address
-          )+
-          '&output=embed';
-
-      }
-
-    });
-
-  }catch(e){}
-
-})();
+const TICKER_CACHE_KEY =
+  "rancho-metal-ticker-v1";
 
 
-/* =========================================
-   LIVE PRECIOUS METAL PRICES
-   ========================================= */
 
-const METAL_API=
-  'https://api.gold-api.com/price/';
+function tickerMoney(value){
 
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style:"currency",
+      currency:"USD",
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    }
+  ).format(value);
 
-const DIRECTION_API=
-  'https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction';
+}
 
-
-const TICKER_CACHE_KEY=
-  'ranchoMetalTicker';
 
 
 async function getMetalPrice(symbol){
 
-  const r=await fetch(
-    METAL_API+symbol,
-    {cache:'no-store'}
-  );
+  const response =
+    await fetch(
+      METAL_API + symbol,
+      {
+        cache:"no-store"
+      }
+    );
 
-  if(!r.ok){
+
+  if(!response.ok){
 
     throw new Error(
-      'Price unavailable'
+      "Metal price request failed"
     );
 
   }
 
-  const data=
-    await r.json();
 
-  const price=
-    Number(data.price);
+  const data =
+    await response.json();
+
+
+  const price =
+    Number(
+      data.price ??
+      data.ask ??
+      data.bid
+    );
+
 
   if(!Number.isFinite(price)){
 
     throw new Error(
-      'Invalid price'
+      "Invalid metal price"
     );
 
   }
 
+
   return price;
+
 }
 
 
-/* =========================================
-   GET MARKET DIRECTION
-   ========================================= */
 
 async function getMetalDirections(){
 
-  try{
+try{
 
-    const r=await fetch(
-      DIRECTION_API,
-      {cache:'no-store'}
-    );
-
-    if(!r.ok){
-      return {};
+const response =
+  await fetch(
+    DIRECTION_API,
+    {
+      cache:"no-store"
     }
+  );
 
-    return await r.json();
 
-  }catch(e){
+if(!response.ok){
+  return {};
+}
 
-    return {};
 
-  }
+return await response.json();
+
+
+}catch(error){
+
+return {};
+
+}
 
 }
 
 
-/* =========================================
-   DIRECTION ARROW
-   ========================================= */
 
-function tickerArrow(direction){
-
-  if(direction==='up'){
-
-    return (
-      '<span style="'+
-      'color:#188038;'+
-      'font-weight:800;'+
-      'margin-left:4px;'+
-      '">▲</span>'
-    );
-
-  }
-
-
-  if(direction==='down'){
-
-    return (
-      '<span style="'+
-      'color:#c5221f;'+
-      'font-weight:800;'+
-      'margin-left:4px;'+
-      '">▼</span>'
-    );
-
-  }
-
-
-  return '';
-}
-
-
-/* =========================================
-   DISPLAY TICKER
-   ========================================= */
-
-function displayMetalTicker(
-  gold,
-  silver,
-  platinum,
-  directions={}
+function directionValue(
+  directions,
+  symbol
 ){
 
-  const ticker=
-    document.querySelector('.ticker');
-
-  if(!ticker)return;
-
-
-  const goldArrow=
-    tickerArrow(
-      directions?.XAU?.direction
-    );
+  if(!directions){
+    return null;
+  }
 
 
-  const silverArrow=
-    tickerArrow(
-      directions?.XAG?.direction
-    );
+  if(
+    directions[symbol] !== undefined
+  ){
+
+    return directions[symbol];
+
+  }
 
 
-  const platinumArrow=
-    tickerArrow(
-      directions?.XPT?.direction
-    );
+  if(
+    directions[
+      symbol.toLowerCase()
+    ] !== undefined
+  ){
+
+    return directions[
+      symbol.toLowerCase()
+    ];
+
+  }
 
 
-  ticker.innerHTML=
+  const names = {
 
-    '<span>GOLD <b>$'+
+    XAU:"gold",
+    XAG:"silver",
+    XPT:"platinum"
 
-    Number(gold).toLocaleString(
-      'en-US',
-      {
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      }
-    )+
-
-    '</b>'+
-    goldArrow+
-    '</span>'+
+  };
 
 
-    '<span>SILVER <b>$'+
-
-    Number(silver).toLocaleString(
-      'en-US',
-      {
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      }
-    )+
-
-    '</b>'+
-    silverArrow+
-    '</span>'+
-
-
-    '<span>PLATINUM <b>$'+
-
-    Number(platinum).toLocaleString(
-      'en-US',
-      {
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-      }
-    )+
-
-    '</b>'+
-    platinumArrow+
-    '</span>';
+  return directions[
+    names[symbol]
+  ];
 
 }
 
 
-/* =========================================
-   SHOW SAVED PRICES IMMEDIATELY
-   ========================================= */
 
-function loadSavedTicker(){
+function tickerArrow(value){
 
-  try{
+  if(
+    value === undefined ||
+    value === null ||
+    value === ""
+  ){
 
-    const saved=
-      localStorage.getItem(
-        TICKER_CACHE_KEY
-      );
+    return "";
 
-    if(!saved)return;
+  }
 
 
-    const data=
-      JSON.parse(saved);
+  const text =
+    String(value)
+      .toLowerCase();
 
 
-    if(
-      Number.isFinite(data.gold) &&
-      Number.isFinite(data.silver) &&
-      Number.isFinite(data.platinum)
-    ){
+  if(
+    text.includes("up") ||
+    text.includes("higher") ||
+    text === "1" ||
+    text === "+"
+  ){
 
-      displayMetalTicker(
-        data.gold,
-        data.silver,
-        data.platinum,
-        data.directions || {}
-      );
+    return " ▲";
 
-    }
+  }
 
-  }catch(e){}
+
+  if(
+    text.includes("down") ||
+    text.includes("lower") ||
+    text === "-1" ||
+    text === "-"
+  ){
+
+    return " ▼";
+
+  }
+
+
+  return "";
 
 }
 
 
-/* =========================================
-   SAVE LAST SUCCESSFUL TICKER
-   ========================================= */
 
-function saveTicker(
+/* =========================================================
+   DISPLAY TICKER
+   ========================================================= */
+
+function displayMetalTicker(data){
+
+  if(!data)return;
+
+
+  document
+    .querySelectorAll(
+      ".ticker"
+    )
+    .forEach(
+      ticker=>{
+
+        const spans =
+          ticker.querySelectorAll(
+            "span"
+          );
+
+
+        if(spans.length<3){
+          return;
+        }
+
+
+        if(
+          Number.isFinite(
+            Number(data.gold)
+          )
+        ){
+
+          spans[0].innerHTML =
+            "GOLD <b>"
+            +
+            tickerMoney(
+              Number(data.gold)
+            )
+            +
+            tickerArrow(
+              data.goldDirection
+            )
+            +
+            "</b>";
+
+        }
+
+
+        if(
+          Number.isFinite(
+            Number(data.silver)
+          )
+        ){
+
+          spans[1].innerHTML =
+            "SILVER <b>"
+            +
+            tickerMoney(
+              Number(data.silver)
+            )
+            +
+            tickerArrow(
+              data.silverDirection
+            )
+            +
+            "</b>";
+
+        }
+
+
+        if(
+          Number.isFinite(
+            Number(data.platinum)
+          )
+        ){
+
+          spans[2].innerHTML =
+            "PLATINUM <b>"
+            +
+            tickerMoney(
+              Number(data.platinum)
+            )
+            +
+            tickerArrow(
+              data.platinumDirection
+            )
+            +
+            "</b>";
+
+        }
+
+      }
+    );
+
+}
+
+
+
+/* =========================================================
+   LOAD CACHED TICKER IMMEDIATELY
+   ========================================================= */
+
+try{
+
+const cached =
+  localStorage.getItem(
+    TICKER_CACHE_KEY
+  );
+
+
+if(cached){
+
+  displayMetalTicker(
+    JSON.parse(cached)
+  );
+
+}
+
+}catch(error){}
+
+
+
+/* =========================================================
+   UPDATE TICKER
+   ========================================================= */
+
+async function updateMetalTicker(){
+
+try{
+
+const [
   gold,
   silver,
   platinum,
   directions
-){
+] =
+  await Promise.all([
 
-  try{
+    getMetalPrice("XAU"),
 
-    localStorage.setItem(
-      TICKER_CACHE_KEY,
-      JSON.stringify({
+    getMetalPrice("XAG"),
 
-        gold,
-        silver,
-        platinum,
-        directions,
-        savedAt:Date.now()
+    getMetalPrice("XPT"),
 
-      })
-    );
+    getMetalDirections()
 
-  }catch(e){}
+  ]);
+
+
+const data = {
+
+  gold,
+  silver,
+  platinum,
+
+  goldDirection:
+    directionValue(
+      directions,
+      "XAU"
+    ),
+
+  silverDirection:
+    directionValue(
+      directions,
+      "XAG"
+    ),
+
+  platinumDirection:
+    directionValue(
+      directions,
+      "XPT"
+    ),
+
+  updated:
+    Date.now()
+
+};
+
+
+displayMetalTicker(data);
+
+
+try{
+
+  localStorage.setItem(
+    TICKER_CACHE_KEY,
+    JSON.stringify(data)
+  );
+
+}catch(error){}
+
+
+}catch(error){
+
+/*
+  If the live API is temporarily unavailable,
+  the cached ticker remains visible.
+*/
+
+}
 
 }
 
 
-/* =========================================
-   UPDATE TOP TICKER
-   ========================================= */
-
-async function updateMetalTicker(){
-
-  const ticker=
-    document.querySelector('.ticker');
-
-  if(!ticker)return;
-
-
-  try{
-
-    const [
-      gold,
-      silver,
-      platinum,
-      directions
-    ]=await Promise.all([
-
-      getMetalPrice('XAU'),
-
-      getMetalPrice('XAG'),
-
-      getMetalPrice('XPT'),
-
-      getMetalDirections()
-
-    ]);
-
-
-    displayMetalTicker(
-      gold,
-      silver,
-      platinum,
-      directions
-    );
-
-
-    saveTicker(
-      gold,
-      silver,
-      platinum,
-      directions
-    );
-
-
-  }catch(e){
-
-    /*
-      Saved prices remain visible if
-      the API is temporarily unavailable.
-    */
-
-  }
-
-}
-
-
-/* =========================================
-   SHOW SAVED PRICE FIRST
-   ========================================= */
-
-loadSavedTicker();
-
-
-/* =========================================
-   GET FRESH PRICE
-   ========================================= */
 
 updateMetalTicker();
 
 
-/* =========================================
-   REFRESH EVERY 5 MINUTES
-   ========================================= */
-
 setInterval(
   updateMetalTicker,
-  5*60*1000
+  300000
 );
