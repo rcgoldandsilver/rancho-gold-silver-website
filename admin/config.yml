@@ -31,6 +31,7 @@ collections:
           - label: "Homepage Intro"
             name: "homepage_intro"
             widget: "text"
+            default: "Rancho Cucamonga Gold & Silver and San Bernardino Gold & Silver are family-owned precious-metals dealers buying and selling gold, silver, coins, bars and bullion with professional testing and straightforward service."
 
           - label: "Rancho Phone"
             name: "rancho_phone"
@@ -68,15 +69,185 @@ collections:
             widget: "image"
             required: false
 
+          - label: "Homepage Main Heading"
+            name: "homepage_heading"
+            widget: "string"
+            default: "Your Local Gold & Silver Dealer"
+
+          - label: "Homepage Free Appraisal Line"
+            name: "homepage_appraisal_text"
+            widget: "string"
+            default: "Free Appraisals • No Obligation to Sell"
+
+          - label: "Homepage Trust Label 1"
+            name: "homepage_trust_1"
+            widget: "string"
+            default: "Three Generations of Experience"
+
+          - label: "Homepage Trust Label 2"
+            name: "homepage_trust_2"
+            widget: "string"
+            default: "Family-Owned"
+
+          - label: "Homepage Trust Label 3"
+            name: "homepage_trust_3"
+            widget: "string"
+            default: "Testing in Front of You"
+
+          - label: "Homepage Trust Label 4"
+            name: "homepage_trust_4"
+            widget: "string"
+            default: "Immediate Payment"
+
           - label: "Homepage WE BUY Photo"
             name: "homepage_buy_image"
             widget: "image"
             required: false
 
+          - label: "Homepage WE BUY Heading"
+            name: "homepage_buy_heading"
+            widget: "string"
+            default: "WE BUY"
+
+          - label: "Homepage WE BUY Description"
+            name: "homepage_buy_description"
+            widget: "text"
+            default: "Jewelry, Coins, Bars, Silverware, Dental Gold & Scrap"
+
           - label: "Homepage WE SELL Photo"
             name: "homepage_sell_image"
             widget: "image"
             required: false
+
+          - label: "Homepage WE SELL Heading"
+            name: "homepage_sell_heading"
+            widget: "string"
+            default: "WE SELL"
+
+          - label: "Homepage WE SELL Description"
+            name: "homepage_sell_description"
+            widget: "text"
+            default: "Gold & Silver Coins, Bars & Bullion"
+
+          - label: "Homepage XRF Heading"
+            name: "homepage_xrf_heading"
+            widget: "string"
+            default: "XRF Testing"
+
+          - label: "Homepage Melting Heading"
+            name: "homepage_melting_heading"
+            widget: "string"
+            default: "In-House Assay & Melting"
+
+
+          # ==================================
+          # HOMEPAGE REVIEWS
+          # ==================================
+
+          - label: "Homepage Reviews Heading"
+            name: "homepage_reviews_heading"
+            widget: "string"
+            default: "Customer Reviews"
+
+          - label: "Homepage Review 1 Name"
+            name: "homepage_review_1_name"
+            widget: "string"
+            default: "Google Customer"
+
+          - label: "Homepage Review 1"
+            name: "homepage_review_1_text"
+            widget: "text"
+            default: "Professional, transparent service and testing right in front of you."
+
+          - label: "Homepage Review 2 Name"
+            name: "homepage_review_2_name"
+            widget: "string"
+            default: "Google Customer"
+
+          - label: "Homepage Review 2"
+            name: "homepage_review_2_text"
+            widget: "text"
+            default: "Knowledgeable, friendly and straightforward experience."
+
+          - label: "Homepage Review 3 Name"
+            name: "homepage_review_3_name"
+            widget: "string"
+            default: "Google Customer"
+
+          - label: "Homepage Review 3"
+            name: "homepage_review_3_text"
+            widget: "text"
+            default: "Fair evaluation and an easy transaction from start to finish."
+
+          - label: "Homepage Review 4 Name"
+            name: "homepage_review_4_name"
+            widget: "string"
+            default: "Google Customer"
+
+          - label: "Homepage Review 4"
+            name: "homepage_review_4_text"
+            widget: "text"
+            default: "Clean shop, professional testing and excellent customer service."
+
+
+          # ==================================
+          # HOMEPAGE FAQ
+          # ==================================
+
+          - label: "Homepage FAQ Heading"
+            name: "homepage_faq_heading"
+            widget: "string"
+            default: "Frequently Asked Questions"
+
+          - label: "FAQ 1 - Question"
+            name: "homepage_faq_1_question"
+            widget: "string"
+            default: "Do I need an appointment?"
+
+          - label: "FAQ 1 - Answer"
+            name: "homepage_faq_1_answer"
+            widget: "text"
+            default: "No. Walk-ins are welcome at both locations."
+
+          - label: "FAQ 2 - Question"
+            name: "homepage_faq_2_question"
+            widget: "string"
+            default: "Are appraisals free?"
+
+          - label: "FAQ 2 - Answer"
+            name: "homepage_faq_2_answer"
+            widget: "text"
+            default: "Yes. Appraisals are free and there is no obligation to sell."
+
+          - label: "FAQ 3 - Question"
+            name: "homepage_faq_3_question"
+            widget: "string"
+            default: "How do you test gold and silver?"
+
+          - label: "FAQ 3 - Answer"
+            name: "homepage_faq_3_answer"
+            widget: "text"
+            default: "We use professional methods including XRF, Sigma verification and traditional testing when appropriate."
+
+          - label: "FAQ 4 - Question"
+            name: "homepage_faq_4_question"
+            widget: "string"
+            default: "Do you buy broken jewelry, silverware, and dental gold?"
+
+          - label: "FAQ 4 - Answer"
+            name: "homepage_faq_4_answer"
+            widget: "text"
+            default: "Yes. We buy many forms of precious metals, including broken items and scrap."
+
+          - label: "FAQ 5 - Question"
+            name: "homepage_faq_5_question"
+            widget: "string"
+            default: "How do I get paid when I sell?"
+
+          - label: "FAQ 5 - Answer"
+            name: "homepage_faq_5_answer"
+            widget: "text"
+            default: "When you accept our offer, payment is immediate. Available methods include cash, business check, Zelle and wire transfer."
 
 
           # ==================================
