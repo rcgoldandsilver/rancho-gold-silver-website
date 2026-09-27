@@ -9,7 +9,7 @@
 
 <meta
   name="description"
-  content="Gold & Silver Buyer & Seller in Rancho Cucamonga and San Bernardino, California."
+  content="Family-owned gold and silver buyer and seller serving Rancho Cucamonga and San Bernardino, California."
 >
 
 <link rel="stylesheet" href="styles.css">
@@ -18,7 +18,9 @@
 <body>
 
 
-<!-- HEADER -->
+<!-- =========================================
+     HEADER
+     ========================================= -->
 
 <header class="header">
 
@@ -39,9 +41,12 @@ GOLD & SILVER
 
 </a>
 
-<button class="menuBtn btn">☰</button>
+<button class="menuBtn btn" aria-label="Menu">
+☰
+</button>
 
 <nav class="nav">
+
 <a href="index.html">Home</a>
 <a href="buy.html">What We Buy</a>
 <a href="sell.html">What We Sell</a>
@@ -49,6 +54,7 @@ GOLD & SILVER
 <a href="about.html">About Us</a>
 <a href="locations.html">Locations</a>
 <a href="prices.html">Live Prices</a>
+
 </nav>
 
 <span class="phone">
@@ -60,7 +66,10 @@ GOLD & SILVER
 </header>
 
 
-<!-- LIVE PRICE TICKER -->
+
+<!-- =========================================
+     LIVE METAL TICKER
+     ========================================= -->
 
 <a
   href="prices.html"
@@ -68,37 +77,48 @@ GOLD & SILVER
   style="display:block;text-decoration:none"
 >
 
-<span>GOLD <b>Live Bid</b></span>
-<span>SILVER <b>Live Bid</b></span>
-<span>PLATINUM <b>Live Bid</b></span>
+<span>
+GOLD <b>Live Bid</b>
+</span>
+
+<span>
+SILVER <b>Live Bid</b>
+</span>
+
+<span>
+PLATINUM <b>Live Bid</b>
+</span>
 
 </a>
 
 
-<!-- HERO -->
+
+<!-- =========================================
+     HERO
+     ========================================= -->
 
 <section class="hero">
 
 <img
   id="homepage-hero"
-  src="assets/a_wide_professional_high_resolution_promotional.png"
-  alt="Gold and silver buyer and seller"
+  src="assets/673e2cc0-88bf-47f1-a07d-d5b56060d4c4.jpeg"
+  alt="Rancho Cucamonga Gold & Silver"
 >
 
-<div class="hero-actions">
+<div class="wrap hero-actions">
 
 <button
   class="btn"
   onclick="pickCall()"
 >
-CALL NOW
+Call Now
 </button>
 
 <button
   class="btn alt"
   onclick="pickDir()"
 >
-GET DIRECTIONS
+Get Directions
 </button>
 
 </div>
@@ -106,7 +126,10 @@ GET DIRECTIONS
 </section>
 
 
-<!-- INTRODUCTION -->
+
+<!-- =========================================
+     INTRO
+     ========================================= -->
 
 <section class="section">
 
@@ -124,9 +147,9 @@ Rancho Cucamonga Gold & Silver and San Bernardino Gold & Silver are family-owned
 </p>
 
 <p>
-<b id="homepage-appraisal-text">
+<strong id="homepage-appraisal">
 Free Appraisals • No Obligation to Sell
-</b>
+</strong>
 </p>
 
 
@@ -155,7 +178,10 @@ Immediate Payment
 </section>
 
 
-<!-- WE BUY / WE SELL -->
+
+<!-- =========================================
+     BUY / SELL
+     ========================================= -->
 
 <section class="section tinted">
 
@@ -168,11 +194,11 @@ Immediate Payment
 
 <img
   id="homepage-buy-image"
-  src="assets/IMG_9528.jpeg"
-  alt="Gold and silver items we buy"
+  src="assets/IMG_8099(3).jpeg"
+  alt="Gold and silver we buy"
 >
 
-<div class="pad">
+<div class="pad center">
 
 <h2 id="homepage-buy-heading">
 WE BUY
@@ -186,12 +212,13 @@ Jewelry, Coins, Bars, Silverware, Dental Gold & Scrap
   class="btn"
   href="buy.html"
 >
-Learn More
+What We Buy
 </a>
 
 </div>
 
 </div>
+
 
 
 <!-- WE SELL -->
@@ -200,11 +227,11 @@ Learn More
 
 <img
   id="homepage-sell-image"
-  src="assets/a3725037-9ac2-4334-aad8-b64d2c03eba9.jpeg"
-  alt="Gold and silver products we sell"
+  src="assets/IMG_9492.jpeg"
+  alt="Gold and silver bullion for sale"
 >
 
-<div class="pad">
+<div class="pad center">
 
 <h2 id="homepage-sell-heading">
 WE SELL
@@ -215,8 +242,140 @@ Gold & Silver Coins, Bars & Bullion
 </p>
 
 <a
+  class="btn alt"
+  href="sell.html"
+>
+What We Sell
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     FEATURED BULLION
+     ========================================= -->
+
+<section class="section">
+
+<div class="wrap">
+
+<div class="center">
+
+<h2 id="homepage-featured-heading">
+Featured Bullion
+</h2>
+
+</div>
+
+
+<div
+  id="featured-products"
+  class="grid4"
+>
+
+<!-- Products selected in Admin load here -->
+
+</div>
+
+
+<div class="center" style="margin-top:24px">
+
+<a
   class="btn"
   href="sell.html"
+>
+View All Products
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     TESTING
+     ========================================= -->
+
+<section class="section tinted">
+
+<div class="wrap grid2">
+
+
+<!-- XRF -->
+
+<div class="card">
+
+<div id="homepage-xrf-media">
+
+<img
+  id="homepage-xrf-image"
+  src="assets/IMG_9464.jpeg"
+  alt="XRF precious metal testing"
+>
+
+</div>
+
+<div class="pad">
+
+<h2 id="homepage-xrf-heading">
+XRF Testing
+</h2>
+
+<p id="homepage-xrf-text">
+Professional precious-metal testing helps us evaluate metal composition clearly and efficiently.
+</p>
+
+<a
+  class="btn"
+  href="testing.html"
+>
+Learn More
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- MELTING -->
+
+<div class="card">
+
+<div id="homepage-melting-media">
+
+<img
+  id="homepage-melting-image"
+  src="assets/AE5A39B1-ACF7-422B-8FC2-DB2595DDEEA9(1).jpeg"
+  alt="Precious metal assay and melting"
+>
+
+</div>
+
+<div class="pad">
+
+<h2 id="homepage-melting-heading">
+In-House Assay & Melting
+</h2>
+
+<p id="homepage-melting-text">
+For appropriate larger lots, melting and homogenizing can help determine consistent precious-metal content.
+</p>
+
+<a
+  class="btn"
+  href="testing.html"
 >
 Learn More
 </a>
@@ -231,7 +390,10 @@ Learn More
 </section>
 
 
-<!-- FEATURED BULLION -->
+
+<!-- =========================================
+     REVIEWS
+     ========================================= -->
 
 <section class="section">
 
@@ -239,159 +401,11 @@ Learn More
 
 <div class="center">
 
-<h2>
-Featured Bullion
-</h2>
-
-</div>
-
-
-<div class="grid4">
-
-
-<a
-  class="card product"
-  href="sell.html#gold-eagle"
->
-
-<img
-  src="assets/IMG_9492.jpeg"
-  alt="American Gold Eagle"
->
-
-<div class="pad">
-<h3>American Gold Eagle</h3>
-</div>
-
-</a>
-
-
-<a
-  class="card product"
-  href="sell.html#centenario"
->
-
-<img
-  src="assets/IMG_9511.jpeg"
-  alt="Mexican 50 Pesos Centenario"
->
-
-<div class="pad">
-<h3>Mexican 50 Pesos Centenario</h3>
-</div>
-
-</a>
-
-
-<a
-  class="card product"
-  href="sell.html#pamp"
->
-
-<img
-  src="assets/IMG_9464.jpeg"
-  alt="PAMP Lady Fortuna 1 oz Gold Bar"
->
-
-<div class="pad">
-<h3>PAMP Lady Fortuna 1 oz Gold Bar</h3>
-</div>
-
-</a>
-
-
-<a
-  class="card product"
-  href="sell.html#silver-eagle"
->
-
-<img
-  src="assets/AAC0FB46-8C44-419F-9EE9-CB68ED4EF9BC.jpeg"
-  alt="American Silver Eagle"
->
-
-<div class="pad">
-<h3>American Silver Eagle</h3>
-</div>
-
-</a>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- TESTING -->
-
-<section class="section tinted">
-
-<div class="wrap grid2">
-
-
-<!-- XRF -->
-
-<div id="homepage-xrf-section">
-
-<div
-  id="homepage-xrf-media"
-  class="media-placeholder"
->
-XRF VIDEO PLACEHOLDER
-</div>
-
-<h2 id="homepage-xrf-heading">
-XRF Testing
-</h2>
-
-<p id="homepage-xrf-text">
-See your precious metals tested right in front of you with professional XRF technology.
-</p>
-
-</div>
-
-
-<!-- MELTING -->
-
-<div id="homepage-melting-section">
-
-<div
-  id="homepage-melting-media"
-  class="media-placeholder"
->
-MELTING VIDEO PLACEHOLDER
-</div>
-
-<h2 id="homepage-melting-heading">
-In-House Assay & Melting
-</h2>
-
-<p id="homepage-melting-text">
-For appropriate larger lots, metals can be melted and homogenized to help determine consistent metal content.
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- CUSTOMER REVIEWS -->
-
-<section class="section">
-
-<div class="wrap">
-
-<h2
-  class="center"
-  id="homepage-reviews-heading"
->
+<h2 id="homepage-reviews-heading">
 Customer Reviews
 </h2>
+
+</div>
 
 
 <div class="reviews">
@@ -403,15 +417,16 @@ Customer Reviews
 ★★★★★
 </div>
 
-<b id="homepage-review-1-name">
-Google Customer
-</b>
-
 <p id="homepage-review-1-text">
 Professional, transparent service and testing right in front of you.
 </p>
 
+<strong id="homepage-review-1-name">
+Google Customer
+</strong>
+
 </div>
+
 
 
 <div class="review">
@@ -419,16 +434,17 @@ Professional, transparent service and testing right in front of you.
 <div class="stars">
 ★★★★★
 </div>
-
-<b id="homepage-review-2-name">
-Google Customer
-</b>
 
 <p id="homepage-review-2-text">
 Knowledgeable, friendly and straightforward experience.
 </p>
 
+<strong id="homepage-review-2-name">
+Google Customer
+</strong>
+
 </div>
+
 
 
 <div class="review">
@@ -436,16 +452,17 @@ Knowledgeable, friendly and straightforward experience.
 <div class="stars">
 ★★★★★
 </div>
-
-<b id="homepage-review-3-name">
-Google Customer
-</b>
 
 <p id="homepage-review-3-text">
 Fair evaluation and an easy transaction from start to finish.
 </p>
 
+<strong id="homepage-review-3-name">
+Google Customer
+</strong>
+
 </div>
+
 
 
 <div class="review">
@@ -454,12 +471,139 @@ Fair evaluation and an easy transaction from start to finish.
 ★★★★★
 </div>
 
-<b id="homepage-review-4-name">
-Google Customer
-</b>
-
 <p id="homepage-review-4-text">
 Clean shop, professional testing and excellent customer service.
+</p>
+
+<strong id="homepage-review-4-name">
+Google Customer
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     LOCATIONS
+     ========================================= -->
+
+<section class="section tinted">
+
+<div class="wrap">
+
+<div class="center">
+
+<h2>
+Our Locations
+</h2>
+
+</div>
+
+
+<div class="grid2">
+
+
+<!-- RANCHO -->
+
+<div class="location">
+
+<h2 id="home-rancho-name">
+Rancho Cucamonga Gold & Silver
+</h2>
+
+<p>
+
+<span id="home-rancho-address">
+9836 Foothill Blvd, Suite 6<br>
+Rancho Cucamonga, CA 91730
+</span>
+
+<br>
+
+<a
+  id="home-rancho-phone"
+  href="tel:19096762900"
+>
+(909) 676-2900
+</a>
+
+</p>
+
+
+<iframe
+  id="home-rancho-map"
+  class="map"
+  loading="lazy"
+  src="https://www.google.com/maps?q=9836+Foothill+Blvd+Suite+6+Rancho+Cucamonga+CA+91730&output=embed"
+></iframe>
+
+
+<p class="center">
+
+<a
+  class="btn"
+  href="rancho-cucamonga.html"
+>
+View Location
+</a>
+
+</p>
+
+</div>
+
+
+
+<!-- SAN BERNARDINO -->
+
+<div class="location">
+
+<h2 id="home-sb-name">
+San Bernardino Gold & Silver
+</h2>
+
+<p>
+
+<span id="home-sb-address">
+1292 W Mill St, Suite 107<br>
+San Bernardino, CA 92410
+</span>
+
+<br>
+
+<a
+  id="home-sb-phone"
+  href="tel:19096562600"
+>
+(909) 656-2600
+</a>
+
+</p>
+
+
+<iframe
+  id="home-sb-map"
+  class="map"
+  loading="lazy"
+  src="https://www.google.com/maps?q=1292+W+Mill+St+Suite+107+San+Bernardino+CA+92410&output=embed"
+></iframe>
+
+
+<p class="center">
+
+<a
+  class="btn"
+  href="san-bernardino.html"
+>
+View Location
+</a>
+
 </p>
 
 </div>
@@ -472,26 +616,28 @@ Clean shop, professional testing and excellent customer service.
 </section>
 
 
-<!-- FAQ -->
 
-<section class="section tinted">
+<!-- =========================================
+     FAQ
+     ========================================= -->
+
+<section class="section">
 
 <div class="wrap faq">
 
-<h2
-  class="center"
-  id="homepage-faq-heading"
->
+<div class="center">
+
+<h2 id="homepage-faq-heading">
 Frequently Asked Questions
 </h2>
+
+</div>
 
 
 <details>
 
-<summary>
-<b id="homepage-faq-1-question">
+<summary id="homepage-faq-1-question">
 Do I need an appointment?
-</b>
 </summary>
 
 <p id="homepage-faq-1-answer">
@@ -503,10 +649,8 @@ No. Walk-ins are welcome at both locations.
 
 <details>
 
-<summary>
-<b id="homepage-faq-2-question">
+<summary id="homepage-faq-2-question">
 Are appraisals free?
-</b>
 </summary>
 
 <p id="homepage-faq-2-answer">
@@ -518,10 +662,8 @@ Yes. Appraisals are free and there is no obligation to sell.
 
 <details>
 
-<summary>
-<b id="homepage-faq-3-question">
+<summary id="homepage-faq-3-question">
 How do you test gold and silver?
-</b>
 </summary>
 
 <p id="homepage-faq-3-answer">
@@ -533,10 +675,8 @@ We use professional methods including XRF, Sigma verification and traditional te
 
 <details>
 
-<summary>
-<b id="homepage-faq-4-question">
+<summary id="homepage-faq-4-question">
 Do you buy broken jewelry, silverware, and dental gold?
-</b>
 </summary>
 
 <p id="homepage-faq-4-answer">
@@ -548,10 +688,8 @@ Yes. We buy many forms of precious metals, including broken items and scrap.
 
 <details>
 
-<summary>
-<b id="homepage-faq-5-question">
+<summary id="homepage-faq-5-question">
 How do I get paid when I sell?
-</b>
 </summary>
 
 <p id="homepage-faq-5-answer">
@@ -566,127 +704,10 @@ When you accept our offer, payment is immediate. Available methods include cash,
 </section>
 
 
-<!-- LOCATIONS -->
 
-<section class="section">
-
-<div class="wrap grid2">
-
-
-<!-- RANCHO -->
-
-<div class="location">
-
-<h2 id="homepage-rancho-name">
-Rancho Cucamonga Gold & Silver
-</h2>
-
-<p>
-
-<span id="homepage-rancho-address">
-9836 Foothill Blvd, Suite 6<br>
-Rancho Cucamonga, CA 91730
-</span>
-
-<br>
-
-<a
-  id="homepage-rancho-phone-link"
-  href="tel:19096762900"
->
-
-<b id="homepage-rancho-phone">
-(909) 676-2900
-</b>
-
-</a>
-
-</p>
-
-
-<iframe
-  id="homepage-rancho-map"
-  class="map"
-  loading="lazy"
-  src="https://www.google.com/maps?q=9836+Foothill+Blvd+Suite+6+Rancho+Cucamonga+CA+91730&output=embed"
-></iframe>
-
-
-<p>
-
-<a
-  id="homepage-rancho-location-button"
-  class="btn"
-  href="rancho-cucamonga.html"
->
-View Location
-</a>
-
-</p>
-
-</div>
-
-
-<!-- SAN BERNARDINO -->
-
-<div class="location">
-
-<h2 id="homepage-sb-name">
-San Bernardino Gold & Silver
-</h2>
-
-<p>
-
-<span id="homepage-sb-address">
-1292 W Mill St, Suite 107<br>
-San Bernardino, CA 92410
-</span>
-
-<br>
-
-<a
-  id="homepage-sb-phone-link"
-  href="tel:19096562600"
->
-
-<b id="homepage-sb-phone">
-(909) 656-2600
-</b>
-
-</a>
-
-</p>
-
-
-<iframe
-  id="homepage-sb-map"
-  class="map"
-  loading="lazy"
-  src="https://www.google.com/maps?q=1292+W+Mill+St+Suite+107+San+Bernardino+CA+92410&output=embed"
-></iframe>
-
-
-<p>
-
-<a
-  id="homepage-sb-location-button"
-  class="btn"
-  href="san-bernardino.html"
->
-View Location
-</a>
-
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
+<!-- =========================================
+     FOOTER
+     ========================================= -->
 
 <footer class="footer">
 
@@ -695,7 +716,9 @@ View Location
 
 <div>
 
-<h3>Our Locations</h3>
+<h3>
+Our Locations
+</h3>
 
 <b id="footer-rancho-name">
 Rancho Cucamonga Gold & Silver
@@ -744,33 +767,92 @@ San Bernardino, CA 92410
 </div>
 
 
+
 <div>
 
-<h3>Quick Links</h3>
+<h3>
+Quick Links
+</h3>
 
-<a href="buy.html">What We Buy</a><br>
-<a href="sell.html">What We Sell</a><br>
-<a href="testing.html">Testing</a><br>
-<a href="prices.html">Live Prices</a>
+<a href="buy.html">
+What We Buy
+</a>
+
+<br>
+
+<a href="sell.html">
+What We Sell
+</a>
+
+<br>
+
+<a href="testing.html">
+Testing
+</a>
+
+<br>
+
+<a href="prices.html">
+Live Prices
+</a>
 
 </div>
 
 
+
 <div>
 
-<h3>Hours</h3>
+<h3>
+Hours
+</h3>
 
-Rancho: Mon–Thu 10–7<br>
-Fri 10–1, 2–7<br>
-Sat 10–7<br>
+<span id="footer-rancho-hours-mon-thu">
+Rancho: Mon–Thu 10–7
+</span>
+
+<br>
+
+<span id="footer-rancho-hours-fri">
+Fri 10–1, 2–7
+</span>
+
+<br>
+
+<span id="footer-rancho-hours-sat">
+Sat 10–7
+</span>
+
+<br>
+
+<span id="footer-rancho-hours-sun">
 Sun Closed
+</span>
+
 
 <br><br>
 
-San Bernardino: Mon–Thu 11–7<br>
-Fri 11–1, 3–7<br>
-Sat 11–7<br>
+
+<span id="footer-sb-hours-mon-thu">
+San Bernardino: Mon–Thu 11–7
+</span>
+
+<br>
+
+<span id="footer-sb-hours-fri">
+Fri 11–1, 3–7
+</span>
+
+<br>
+
+<span id="footer-sb-hours-sat">
+Sat 11–7
+</span>
+
+<br>
+
+<span id="footer-sb-hours-sun">
 Sun Closed
+</span>
 
 </div>
 
@@ -782,10 +864,15 @@ Sun Closed
   class="wrap center"
   style="margin-top:28px"
 >
-© 2026 Rancho Cucamonga Gold & Silver • San Bernardino Gold & Silver
+
+© 2026 Rancho Cucamonga Gold & Silver
+•
+San Bernardino Gold & Silver
+
 </div>
 
 </footer>
+
 
 
 <script src="site.js"></script>
@@ -797,7 +884,12 @@ Sun Closed
 
 try{
 
-const r=
+
+/* =========================================
+   GENERAL SETTINGS
+   ========================================= */
+
+const response=
   await fetch(
     "content/settings/general.json",
     {
@@ -805,10 +897,11 @@ const r=
     }
   );
 
-if(!r.ok)return;
+if(!response.ok)return;
 
 const g=
-  await r.json();
+  await response.json();
+
 
 
 function setText(id,value){
@@ -825,6 +918,7 @@ function setText(id,value){
 }
 
 
+
 function setImage(id,value){
 
   if(!value)return;
@@ -839,12 +933,14 @@ function setImage(id,value){
 }
 
 
+
 function cleanPhone(phone){
 
   return String(phone || "")
     .replace(/\D/g,"");
 
 }
+
 
 
 function showAddress(element,address){
@@ -856,7 +952,7 @@ function showAddress(element,address){
       .split(",")
       .map(part=>part.trim());
 
-  if(parts.length >= 3){
+  if(parts.length>=3){
 
     element.innerHTML=
       parts.slice(0,-2).join(", ")
@@ -874,7 +970,10 @@ function showAddress(element,address){
 }
 
 
-/* HEADER */
+
+/* =========================================
+   HEADER
+   ========================================= */
 
 setImage(
   "header-logo",
@@ -882,7 +981,15 @@ setImage(
 );
 
 
-/* HOMEPAGE INTRODUCTION */
+
+/* =========================================
+   HOMEPAGE INTRO
+   ========================================= */
+
+setImage(
+  "homepage-hero",
+  g.hero_image
+);
 
 setText(
   "homepage-heading",
@@ -895,7 +1002,7 @@ setText(
 );
 
 setText(
-  "homepage-appraisal-text",
+  "homepage-appraisal",
   g.homepage_appraisal_text
 );
 
@@ -920,15 +1027,10 @@ setText(
 );
 
 
-/* HERO */
 
-setImage(
-  "homepage-hero",
-  g.hero_image
-);
-
-
-/* WE BUY */
+/* =========================================
+   BUY / SELL
+   ========================================= */
 
 setImage(
   "homepage-buy-image",
@@ -946,8 +1048,6 @@ setText(
 );
 
 
-/* WE SELL */
-
 setImage(
   "homepage-sell-image",
   g.homepage_sell_image
@@ -964,7 +1064,21 @@ setText(
 );
 
 
-/* XRF */
+
+/* =========================================
+   FEATURED HEADING
+   ========================================= */
+
+setText(
+  "homepage-featured-heading",
+  g.homepage_featured_heading
+);
+
+
+
+/* =========================================
+   TESTING
+   ========================================= */
 
 setText(
   "homepage-xrf-heading",
@@ -972,25 +1086,111 @@ setText(
 );
 
 setText(
-  "homepage-xrf-text",
-  g.xrf_text
-);
-
-
-/* MELTING */
-
-setText(
   "homepage-melting-heading",
   g.homepage_melting_heading
 );
 
-setText(
-  "homepage-melting-text",
-  g.melting_text
-);
+
+if(g.xrf_text){
+
+  setText(
+    "homepage-xrf-text",
+    g.xrf_text
+  );
+
+}
 
 
-/* REVIEWS */
+if(g.melting_text){
+
+  setText(
+    "homepage-melting-text",
+    g.melting_text
+  );
+
+}
+
+
+if(g.xrf_video){
+
+  const media=
+    document.getElementById(
+      "homepage-xrf-media"
+    );
+
+  if(media){
+
+    media.innerHTML="";
+
+    const video=
+      document.createElement("video");
+
+    video.src=g.xrf_video;
+    video.autoplay=true;
+    video.muted=true;
+    video.loop=true;
+    video.playsInline=true;
+
+    video.style.width="100%";
+    video.style.height="230px";
+    video.style.objectFit="cover";
+
+    media.appendChild(video);
+
+  }
+
+}else{
+
+  setImage(
+    "homepage-xrf-image",
+    g.xrf_image
+  );
+
+}
+
+
+if(g.melting_video){
+
+  const media=
+    document.getElementById(
+      "homepage-melting-media"
+    );
+
+  if(media){
+
+    media.innerHTML="";
+
+    const video=
+      document.createElement("video");
+
+    video.src=g.melting_video;
+    video.autoplay=true;
+    video.muted=true;
+    video.loop=true;
+    video.playsInline=true;
+
+    video.style.width="100%";
+    video.style.height="230px";
+    video.style.objectFit="cover";
+
+    media.appendChild(video);
+
+  }
+
+}else{
+
+  setImage(
+    "homepage-melting-image",
+    g.melting_image
+  );
+
+}
+
+
+
+/* =========================================
+   REVIEWS
+   ========================================= */
 
 setText(
   "homepage-reviews-heading",
@@ -1012,7 +1212,10 @@ for(let i=1;i<=4;i++){
 }
 
 
-/* FAQ */
+
+/* =========================================
+   FAQ
+   ========================================= */
 
 setText(
   "homepage-faq-heading",
@@ -1034,26 +1237,19 @@ for(let i=1;i<=5;i++){
 }
 
 
-/* LOCATION NAMES */
+
+/* =========================================
+   LOCATIONS
+   ========================================= */
 
 setText(
-  "homepage-rancho-name",
+  "home-rancho-name",
   g.rancho_location_name
 );
 
 setText(
-  "homepage-sb-name",
+  "home-sb-name",
   g.sb_location_name
-);
-
-setText(
-  "homepage-rancho-location-button",
-  g.rancho_location_button
-);
-
-setText(
-  "homepage-sb-location-button",
-  g.sb_location_button
 );
 
 setText(
@@ -1067,13 +1263,12 @@ setText(
 );
 
 
-/* RANCHO ADDRESS */
 
 if(g.rancho_address){
 
   showAddress(
     document.getElementById(
-      "homepage-rancho-address"
+      "home-rancho-address"
     ),
     g.rancho_address
   );
@@ -1087,7 +1282,7 @@ if(g.rancho_address){
 
   const map=
     document.getElementById(
-      "homepage-rancho-map"
+      "home-rancho-map"
     );
 
   if(map){
@@ -1106,13 +1301,12 @@ if(g.rancho_address){
 }
 
 
-/* SAN BERNARDINO ADDRESS */
 
 if(g.sb_address){
 
   showAddress(
     document.getElementById(
-      "homepage-sb-address"
+      "home-sb-address"
     ),
     g.sb_address
   );
@@ -1126,7 +1320,7 @@ if(g.sb_address){
 
   const map=
     document.getElementById(
-      "homepage-sb-map"
+      "home-sb-map"
     );
 
   if(map){
@@ -1145,189 +1339,345 @@ if(g.sb_address){
 }
 
 
-/* RANCHO PHONE */
 
 if(g.rancho_phone){
 
-  setText(
-    "homepage-rancho-phone",
-    g.rancho_phone
-  );
-
-  setText(
-    "footer-rancho-phone",
-    g.rancho_phone
-  );
-
   const phone=
-    cleanPhone(
-      g.rancho_phone
-    );
-
-  const link=
     document.getElementById(
-      "homepage-rancho-phone-link"
+      "home-rancho-phone"
     );
 
-  const footerLink=
+  const footerPhone=
     document.getElementById(
       "footer-rancho-phone"
     );
 
-  if(link){
-    link.href="tel:"+phone;
+  if(phone){
+
+    phone.textContent=
+      g.rancho_phone;
+
+    phone.href=
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
   }
 
-  if(footerLink){
-    footerLink.href="tel:"+phone;
+  if(footerPhone){
+
+    footerPhone.textContent=
+      g.rancho_phone;
+
+    footerPhone.href=
+      "tel:"
+      +
+      cleanPhone(
+        g.rancho_phone
+      );
+
   }
 
 }
 
 
-/* SAN BERNARDINO PHONE */
 
 if(g.sb_phone){
 
-  setText(
-    "homepage-sb-phone",
-    g.sb_phone
-  );
-
-  setText(
-    "footer-sb-phone",
-    g.sb_phone
-  );
-
   const phone=
-    cleanPhone(
-      g.sb_phone
-    );
-
-  const link=
     document.getElementById(
-      "homepage-sb-phone-link"
+      "home-sb-phone"
     );
 
-  const footerLink=
+  const footerPhone=
     document.getElementById(
       "footer-sb-phone"
     );
 
-  if(link){
-    link.href="tel:"+phone;
-  }
+  if(phone){
 
-  if(footerLink){
-    footerLink.href="tel:"+phone;
-  }
+    phone.textContent=
+      g.sb_phone;
 
-}
-
-
-/* XRF MEDIA */
-
-const xrfMedia=
-  document.getElementById(
-    "homepage-xrf-media"
-  );
-
-if(xrfMedia){
-
-  if(g.xrf_video){
-
-    const video=
-      document.createElement("video");
-
-    video.src=g.xrf_video;
-    video.autoplay=true;
-    video.muted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.controls=true;
-
-    video.style.width="100%";
-    video.style.height="300px";
-    video.style.objectFit="cover";
-    video.style.borderRadius="12px";
-
-    xrfMedia.replaceWith(video);
+    phone.href=
+      "tel:"
+      +
+      cleanPhone(
+        g.sb_phone
+      );
 
   }
 
-  else if(g.xrf_image){
+  if(footerPhone){
 
-    const image=
-      document.createElement("img");
+    footerPhone.textContent=
+      g.sb_phone;
 
-    image.src=g.xrf_image;
-    image.alt="XRF precious metal testing";
-
-    image.style.width="100%";
-    image.style.height="300px";
-    image.style.objectFit="cover";
-    image.style.borderRadius="12px";
-
-    xrfMedia.replaceWith(image);
+    footerPhone.href=
+      "tel:"
+      +
+      cleanPhone(
+        g.sb_phone
+      );
 
   }
 
 }
 
 
-/* MELTING MEDIA */
 
-const meltingMedia=
-  document.getElementById(
-    "homepage-melting-media"
-  );
+/* =========================================
+   HOURS
+   ========================================= */
 
-if(meltingMedia){
+setText(
+  "footer-rancho-hours-mon-thu",
+  g.rancho_hours_mon_thu
+    ? "Rancho: "+g.rancho_hours_mon_thu
+    : ""
+);
 
-  if(g.melting_video){
+setText(
+  "footer-rancho-hours-fri",
+  g.rancho_hours_fri
+);
 
-    const video=
-      document.createElement("video");
+setText(
+  "footer-rancho-hours-sat",
+  g.rancho_hours_sat
+);
 
-    video.src=g.melting_video;
-    video.autoplay=true;
-    video.muted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.controls=true;
+setText(
+  "footer-rancho-hours-sun",
+  g.rancho_hours_sun
+);
 
-    video.style.width="100%";
-    video.style.height="300px";
-    video.style.objectFit="cover";
-    video.style.borderRadius="12px";
 
-    meltingMedia.replaceWith(video);
+setText(
+  "footer-sb-hours-mon-thu",
+  g.sb_hours_mon_thu
+    ? "San Bernardino: "+g.sb_hours_mon_thu
+    : ""
+);
 
-  }
+setText(
+  "footer-sb-hours-fri",
+  g.sb_hours_fri
+);
 
-  else if(g.melting_image){
+setText(
+  "footer-sb-hours-sat",
+  g.sb_hours_sat
+);
 
-    const image=
-      document.createElement("img");
-
-    image.src=g.melting_image;
-    image.alt="Precious metal assay and melting";
-
-    image.style.width="100%";
-    image.style.height="300px";
-    image.style.objectFit="cover";
-    image.style.borderRadius="12px";
-
-    meltingMedia.replaceWith(image);
-
-  }
-
-}
+setText(
+  "footer-sb-hours-sun",
+  g.sb_hours_sun
+);
 
 
 }catch(e){}
 
 })();
+
+
+
+/* =========================================
+   FEATURED PRODUCTS
+   ========================================= */
+
+(async()=>{
+
+try{
+
+const API=
+  "https://api.github.com/repos/rcgoldandsilver/rancho-gold-silver-website/contents/content/products";
+
+
+const response=
+  await fetch(
+    API,
+    {
+      cache:"no-store"
+    }
+  );
+
+
+if(!response.ok)return;
+
+
+const files=
+  await response.json();
+
+
+const products=
+  await Promise.all(
+
+    files
+      .filter(
+        file=>
+          file.name.endsWith(".json")
+      )
+      .map(
+        async file=>{
+
+          try{
+
+            const r=
+              await fetch(
+                file.download_url,
+                {
+                  cache:"no-store"
+                }
+              );
+
+            if(!r.ok)return null;
+
+            const product=
+              await r.json();
+
+            product.__file=
+              file.name;
+
+            return product;
+
+          }catch(e){
+
+            return null;
+
+          }
+
+        }
+      )
+
+  );
+
+
+const featured=
+  products
+    .filter(
+      product=>
+        product &&
+        product.visible!==false &&
+        product.featured_homepage===true
+    )
+    .sort(
+      (a,b)=>
+        Number(a.order || 100)
+        -
+        Number(b.order || 100)
+    )
+    .slice(0,4);
+
+
+const container=
+  document.getElementById(
+    "featured-products"
+  );
+
+
+if(!container)return;
+
+
+if(featured.length===0){
+
+  /*
+    Keep homepage clean if no products
+    have been selected in Admin.
+  */
+
+  container.style.display="none";
+  return;
+
+}
+
+
+container.innerHTML="";
+
+
+featured.forEach(product=>{
+
+  const card=
+    document.createElement("div");
+
+  card.className="card";
+
+
+  const slug=
+    product.__file
+      .replace(/\.json$/i,"");
+
+
+  const image=
+    product.image || "";
+
+
+  card.innerHTML=
+
+    '<a href="sell.html#'
+    +
+    encodeURIComponent(slug)
+    +
+    '" style="text-decoration:none;color:inherit">'
+    +
+
+    (
+      image
+      ?
+      '<img src="'
+      +
+      image
+      +
+      '" alt="">'
+      :
+      ''
+    )
+    +
+
+    '<div class="pad center">'
+    +
+
+    '<h3>'
+    +
+    escapeHTML(
+      product.name || ""
+    )
+    +
+    '</h3>'
+    +
+
+    '<span class="btn">View Details</span>'
+    +
+
+    '</div>'
+    +
+
+    '</a>';
+
+
+  container.appendChild(card);
+
+});
+
+
+}catch(e){}
+
+})();
+
+
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
 
 </script>
 
