@@ -57,7 +57,6 @@ collections:
             name: "header_logo"
             widget: "image"
             required: false
-            hint: "Logo shown at the top of the website."
 
 
           # ==================================
@@ -211,13 +210,46 @@ collections:
             name: "about_image_1"
             widget: "image"
             required: false
-            hint: "First photo shown on the About Us page."
 
           - label: "About Us - Photo 2"
             name: "about_image_2"
             widget: "image"
             required: false
-            hint: "Second photo shown on the About Us page."
+
+
+          # ==================================
+          # LOCATIONS PAGE
+          # ==================================
+
+          - label: "Locations - Page Heading"
+            name: "locations_heading"
+            widget: "string"
+            default: "Our Locations"
+
+          - label: "Locations - Intro"
+            name: "locations_intro"
+            widget: "text"
+            default: "Walk-ins welcome. No appointment needed."
+
+          - label: "Rancho Location - Name"
+            name: "rancho_location_name"
+            widget: "string"
+            default: "Rancho Cucamonga Gold & Silver"
+
+          - label: "Rancho Location - View Button"
+            name: "rancho_location_button"
+            widget: "string"
+            default: "View Location"
+
+          - label: "San Bernardino Location - Name"
+            name: "sb_location_name"
+            widget: "string"
+            default: "San Bernardino Gold & Silver"
+
+          - label: "San Bernardino Location - View Button"
+            name: "sb_location_button"
+            widget: "string"
+            default: "View Location"
 
 
   # ==================================
