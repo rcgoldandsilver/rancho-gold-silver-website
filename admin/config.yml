@@ -24,6 +24,10 @@ collections:
 
         fields:
 
+          # ==============================
+          # GENERAL INFORMATION
+          # ==============================
+
           - label: "Homepage Intro"
             name: "homepage_intro"
             widget: "text"
@@ -46,7 +50,7 @@ collections:
 
 
           # ==============================
-          # WEBSITE IMAGES
+          # HEADER
           # ==============================
 
           - label: "Header Logo"
@@ -55,10 +59,27 @@ collections:
             required: false
             hint: "Logo shown next to Rancho Cucamonga Gold & Silver at the top of the website."
 
+
+          # ==============================
+          # HOMEPAGE
+          # ==============================
+
           - label: "Homepage Hero Image"
             name: "hero_image"
             widget: "image"
             required: false
+
+          - label: "Homepage WE BUY Photo"
+            name: "homepage_buy_image"
+            widget: "image"
+            required: false
+            hint: "Photo shown on the WE BUY card on the homepage."
+
+          - label: "Homepage WE SELL Photo"
+            name: "homepage_sell_image"
+            widget: "image"
+            required: false
+            hint: "Photo shown on the WE SELL card on the homepage."
 
 
           # ==============================
@@ -106,16 +127,26 @@ collections:
             required: false
 
 
+  # ====================================
+  # PRODUCTS
+  # ====================================
+
   - name: "products"
     label: "Products"
     label_singular: "Product"
+
     folder: "content/products"
+
     create: true
     delete: true
+
     extension: "json"
     format: "json"
+
     identifier_field: "name"
+
     slug: "{{slug}}"
+
     summary: "{{name}} — {{category}}"
 
     fields:
