@@ -2,33 +2,182 @@
 <html lang="en">
 
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
-
-<title>Precious Metals Price Board</title>
+<title>Live Precious Metal Price Board</title>
 
 <style>
 
-.price-move{
-  font-size:.65em;
-  margin-left:8px;
-  vertical-align:middle;
-  font-weight:bold;
+*{
+  box-sizing:border-box;
 }
 
-.price-up{
-  color:#188038;
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#071525;
+  color:#fff;
 }
 
-.price-down{
-  color:#c5221f;
+.board{
+  min-height:100vh;
+  padding:28px;
 }
 
-.board-time{
-  margin-top:22px;
-  font-size:16px;
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:28px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.brand img{
+  width:90px;
+  height:70px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:8px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:30px;
+}
+
+.brand p{
+  margin:5px 0 0;
+  opacity:.75;
+}
+
+.exit{
+  display:inline-block;
+  padding:12px 18px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:8px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.metals{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-bottom:28px;
+}
+
+.metal{
+  background:#10243a;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:24px;
+  text-align:center;
+}
+
+.metal-name{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+.price{
+  font-size:44px;
+  font-weight:800;
+  margin:12px 0 6px;
+}
+
+.direction{
+  min-height:24px;
+  font-size:18px;
+  font-weight:700;
+}
+
+.note{
+  opacity:.65;
+  margin-top:8px;
+  font-size:14px;
+}
+
+.karat{
+  background:#fff;
+  color:#111;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.karat h2{
+  margin:0;
+  padding:20px 24px;
+  background:#efe5d4;
+  color:#071525;
+  font-size:25px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:17px 20px;
+  text-align:left;
+  border-bottom:1px solid #ddd;
+}
+
+th{
+  background:#f6f2eb;
+  color:#071525;
+}
+
+td:last-child,
+th:last-child{
+  text-align:right;
+  font-weight:700;
+}
+
+.status{
+  text-align:center;
+  margin-top:18px;
+  opacity:.65;
+  font-size:13px;
+}
+
+@media(max-width:800px){
+
+  .board{
+    padding:16px;
+  }
+
+  .top{
+    display:block;
+  }
+
+  .exit{
+    margin-top:18px;
+  }
+
+  .metals{
+    grid-template-columns:1fr;
+  }
+
+  .price{
+    font-size:36px;
+  }
+
+  .brand h1{
+    font-size:22px;
+  }
+
 }
 
 </style>
@@ -36,97 +185,131 @@
 </head>
 
 
-<body class="fullscreen-board">
+<body>
 
-<div class="wrap center" style="padding:22px">
+<div class="board">
 
 
-<div style="display:flex;justify-content:space-between;align-items:center">
+<!-- TOP -->
 
-<h2>
-RANCHO CUCAMONGA GOLD & SILVER
-<br>
-<small>SAN BERNARDINO GOLD & SILVER</small>
-</h2>
+<div class="top">
 
-<a class="btn alt" href="prices.html">
-Exit Full Screen
+<div class="brand">
+
+<img
+  id="header-logo"
+  src="assets/IMG_9487.jpeg"
+  alt="Rancho Cucamonga Gold & Silver"
+>
+
+<div>
+
+<h1>
+Live Precious Metal Prices
+</h1>
+
+<p>
+Rancho Cucamonga Gold & Silver
+</p>
+
+</div>
+
+</div>
+
+
+<a
+  id="price-board-exit-button"
+  class="exit"
+  href="prices.html"
+>
+Exit Price Board
 </a>
 
 </div>
 
 
-<div class="priceboxes">
+
+<!-- METALS -->
+
+<div class="metals">
 
 
-<div class="pricebox">
+<div class="metal">
 
-<h1>GOLD</h1>
-
-<div class="pricebig">
-
-<span id="gold-oz">—</span>
-
-<span
-id="gold-arrow"
-class="price-move">
-</span>
-
-/ oz
-
+<div class="metal-name">
+GOLD
 </div>
 
-<h3>
-<span id="gold-gram">—</span> / gram
-</h3>
-
+<div
+  id="gold-price"
+  class="price"
+>
+—
 </div>
 
-
-<div class="pricebox">
-
-<h1>SILVER</h1>
-
-<div class="pricebig">
-
-<span id="silver-oz">—</span>
-
-<span
-id="silver-arrow"
-class="price-move">
-</span>
-
-/ oz
-
+<div
+  id="gold-direction"
+  class="direction"
+>
 </div>
 
-<h3>
-<span id="silver-gram">—</span> / gram
-</h3>
+<div class="note">
+USD / Troy Ounce
+</div>
 
 </div>
 
 
-<div class="pricebox">
 
-<h1>PLATINUM</h1>
+<div class="metal">
 
-<div class="pricebig">
+<div class="metal-name">
+SILVER
+</div>
 
-<span id="platinum-oz">—</span>
+<div
+  id="silver-price"
+  class="price"
+>
+—
+</div>
 
-<span
-id="platinum-arrow"
-class="price-move">
-</span>
+<div
+  id="silver-direction"
+  class="direction"
+>
+</div>
 
-/ oz
+<div class="note">
+USD / Troy Ounce
+</div>
 
 </div>
 
-<h3>
-<span id="platinum-gram">—</span> / gram
-</h3>
+
+
+<div class="metal">
+
+<div class="metal-name">
+PLATINUM
+</div>
+
+<div
+  id="platinum-price"
+  class="price"
+>
+—
+</div>
+
+<div
+  id="platinum-direction"
+  class="direction"
+>
+</div>
+
+<div class="note">
+USD / Troy Ounce
+</div>
 
 </div>
 
@@ -134,142 +317,182 @@ class="price-move">
 </div>
 
 
-<div style="max-width:500px;margin:25px auto;text-align:left">
 
-<h2>Gold Price by Karat</h2>
+<!-- KARAT TABLE -->
+
+<div class="karat">
+
+<h2 id="price-board-karat-heading">
+Gold Value by Karat
+</h2>
+
 
 <table>
 
+<thead>
+
 <tr>
-<th>24K</th>
-<td id="k24">—</td>
+
+<th>
+Karat
+</th>
+
+<th>
+Purity
+</th>
+
+<th>
+Value Per Gram
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+<td>24K</td>
+<td>99.9%</td>
+<td id="gold-24k">—</td>
 </tr>
 
 <tr>
-<th>22K</th>
-<td id="k22">—</td>
+<td>22K</td>
+<td>91.6%</td>
+<td id="gold-22k">—</td>
 </tr>
 
 <tr>
-<th>21K</th>
-<td id="k21">—</td>
+<td>21K</td>
+<td>87.5%</td>
+<td id="gold-21k">—</td>
 </tr>
 
 <tr>
-<th>18K</th>
-<td id="k18">—</td>
+<td>18K</td>
+<td>75.0%</td>
+<td id="gold-18k">—</td>
 </tr>
 
 <tr>
-<th>14K</th>
-<td id="k14">—</td>
+<td>14K</td>
+<td>58.5%</td>
+<td id="gold-14k">—</td>
 </tr>
 
 <tr>
-<th>10K</th>
-<td id="k10">—</td>
+<td>10K</td>
+<td>41.7%</td>
+<td id="gold-10k">—</td>
 </tr>
 
-<tr>
-<th>9K</th>
-<td id="k9">—</td>
-</tr>
-
-<tr>
-<th>8K</th>
-<td id="k8">—</td>
-</tr>
+</tbody>
 
 </table>
 
 </div>
 
 
-<p class="board-time">
-
-Current Time:
-<span id="clock"></span>
-
-&nbsp; • &nbsp;
-
-Last Updated:
-<span id="last-updated">Loading...</span>
-
-</p>
+<div
+  id="status"
+  class="status"
+>
+Live market reference • Updating automatically
+</div>
 
 
 </div>
 
 
+
 <script>
 
-const API=
-  'https://api.gold-api.com/price/';
+const METAL_API =
+  "https://api.gold-api.com/price/";
 
-const DIRECTION_API=
-  'https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction';
-
-const TROY_OUNCE_GRAMS=
-  31.1034768;
+const DIRECTION_API =
+  "https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction";
 
 
-/* FORMAT MONEY */
+
+/* =========================================
+   HELPERS
+   ========================================= */
 
 function money(value){
 
-  return '$'+Number(value).toLocaleString(
-    'en-US',
+  return new Intl.NumberFormat(
+    "en-US",
     {
+      style:"currency",
+      currency:"USD",
       minimumFractionDigits:2,
       maximumFractionDigits:2
     }
-  );
+  ).format(value);
 
 }
 
 
-/* GET LIVE PRICE */
 
-async function getPrice(symbol){
+async function getMetalPrice(symbol){
 
-  const r=await fetch(
-    API+symbol,
-    {cache:'no-store'}
-  );
+  const response =
+    await fetch(
+      METAL_API + symbol,
+      {
+        cache:"no-store"
+      }
+    );
 
-  if(!r.ok){
-    throw new Error('Price unavailable');
+  if(!response.ok){
+    throw new Error("Price request failed");
   }
 
-  const data=await r.json();
+  const data =
+    await response.json();
 
-  const price=Number(data.price);
+
+  const price =
+    Number(
+      data.price ??
+      data.ask ??
+      data.bid
+    );
+
 
   if(!Number.isFinite(price)){
-    throw new Error('Invalid price');
+    throw new Error("Invalid price");
   }
+
 
   return price;
 
 }
 
 
-/* GET MARKET DIRECTION */
 
-async function getDirections(){
+async function getMetalDirections(){
 
   try{
 
-    const r=await fetch(
-      DIRECTION_API,
-      {cache:'no-store'}
-    );
+    const response =
+      await fetch(
+        DIRECTION_API,
+        {
+          cache:"no-store"
+        }
+      );
 
-    if(!r.ok){
+
+    if(!response.ok){
       return {};
     }
 
-    return await r.json();
+
+    return await response.json();
 
   }catch(e){
 
@@ -280,200 +503,346 @@ async function getDirections(){
 }
 
 
-/* MARKET DIRECTION ARROW */
 
-function updateArrow(id,direction){
+function getDirectionValue(
+  directions,
+  symbol
+){
 
-  const el=
-    document.getElementById(id);
-
-  if(!el)return;
-
-  el.textContent='';
-  el.className='price-move';
-
-
-  if(direction==='up'){
-
-    el.textContent='▲';
-    el.classList.add('price-up');
-
+  if(!directions){
+    return null;
   }
 
-  else if(direction==='down'){
 
-    el.textContent='▼';
-    el.classList.add('price-down');
+  const direct =
+    directions[symbol];
 
+
+  if(
+    direct !== undefined &&
+    direct !== null
+  ){
+    return direct;
   }
 
-}
+
+  const lowercase =
+    directions[
+      symbol.toLowerCase()
+    ];
 
 
-/* GOLD KARATS */
+  if(
+    lowercase !== undefined &&
+    lowercase !== null
+  ){
+    return lowercase;
+  }
 
-function updateKarats(goldGram){
 
-  const karats={
-
-    k24:24/24,
-    k22:22/24,
-    k21:21/24,
-    k18:18/24,
-    k14:14/24,
-    k10:10/24,
-    k9:9/24,
-    k8:8/24
-
+  const names = {
+    XAU:"gold",
+    XAG:"silver",
+    XPT:"platinum"
   };
 
 
-  Object.entries(karats).forEach(
-    ([id,purity])=>{
-
-      document.getElementById(id).textContent=
-        money(goldGram*purity)+' / gram';
-
-    }
-  );
+  return directions[
+    names[symbol]
+  ];
 
 }
 
 
-/* UPDATE PRICES */
 
-async function updatePrices(){
+function showDirection(
+  id,
+  value
+){
 
-  try{
+  const element =
+    document.getElementById(id);
 
-    const [
-      gold,
-      silver,
-      platinum,
-      directions
-    ]=await Promise.all([
-
-      getPrice('XAU'),
-      getPrice('XAG'),
-      getPrice('XPT'),
-      getDirections()
-
-    ]);
+  if(!element)return;
 
 
-    /* MARKET DIRECTION ARROWS */
+  if(
+    value === undefined ||
+    value === null ||
+    value === ""
+  ){
 
-    updateArrow(
-      'gold-arrow',
-      directions?.XAU?.direction
-    );
+    element.textContent="";
+    return;
 
-    updateArrow(
-      'silver-arrow',
-      directions?.XAG?.direction
-    );
-
-    updateArrow(
-      'platinum-arrow',
-      directions?.XPT?.direction
-    );
+  }
 
 
-    /* OUNCE */
-
-    document.getElementById(
-      'gold-oz'
-    ).textContent=
-      money(gold);
-
-    document.getElementById(
-      'silver-oz'
-    ).textContent=
-      money(silver);
-
-    document.getElementById(
-      'platinum-oz'
-    ).textContent=
-      money(platinum);
+  const text =
+    String(value).toLowerCase();
 
 
-    /* GRAMS */
+  if(
+    text.includes("up") ||
+    text.includes("higher") ||
+    text === "1" ||
+    text === "+"
+  ){
 
-    const goldGram=
-      gold/TROY_OUNCE_GRAMS;
+    element.textContent="▲";
 
-    const silverGram=
-      silver/TROY_OUNCE_GRAMS;
+  }
 
-    const platinumGram=
-      platinum/TROY_OUNCE_GRAMS;
+  else if(
+    text.includes("down") ||
+    text.includes("lower") ||
+    text === "-1" ||
+    text === "-"
+  ){
 
+    element.textContent="▼";
 
-    document.getElementById(
-      'gold-gram'
-    ).textContent=
-      money(goldGram);
+  }
 
-    document.getElementById(
-      'silver-gram'
-    ).textContent=
-      money(silverGram);
+  else{
 
-    document.getElementById(
-      'platinum-gram'
-    ).textContent=
-      money(platinumGram);
-
-
-    /* KARATS */
-
-    updateKarats(goldGram);
-
-
-    /* LAST UPDATED */
-
-    document.getElementById(
-      'last-updated'
-    ).textContent=
-      new Date().toLocaleString();
-
-
-  }catch(e){
-
-    /* Keep last successful prices */
+    element.textContent="";
 
   }
 
 }
 
 
-/* CLOCK */
 
-function updateClock(){
+/* =========================================
+   UPDATE LIVE BOARD
+   ========================================= */
 
+async function updateBoard(){
+
+const status =
   document.getElementById(
-    'clock'
-  ).textContent=
-    new Date().toLocaleString();
+    "status"
+  );
+
+
+try{
+
+const [
+  gold,
+  silver,
+  platinum,
+  directions
+] =
+  await Promise.all([
+
+    getMetalPrice("XAU"),
+
+    getMetalPrice("XAG"),
+
+    getMetalPrice("XPT"),
+
+    getMetalDirections()
+
+  ]);
+
+
+
+document.getElementById(
+  "gold-price"
+).textContent =
+  money(gold);
+
+
+document.getElementById(
+  "silver-price"
+).textContent =
+  money(silver);
+
+
+document.getElementById(
+  "platinum-price"
+).textContent =
+  money(platinum);
+
+
+
+showDirection(
+  "gold-direction",
+  getDirectionValue(
+    directions,
+    "XAU"
+  )
+);
+
+
+showDirection(
+  "silver-direction",
+  getDirectionValue(
+    directions,
+    "XAG"
+  )
+);
+
+
+showDirection(
+  "platinum-direction",
+  getDirectionValue(
+    directions,
+    "XPT"
+  )
+);
+
+
+
+/* GOLD VALUE PER GRAM */
+
+const gramsPerTroyOunce =
+  31.1034768;
+
+
+const pureGoldPerGram =
+  gold /
+  gramsPerTroyOunce;
+
+
+const karats = {
+
+  "gold-24k":0.999,
+  "gold-22k":0.916,
+  "gold-21k":0.875,
+  "gold-18k":0.750,
+  "gold-14k":0.585,
+  "gold-10k":0.417
+
+};
+
+
+
+Object.entries(
+  karats
+).forEach(
+  ([id,purity])=>{
+
+    const element =
+      document.getElementById(id);
+
+    if(element){
+
+      element.textContent =
+        money(
+          pureGoldPerGram *
+          purity
+        );
+
+    }
+
+  }
+);
+
+
+
+const now =
+  new Date();
+
+
+status.textContent =
+  "Live market reference • Updated "
+  +
+  now.toLocaleTimeString(
+    [],
+    {
+      hour:"numeric",
+      minute:"2-digit"
+    }
+  );
+
+
+}catch(e){
+
+status.textContent =
+  "Live price temporarily unavailable";
 
 }
 
-updateClock();
+}
+
+
+
+updateBoard();
+
 
 setInterval(
-  updateClock,
-  1000
+  updateBoard,
+  300000
 );
 
 
-/* PRICES */
 
-updatePrices();
+/* =========================================
+   ADMIN SETTINGS
+   ========================================= */
 
-setInterval(
-  updatePrices,
-  5*60*1000
-);
+(async()=>{
+
+try{
+
+const response =
+  await fetch(
+    "content/settings/general.json",
+    {
+      cache:"no-store"
+    }
+  );
+
+
+if(!response.ok)return;
+
+
+const g =
+  await response.json();
+
+
+
+if(g.header_logo){
+
+  const logo =
+    document.getElementById(
+      "header-logo"
+    );
+
+  if(logo){
+    logo.src=g.header_logo;
+  }
+
+}
+
+
+
+if(g.price_board_karat_heading){
+
+  document.getElementById(
+    "price-board-karat-heading"
+  ).textContent =
+    g.price_board_karat_heading;
+
+}
+
+
+
+if(g.price_board_exit_button){
+
+  document.getElementById(
+    "price-board-exit-button"
+  ).textContent =
+    g.price_board_exit_button;
+
+}
+
+
+}catch(e){}
+
+})();
 
 </script>
 
