@@ -39,7 +39,7 @@ GOLD & SILVER
 
 </a>
 
-<button class="menuBtn btn">
+<button class="menuBtn btn" aria-label="Menu">
 ☰
 </button>
 
@@ -119,7 +119,7 @@ Walk-ins welcome. No appointment needed.
 <div class="wrap grid2">
 
 
-<!-- RANCHO CUCAMONGA -->
+<!-- RANCHO -->
 
 <div class="location">
 
@@ -147,6 +147,37 @@ Rancho Cucamonga, CA 91730
 </b>
 
 </a>
+
+</p>
+
+
+<p>
+
+<strong>Hours</strong>
+
+<br>
+
+<span id="rancho-hours-mon-thu">
+Mon–Thu 10–7
+</span>
+
+<br>
+
+<span id="rancho-hours-fri">
+Fri 10–1, 2–7
+</span>
+
+<br>
+
+<span id="rancho-hours-sat">
+Sat 10–7
+</span>
+
+<br>
+
+<span id="rancho-hours-sun">
+Sun Closed
+</span>
 
 </p>
 
@@ -207,6 +238,37 @@ San Bernardino, CA 92410
 </p>
 
 
+<p>
+
+<strong>Hours</strong>
+
+<br>
+
+<span id="sb-hours-mon-thu">
+Mon–Thu 11–7
+</span>
+
+<br>
+
+<span id="sb-hours-fri">
+Fri 11–1, 3–7
+</span>
+
+<br>
+
+<span id="sb-hours-sat">
+Sat 11–7
+</span>
+
+<br>
+
+<span id="sb-hours-sun">
+Sun Closed
+</span>
+
+</p>
+
+
 <iframe
   id="sb-map"
   class="map"
@@ -248,7 +310,6 @@ View Location
 <h3>
 Our Locations
 </h3>
-
 
 <b id="footer-rancho-name">
 Rancho Cucamonga Gold & Silver
@@ -336,23 +397,53 @@ Live Prices
 Hours
 </h3>
 
+<span id="footer-rancho-hours-mon-thu">
 Rancho: Mon–Thu 10–7
+</span>
+
 <br>
+
+<span id="footer-rancho-hours-fri">
 Fri 10–1, 2–7
+</span>
+
 <br>
+
+<span id="footer-rancho-hours-sat">
 Sat 10–7
+</span>
+
 <br>
+
+<span id="footer-rancho-hours-sun">
 Sun Closed
+</span>
+
 
 <br><br>
 
+
+<span id="footer-sb-hours-mon-thu">
 San Bernardino: Mon–Thu 11–7
+</span>
+
 <br>
+
+<span id="footer-sb-hours-fri">
 Fri 11–1, 3–7
+</span>
+
 <br>
+
+<span id="footer-sb-hours-sat">
 Sat 11–7
+</span>
+
 <br>
+
+<span id="footer-sb-hours-sun">
 Sun Closed
+</span>
 
 </div>
 
@@ -384,10 +475,7 @@ San Bernardino Gold & Silver
 
 try{
 
-
-/* LOAD ADMIN SETTINGS */
-
-const r=
+const response =
   await fetch(
     "content/settings/general.json",
     {
@@ -395,14 +483,27 @@ const r=
     }
   );
 
-if(!r.ok)return;
+if(!response.ok)return;
 
-const g=
-  await r.json();
+const g =
+  await response.json();
 
 
 
-/* HELPER FOR PHONE LINKS */
+function setText(id,value){
+
+  if(!value)return;
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+    element.textContent=value;
+  }
+
+}
+
+
 
 function cleanPhone(phone){
 
@@ -413,20 +514,18 @@ function cleanPhone(phone){
 
 
 
-/* HELPER FOR ADDRESS DISPLAY */
-
 function showAddress(element,address){
 
   if(!element || !address)return;
 
-  const parts=
+  const parts =
     String(address)
       .split(",")
       .map(part=>part.trim());
 
-  if(parts.length >= 3){
+  if(parts.length>=3){
 
-    element.innerHTML=
+    element.innerHTML =
       parts.slice(0,-2).join(", ")
       +
       "<br>"
@@ -447,8 +546,10 @@ function showAddress(element,address){
 
 if(g.header_logo){
 
-  const logo=
-    document.getElementById("header-logo");
+  const logo =
+    document.getElementById(
+      "header-logo"
+    );
 
   if(logo){
     logo.src=g.header_logo;
@@ -458,84 +559,61 @@ if(g.header_logo){
 
 
 
-/* PAGE HEADING */
+/* PAGE */
 
-if(g.locations_heading){
+setText(
+  "locations-heading",
+  g.locations_heading
+);
 
-  document.getElementById(
-    "locations-heading"
-  ).textContent=
-    g.locations_heading;
-
-}
-
-
-
-/* PAGE INTRO */
-
-if(g.locations_intro){
-
-  document.getElementById(
-    "locations-intro"
-  ).textContent=
-    g.locations_intro;
-
-}
+setText(
+  "locations-intro",
+  g.locations_intro
+);
 
 
 
-/* =========================================
-   RANCHO
-   ========================================= */
+/* RANCHO NAME */
 
-if(g.rancho_location_name){
+setText(
+  "rancho-location-name",
+  g.rancho_location_name
+);
 
-  document.getElementById(
-    "rancho-location-name"
-  ).textContent=
-    g.rancho_location_name;
-
-
-  document.getElementById(
-    "footer-rancho-name"
-  ).textContent=
-    g.rancho_location_name;
-
-}
+setText(
+  "footer-rancho-name",
+  g.rancho_location_name
+);
 
 
+
+/* RANCHO ADDRESS */
 
 if(g.rancho_address){
 
-  const address=
+  showAddress(
     document.getElementById(
       "rancho-location-address"
-    );
+    ),
+    g.rancho_address
+  );
 
-  const footerAddress=
+  showAddress(
     document.getElementById(
       "footer-rancho-address"
-    );
-
-  showAddress(
-    address,
-    g.rancho_address
-  );
-
-  showAddress(
-    footerAddress,
+    ),
     g.rancho_address
   );
 
 
-  const map=
+  const map =
     document.getElementById(
       "rancho-map"
     );
 
   if(map){
 
-    map.src=
+    map.src =
       "https://www.google.com/maps?q="
       +
       encodeURIComponent(
@@ -550,114 +628,129 @@ if(g.rancho_address){
 
 
 
+/* RANCHO PHONE */
+
 if(g.rancho_phone){
 
-  const phone=
+  const phone =
     document.getElementById(
       "rancho-location-phone"
     );
 
-  const link=
+  const link =
     document.getElementById(
       "rancho-location-phone-link"
     );
 
-  const footerPhone=
+  const footer =
     document.getElementById(
       "footer-rancho-phone"
     );
 
 
-  phone.textContent=
-    g.rancho_phone;
+  if(phone){
+    phone.textContent=g.rancho_phone;
+  }
 
+  if(link){
 
-  link.href=
-    "tel:"
-    +
-    cleanPhone(
-      g.rancho_phone
-    );
+    link.href =
+      "tel:"
+      +
+      cleanPhone(g.rancho_phone);
 
+  }
 
-  footerPhone.textContent=
-    g.rancho_phone;
+  if(footer){
 
+    footer.textContent =
+      g.rancho_phone;
 
-  footerPhone.href=
-    "tel:"
-    +
-    cleanPhone(
-      g.rancho_phone
-    );
+    footer.href =
+      "tel:"
+      +
+      cleanPhone(g.rancho_phone);
 
-}
-
-
-
-if(g.rancho_location_button){
-
-  document.getElementById(
-    "rancho-location-button"
-  ).textContent=
-    g.rancho_location_button;
+  }
 
 }
 
 
 
-/* =========================================
-   SAN BERNARDINO
-   ========================================= */
+/* RANCHO HOURS */
 
-if(g.sb_location_name){
+setText(
+  "rancho-hours-mon-thu",
+  g.rancho_hours_mon_thu
+);
 
-  document.getElementById(
-    "sb-location-name"
-  ).textContent=
-    g.sb_location_name;
+setText(
+  "rancho-hours-fri",
+  g.rancho_hours_fri
+);
+
+setText(
+  "rancho-hours-sat",
+  g.rancho_hours_sat
+);
+
+setText(
+  "rancho-hours-sun",
+  g.rancho_hours_sun
+);
 
 
-  document.getElementById(
-    "footer-sb-name"
-  ).textContent=
-    g.sb_location_name;
 
-}
+/* RANCHO BUTTON */
+
+setText(
+  "rancho-location-button",
+  g.rancho_location_button
+);
 
 
+
+/* SAN BERNARDINO NAME */
+
+setText(
+  "sb-location-name",
+  g.sb_location_name
+);
+
+setText(
+  "footer-sb-name",
+  g.sb_location_name
+);
+
+
+
+/* SAN BERNARDINO ADDRESS */
 
 if(g.sb_address){
 
-  const address=
+  showAddress(
     document.getElementById(
       "sb-location-address"
-    );
+    ),
+    g.sb_address
+  );
 
-  const footerAddress=
+  showAddress(
     document.getElementById(
       "footer-sb-address"
-    );
-
-  showAddress(
-    address,
-    g.sb_address
-  );
-
-  showAddress(
-    footerAddress,
+    ),
     g.sb_address
   );
 
 
-  const map=
+  const map =
     document.getElementById(
       "sb-map"
     );
 
   if(map){
 
-    map.src=
+    map.src =
       "https://www.google.com/maps?q="
       +
       encodeURIComponent(
@@ -672,63 +765,88 @@ if(g.sb_address){
 
 
 
+/* SAN BERNARDINO PHONE */
+
 if(g.sb_phone){
 
-  const phone=
+  const phone =
     document.getElementById(
       "sb-location-phone"
     );
 
-  const link=
+  const link =
     document.getElementById(
       "sb-location-phone-link"
     );
 
-  const footerPhone=
+  const footer =
     document.getElementById(
       "footer-sb-phone"
     );
 
 
-  phone.textContent=
-    g.sb_phone;
+  if(phone){
+    phone.textContent=g.sb_phone;
+  }
 
+  if(link){
 
-  link.href=
-    "tel:"
-    +
-    cleanPhone(
-      g.sb_phone
-    );
+    link.href =
+      "tel:"
+      +
+      cleanPhone(g.sb_phone);
 
+  }
 
-  footerPhone.textContent=
-    g.sb_phone;
+  if(footer){
 
+    footer.textContent =
+      g.sb_phone;
 
-  footerPhone.href=
-    "tel:"
-    +
-    cleanPhone(
-      g.sb_phone
-    );
+    footer.href =
+      "tel:"
+      +
+      cleanPhone(g.sb_phone);
 
-}
-
-
-
-if(g.sb_location_button){
-
-  document.getElementById(
-    "sb-location-button"
-  ).textContent=
-    g.sb_location_button;
+  }
 
 }
+
+
+
+/* SAN BERNARDINO HOURS */
+
+setText(
+  "sb-hours-mon-thu",
+  g.sb_hours_mon_thu
+);
+
+setText(
+  "sb-hours-fri",
+  g.sb_hours_fri
+);
+
+setText(
+  "sb-hours-sat",
+  g.sb_hours_sat
+);
+
+setText(
+  "sb-hours-sun",
+  g.sb_hours_sun
+);
+
+
+
+/* SAN BERNARDINO BUTTON */
+
+setText(
+  "sb-location-button",
+  g.sb_location_button
+);
 
 
 }catch(e){}
-
 
 })();
 
