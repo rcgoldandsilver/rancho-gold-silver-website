@@ -6,7 +6,6 @@
 
 /* =========================================================
    DEFAULT SITE INFORMATION
-   These values are used if general.json cannot be loaded.
    ========================================================= */
 
 window.SITE_INFO = {
@@ -80,10 +79,8 @@ function setText(id,value){
     return;
   }
 
-
   const element =
     document.getElementById(id);
-
 
   if(element){
     element.textContent=value;
@@ -97,10 +94,8 @@ function setImage(id,value){
 
   if(!value)return;
 
-
   const element =
     document.getElementById(id);
-
 
   if(element){
     element.src=value;
@@ -122,14 +117,12 @@ function showAddress(
     return;
   }
 
-
   const parts =
     String(address)
       .split(",")
       .map(
         part=>part.trim()
       );
-
 
   if(parts.length>=3){
 
@@ -190,24 +183,19 @@ document.addEventListener(
         ".menuBtn"
       );
 
-
     if(!button)return;
-
 
     const header =
       button.closest(
         ".header"
       );
 
-
     if(!header)return;
-
 
     const nav =
       header.querySelector(
         ".nav"
       );
-
 
     if(nav){
 
@@ -223,62 +211,13 @@ document.addEventListener(
 
 
 /* =========================================================
-   PRODUCT DETAILS
-   Works for static product cards.
-   Dynamic sell.html cards have their own handler.
+   IMPORTANT:
+   PRODUCT VIEW DETAILS IS NOT HANDLED HERE.
+
+   sell.html loads the products dynamically and controls
+   View Details itself. Keeping the product toggle out of
+   site.js prevents double-click / double-toggle conflicts.
    ========================================================= */
-
-document.addEventListener(
-  "click",
-  event=>{
-
-    const button =
-      event.target.closest(
-        "[data-details]"
-      );
-
-
-    if(!button)return;
-
-
-    /*
-      sell.html dynamically handles its own
-      product buttons. If that button is inside
-      a dynamic product, do not toggle it twice.
-    */
-
-    if(
-      button.closest(
-        "[data-dynamic-product='true']"
-      )
-    ){
-      return;
-    }
-
-
-    const product =
-      button.closest(
-        ".product"
-      );
-
-
-    if(!product)return;
-
-
-    product.classList.toggle(
-      "open"
-    );
-
-
-    button.textContent =
-      product.classList.contains(
-        "open"
-      )
-        ? "Hide Details"
-        : "View Details";
-
-  }
-);
 
 
 
@@ -291,18 +230,15 @@ function pickCall(){
   const info =
     window.SITE_INFO;
 
-
   const choice =
     window.confirm(
       "Press OK for Rancho Cucamonga.\nPress Cancel for San Bernardino."
     );
 
-
   const phone =
     choice
       ? info.rancho_phone
       : info.sb_phone;
-
 
   window.location.href =
     "tel:"
@@ -318,18 +254,15 @@ function pickDir(){
   const info =
     window.SITE_INFO;
 
-
   const choice =
     window.confirm(
       "Press OK for Rancho Cucamonga.\nPress Cancel for San Bernardino."
     );
 
-
   const address =
     choice
       ? info.rancho_address
       : info.sb_address;
-
 
   window.open(
     googleDirections(address),
@@ -352,9 +285,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     HEADER LOGO
-     ------------------------- */
+  /* HEADER LOGO */
 
   if(g.header_logo){
 
@@ -373,9 +304,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     HEADER PHONE
-     ------------------------- */
+  /* HEADER PHONE */
 
   document
     .querySelectorAll(
@@ -386,7 +315,6 @@ function applySharedSiteInfo(){
 
         element.textContent =
           g.rancho_phone;
-
 
         if(
           element.tagName === "A"
@@ -406,9 +334,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     LOCATION NAMES
-     ------------------------- */
+  /* LOCATION NAMES */
 
   setText(
     "footer-rancho-name",
@@ -419,7 +345,6 @@ function applySharedSiteInfo(){
     "footer-sb-name",
     g.sb_location_name
   );
-
 
   setText(
     "rancho-location-name",
@@ -433,9 +358,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     FOOTER ADDRESSES
-     ------------------------- */
+  /* FOOTER ADDRESSES */
 
   showAddress(
     document.getElementById(
@@ -443,7 +366,6 @@ function applySharedSiteInfo(){
     ),
     g.rancho_address
   );
-
 
   showAddress(
     document.getElementById(
@@ -454,9 +376,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     PAGE ADDRESSES
-     ------------------------- */
+  /* PAGE ADDRESSES */
 
   showAddress(
     document.getElementById(
@@ -465,7 +385,6 @@ function applySharedSiteInfo(){
     g.rancho_address
   );
 
-
   showAddress(
     document.getElementById(
       "sb-location-address"
@@ -473,14 +392,12 @@ function applySharedSiteInfo(){
     g.sb_address
   );
 
-
   showAddress(
     document.getElementById(
       "rancho-address"
     ),
     g.rancho_address
   );
-
 
   showAddress(
     document.getElementById(
@@ -491,15 +408,12 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     FOOTER PHONES
-     ------------------------- */
+  /* FOOTER PHONES */
 
   const footerRanchoPhone =
     document.getElementById(
       "footer-rancho-phone"
     );
-
 
   if(footerRanchoPhone){
 
@@ -522,7 +436,6 @@ function applySharedSiteInfo(){
       "footer-sb-phone"
     );
 
-
   if(footerSBPhone){
 
     footerSBPhone.textContent =
@@ -539,21 +452,17 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     LOCATION PAGE PHONES
-     ------------------------- */
+  /* LOCATION PAGE PHONES */
 
   setText(
     "rancho-location-phone",
     g.rancho_phone
   );
 
-
   const ranchoLocationPhoneLink =
     document.getElementById(
       "rancho-location-phone-link"
     );
-
 
   if(ranchoLocationPhoneLink){
 
@@ -573,12 +482,10 @@ function applySharedSiteInfo(){
     g.sb_phone
   );
 
-
   const sbLocationPhoneLink =
     document.getElementById(
       "sb-location-phone-link"
     );
-
 
   if(sbLocationPhoneLink){
 
@@ -593,15 +500,12 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     INDIVIDUAL STORE PHONES
-     ------------------------- */
+  /* INDIVIDUAL STORE PHONES */
 
   const ranchoPhone =
     document.getElementById(
       "rancho-phone"
     );
-
 
   if(ranchoPhone){
 
@@ -624,7 +528,6 @@ function applySharedSiteInfo(){
       "sb-phone"
     );
 
-
   if(sbPhone){
 
     sbPhone.textContent =
@@ -641,15 +544,12 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     CALL BUTTONS
-     ------------------------- */
+  /* CALL BUTTONS */
 
   const ranchoCallButton =
     document.getElementById(
       "rancho-call-button"
     );
-
 
   if(ranchoCallButton){
 
@@ -669,7 +569,6 @@ function applySharedSiteInfo(){
       "sb-call-button"
     );
 
-
   if(sbCallButton){
 
     sbCallButton.href =
@@ -688,14 +587,12 @@ function applySharedSiteInfo(){
       "sell-call-button"
     );
 
-
   if(sellCallButton){
 
     sellCallButton.textContent =
       "Rancho: "
       +
       g.rancho_phone;
-
 
     sellCallButton.href =
       "tel:"
@@ -708,9 +605,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     PRODUCT CALL BUTTONS
-     ------------------------- */
+  /* PRODUCT CALL BUTTONS */
 
   document
     .querySelectorAll(
@@ -731,9 +626,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     RANCHO HOURS
-     ------------------------- */
+  /* RANCHO HOURS */
 
   setText(
     "rancho-hours-mon-thu",
@@ -757,9 +650,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     SAN BERNARDINO HOURS
-     ------------------------- */
+  /* SAN BERNARDINO HOURS */
 
   setText(
     "sb-hours-mon-thu",
@@ -783,9 +674,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     FOOTER RANCHO HOURS
-     ------------------------- */
+  /* FOOTER RANCHO HOURS */
 
   setText(
     "footer-rancho-hours-mon-thu",
@@ -811,9 +700,7 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     FOOTER SAN BERNARDINO HOURS
-     ------------------------- */
+  /* FOOTER SAN BERNARDINO HOURS */
 
   setText(
     "footer-sb-hours-mon-thu",
@@ -839,15 +726,12 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     MAPS
-     ------------------------- */
+  /* MAPS */
 
   const ranchoMap =
     document.getElementById(
       "rancho-map"
     );
-
 
   if(ranchoMap){
 
@@ -865,7 +749,6 @@ function applySharedSiteInfo(){
       "sb-map"
     );
 
-
   if(sbMap){
 
     sbMap.src =
@@ -877,15 +760,12 @@ function applySharedSiteInfo(){
 
 
 
-  /* -------------------------
-     DIRECTIONS BUTTONS
-     ------------------------- */
+  /* DIRECTIONS */
 
   const ranchoDirections =
     document.getElementById(
       "rancho-directions"
     );
-
 
   if(ranchoDirections){
 
@@ -902,7 +782,6 @@ function applySharedSiteInfo(){
     document.getElementById(
       "sb-directions"
     );
-
 
   if(sbDirections){
 
@@ -933,7 +812,6 @@ const response =
     }
   );
 
-
 if(!response.ok){
 
   applySharedSiteInfo();
@@ -941,22 +819,17 @@ if(!response.ok){
 
 }
 
-
 const settings =
   await response.json();
-
 
 window.SITE_INFO = {
 
   ...window.SITE_INFO,
-
   ...settings
 
 };
 
-
 applySharedSiteInfo();
-
 
 }catch(error){
 
@@ -1013,7 +886,6 @@ async function getMetalPrice(symbol){
       }
     );
 
-
   if(!response.ok){
 
     throw new Error(
@@ -1022,10 +894,8 @@ async function getMetalPrice(symbol){
 
   }
 
-
   const data =
     await response.json();
-
 
   const price =
     Number(
@@ -1034,7 +904,6 @@ async function getMetalPrice(symbol){
       data.bid
     );
 
-
   if(!Number.isFinite(price)){
 
     throw new Error(
@@ -1042,7 +911,6 @@ async function getMetalPrice(symbol){
     );
 
   }
-
 
   return price;
 
@@ -1062,14 +930,11 @@ const response =
     }
   );
 
-
 if(!response.ok){
   return {};
 }
 
-
 return await response.json();
-
 
 }catch(error){
 
@@ -1090,7 +955,6 @@ function directionValue(
     return null;
   }
 
-
   if(
     directions[symbol] !== undefined
   ){
@@ -1098,7 +962,6 @@ function directionValue(
     return directions[symbol];
 
   }
-
 
   if(
     directions[
@@ -1112,7 +975,6 @@ function directionValue(
 
   }
 
-
   const names = {
 
     XAU:"gold",
@@ -1120,7 +982,6 @@ function directionValue(
     XPT:"platinum"
 
   };
-
 
   return directions[
     names[symbol]
@@ -1142,11 +1003,9 @@ function tickerArrow(value){
 
   }
 
-
   const text =
     String(value)
       .toLowerCase();
-
 
   if(
     text.includes("up") ||
@@ -1159,7 +1018,6 @@ function tickerArrow(value){
 
   }
 
-
   if(
     text.includes("down") ||
     text.includes("lower") ||
@@ -1170,7 +1028,6 @@ function tickerArrow(value){
     return " ▼";
 
   }
-
 
   return "";
 
@@ -1186,7 +1043,6 @@ function displayMetalTicker(data){
 
   if(!data)return;
 
-
   document
     .querySelectorAll(
       ".ticker"
@@ -1199,11 +1055,9 @@ function displayMetalTicker(data){
             "span"
           );
 
-
         if(spans.length<3){
           return;
         }
-
 
         if(
           Number.isFinite(
@@ -1226,7 +1080,6 @@ function displayMetalTicker(data){
 
         }
 
-
         if(
           Number.isFinite(
             Number(data.silver)
@@ -1247,7 +1100,6 @@ function displayMetalTicker(data){
             "</b>";
 
         }
-
 
         if(
           Number.isFinite(
@@ -1278,7 +1130,7 @@ function displayMetalTicker(data){
 
 
 /* =========================================================
-   LOAD CACHED TICKER IMMEDIATELY
+   LOAD CACHED TICKER
    ========================================================= */
 
 try{
@@ -1287,7 +1139,6 @@ const cached =
   localStorage.getItem(
     TICKER_CACHE_KEY
   );
-
 
 if(cached){
 
@@ -1318,15 +1169,11 @@ const [
   await Promise.all([
 
     getMetalPrice("XAU"),
-
     getMetalPrice("XAG"),
-
     getMetalPrice("XPT"),
-
     getMetalDirections()
 
   ]);
-
 
 const data = {
 
@@ -1357,9 +1204,7 @@ const data = {
 
 };
 
-
 displayMetalTicker(data);
-
 
 try{
 
@@ -1369,7 +1214,6 @@ try{
   );
 
 }catch(error){}
-
 
 }catch(error){
 
@@ -1385,7 +1229,6 @@ try{
 
 
 updateMetalTicker();
-
 
 setInterval(
   updateMetalTicker,
