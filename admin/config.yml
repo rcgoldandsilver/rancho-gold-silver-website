@@ -252,6 +252,57 @@ collections:
             default: "View Location"
 
 
+          # ==================================
+          # RANCHO CUCAMONGA LOCATION PAGE
+          # ==================================
+
+          - label: "Rancho Page - Heading"
+            name: "rancho_page_heading"
+            widget: "string"
+            default: "Rancho Cucamonga Gold & Silver"
+
+          - label: "Rancho Page - Intro"
+            name: "rancho_page_intro"
+            widget: "text"
+            default: "Buy Gold & Silver • Sell Gold & Silver • Free Appraisals • Professional Testing"
+
+          - label: "Rancho Page - Visit Us Heading"
+            name: "rancho_visit_heading"
+            widget: "string"
+            default: "Visit Us"
+
+          - label: "Rancho Page - Gallery Heading"
+            name: "rancho_gallery_heading"
+            widget: "string"
+            default: "Store Gallery"
+
+          - label: "Rancho Page - Gallery Photo 1"
+            name: "rancho_gallery_image_1"
+            widget: "image"
+            required: false
+
+          - label: "Rancho Page - Gallery Photo 2"
+            name: "rancho_gallery_image_2"
+            widget: "image"
+            required: false
+
+          - label: "Rancho Page - Gallery Photo 3"
+            name: "rancho_gallery_image_3"
+            widget: "image"
+            required: false
+
+          - label: "Rancho Page - Gallery Photo 4"
+            name: "rancho_gallery_image_4"
+            widget: "image"
+            required: false
+
+          - label: "Rancho Page - Gallery Note"
+            name: "rancho_gallery_note"
+            widget: "text"
+            required: false
+            default: "Location gallery placeholders will be replaced with the final 4–6 photos you provide."
+
+
   # ==================================
   # PRODUCTS / WHAT WE SELL
   # ==================================
