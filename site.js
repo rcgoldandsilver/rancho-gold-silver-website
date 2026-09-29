@@ -238,8 +238,8 @@ function pickCall() {
 
 
 /*
-   GENERAL DIRECTIONS BUTTON:
-   KEEP LOCATION CHOICE
+   GENERAL GET DIRECTIONS:
+   ALWAYS RANCHO CUCAMONGA
 */
 
 function pickDir() {
@@ -247,18 +247,10 @@ function pickDir() {
   const info =
     window.SITE_INFO;
 
-  const choice =
-    window.confirm(
-      "Press OK for Rancho Cucamonga.\nPress Cancel for San Bernardino."
-    );
-
-  const address =
-    choice
-      ? info.rancho_address
-      : info.sb_address;
-
   window.open(
-    googleDirections(address),
+    googleDirections(
+      info.rancho_address
+    ),
     "_blank",
     "noopener"
   );
