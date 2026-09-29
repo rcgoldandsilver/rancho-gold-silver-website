@@ -55,96 +55,82 @@ window.SITE_INFO = {
 };
 
 
-
 /* =========================================================
    BASIC HELPERS
    ========================================================= */
 
-function cleanPhone(phone){
+function cleanPhone(phone) {
 
   return String(phone || "")
-    .replace(/\D/g,"");
+    .replace(/\D/g, "");
 
 }
 
 
+function setText(id, value) {
 
-function setText(id,value){
-
-  if(
+  if (
     value === undefined ||
     value === null ||
     value === ""
-  ){
+  ) {
     return;
   }
 
   const element =
     document.getElementById(id);
 
-  if(element){
-    element.textContent=value;
+  if (element) {
+    element.textContent = value;
   }
 
 }
 
 
+function setImage(id, value) {
 
-function setImage(id,value){
-
-  if(!value)return;
+  if (!value) return;
 
   const element =
     document.getElementById(id);
 
-  if(element){
-    element.src=value;
+  if (element) {
+    element.src = value;
   }
 
 }
 
 
+function showAddress(element, address) {
 
-function showAddress(
-  element,
-  address
-){
-
-  if(
-    !element ||
-    !address
-  ){
+  if (!element || !address) {
     return;
   }
 
   const parts =
     String(address)
       .split(",")
-      .map(
-        part=>part.trim()
-      );
+      .map(part => part.trim());
 
-  if(parts.length>=3){
+  if (parts.length >= 3) {
 
     element.innerHTML =
-      parts.slice(0,-2).join(", ")
+      parts.slice(0, -2).join(", ")
       +
       "<br>"
       +
       parts.slice(-2).join(", ");
 
-  }else{
+  } else {
 
-    element.textContent=
-      address;
+    element.textContent = address;
 
   }
 
 }
 
 
-
-function googleMapEmbed(address){
+function googleMapEmbed(address) {
 
   return (
     "https://www.google.com/maps?q="
@@ -157,8 +143,7 @@ function googleMapEmbed(address){
 }
 
 
-
-function googleDirections(address){
+function googleDirections(address) {
 
   return (
     "https://www.google.com/maps/search/?api=1&query="
@@ -169,87 +154,95 @@ function googleDirections(address){
 }
 
 
-
 /* =========================================================
    MOBILE MENU
    ========================================================= */
 
 document.addEventListener(
   "click",
-  event=>{
+  event => {
 
     const button =
-      event.target.closest(
-        ".menuBtn"
-      );
+      event.target.closest(".menuBtn");
 
-    if(!button)return;
+    if (!button) return;
 
     const header =
-      button.closest(
-        ".header"
-      );
+      button.closest(".header");
 
-    if(!header)return;
+    if (!header) return;
 
     const nav =
-      header.querySelector(
-        ".nav"
-      );
+      header.querySelector(".nav");
 
-    if(nav){
+    if (!nav) return;
 
-      nav.classList.toggle(
-        "open"
-      );
+    nav.classList.toggle("show");
 
+  }
+);
+
+
+/* Close mobile menu after choosing a page */
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const link =
+      event.target.closest(".nav a");
+
+    if (!link) return;
+
+    const nav =
+      link.closest(".nav");
+
+    if (nav) {
+      nav.classList.remove("show");
     }
 
   }
 );
 
 
-
 /* =========================================================
    IMPORTANT:
    PRODUCT VIEW DETAILS IS NOT HANDLED HERE.
 
-   sell.html loads the products dynamically and controls
-   View Details itself. Keeping the product toggle out of
-   site.js prevents double-click / double-toggle conflicts.
+   sell.html controls product View Details itself.
+   This prevents the previous double-toggle problem.
    ========================================================= */
-
 
 
 /* =========================================================
-   CALL / DIRECTIONS CHOOSER
+   CALL / DIRECTIONS
    ========================================================= */
 
-function pickCall(){
+
+/*
+   GENERAL CALL NOW BUTTONS:
+   ALWAYS CALL RANCHO CUCAMONGA
+*/
+
+function pickCall() {
 
   const info =
     window.SITE_INFO;
 
-  const choice =
-    window.confirm(
-      "Press OK for Rancho Cucamonga.\nPress Cancel for San Bernardino."
-    );
-
-  const phone =
-    choice
-      ? info.rancho_phone
-      : info.sb_phone;
-
   window.location.href =
     "tel:"
     +
-    cleanPhone(phone);
+    cleanPhone(info.rancho_phone);
 
 }
 
 
+/*
+   GENERAL DIRECTIONS BUTTON:
+   KEEP LOCATION CHOICE
+*/
 
-function pickDir(){
+function pickDir() {
 
   const info =
     window.SITE_INFO;
@@ -273,65 +266,52 @@ function pickDir(){
 }
 
 
-
 /* =========================================================
    APPLY SHARED SITE INFORMATION
    ========================================================= */
 
-function applySharedSiteInfo(){
+function applySharedSiteInfo() {
 
   const g =
     window.SITE_INFO;
 
 
-
   /* HEADER LOGO */
 
-  if(g.header_logo){
+  if (g.header_logo) {
 
     document
-      .querySelectorAll(
-        "#header-logo"
-      )
+      .querySelectorAll("#header-logo")
       .forEach(
-        logo=>{
-          logo.src=
-            g.header_logo;
+        logo => {
+          logo.src = g.header_logo;
         }
       );
 
   }
 
 
-
   /* HEADER PHONE */
 
   document
-    .querySelectorAll(
-      ".header .phone"
-    )
+    .querySelectorAll(".header .phone")
     .forEach(
-      element=>{
+      element => {
 
         element.textContent =
           g.rancho_phone;
 
-        if(
-          element.tagName === "A"
-        ){
+        if (element.tagName === "A") {
 
           element.href =
             "tel:"
             +
-            cleanPhone(
-              g.rancho_phone
-            );
+            cleanPhone(g.rancho_phone);
 
         }
 
       }
     );
-
 
 
   /* LOCATION NAMES */
@@ -357,7 +337,6 @@ function applySharedSiteInfo(){
   );
 
 
-
   /* FOOTER ADDRESSES */
 
   showAddress(
@@ -373,7 +352,6 @@ function applySharedSiteInfo(){
     ),
     g.sb_address
   );
-
 
 
   /* PAGE ADDRESSES */
@@ -407,7 +385,6 @@ function applySharedSiteInfo(){
   );
 
 
-
   /* FOOTER PHONES */
 
   const footerRanchoPhone =
@@ -415,7 +392,7 @@ function applySharedSiteInfo(){
       "footer-rancho-phone"
     );
 
-  if(footerRanchoPhone){
+  if (footerRanchoPhone) {
 
     footerRanchoPhone.textContent =
       g.rancho_phone;
@@ -423,12 +400,9 @@ function applySharedSiteInfo(){
     footerRanchoPhone.href =
       "tel:"
       +
-      cleanPhone(
-        g.rancho_phone
-      );
+      cleanPhone(g.rancho_phone);
 
   }
-
 
 
   const footerSBPhone =
@@ -436,7 +410,7 @@ function applySharedSiteInfo(){
       "footer-sb-phone"
     );
 
-  if(footerSBPhone){
+  if (footerSBPhone) {
 
     footerSBPhone.textContent =
       g.sb_phone;
@@ -444,12 +418,9 @@ function applySharedSiteInfo(){
     footerSBPhone.href =
       "tel:"
       +
-      cleanPhone(
-        g.sb_phone
-      );
+      cleanPhone(g.sb_phone);
 
   }
-
 
 
   /* LOCATION PAGE PHONES */
@@ -464,17 +435,14 @@ function applySharedSiteInfo(){
       "rancho-location-phone-link"
     );
 
-  if(ranchoLocationPhoneLink){
+  if (ranchoLocationPhoneLink) {
 
     ranchoLocationPhoneLink.href =
       "tel:"
       +
-      cleanPhone(
-        g.rancho_phone
-      );
+      cleanPhone(g.rancho_phone);
 
   }
-
 
 
   setText(
@@ -487,17 +455,14 @@ function applySharedSiteInfo(){
       "sb-location-phone-link"
     );
 
-  if(sbLocationPhoneLink){
+  if (sbLocationPhoneLink) {
 
     sbLocationPhoneLink.href =
       "tel:"
       +
-      cleanPhone(
-        g.sb_phone
-      );
+      cleanPhone(g.sb_phone);
 
   }
-
 
 
   /* INDIVIDUAL STORE PHONES */
@@ -507,7 +472,7 @@ function applySharedSiteInfo(){
       "rancho-phone"
     );
 
-  if(ranchoPhone){
+  if (ranchoPhone) {
 
     ranchoPhone.textContent =
       g.rancho_phone;
@@ -515,12 +480,9 @@ function applySharedSiteInfo(){
     ranchoPhone.href =
       "tel:"
       +
-      cleanPhone(
-        g.rancho_phone
-      );
+      cleanPhone(g.rancho_phone);
 
   }
-
 
 
   const sbPhone =
@@ -528,7 +490,7 @@ function applySharedSiteInfo(){
       "sb-phone"
     );
 
-  if(sbPhone){
+  if (sbPhone) {
 
     sbPhone.textContent =
       g.sb_phone;
@@ -536,12 +498,9 @@ function applySharedSiteInfo(){
     sbPhone.href =
       "tel:"
       +
-      cleanPhone(
-        g.sb_phone
-      );
+      cleanPhone(g.sb_phone);
 
   }
-
 
 
   /* CALL BUTTONS */
@@ -551,17 +510,14 @@ function applySharedSiteInfo(){
       "rancho-call-button"
     );
 
-  if(ranchoCallButton){
+  if (ranchoCallButton) {
 
     ranchoCallButton.href =
       "tel:"
       +
-      cleanPhone(
-        g.rancho_phone
-      );
+      cleanPhone(g.rancho_phone);
 
   }
-
 
 
   const sbCallButton =
@@ -569,17 +525,14 @@ function applySharedSiteInfo(){
       "sb-call-button"
     );
 
-  if(sbCallButton){
+  if (sbCallButton) {
 
     sbCallButton.href =
       "tel:"
       +
-      cleanPhone(
-        g.sb_phone
-      );
+      cleanPhone(g.sb_phone);
 
   }
-
 
 
   const sellCallButton =
@@ -587,7 +540,7 @@ function applySharedSiteInfo(){
       "sell-call-button"
     );
 
-  if(sellCallButton){
+  if (sellCallButton) {
 
     sellCallButton.textContent =
       "Rancho: "
@@ -597,33 +550,25 @@ function applySharedSiteInfo(){
     sellCallButton.href =
       "tel:"
       +
-      cleanPhone(
-        g.rancho_phone
-      );
+      cleanPhone(g.rancho_phone);
 
   }
-
 
 
   /* PRODUCT CALL BUTTONS */
 
   document
-    .querySelectorAll(
-      ".product-call"
-    )
+    .querySelectorAll(".product-call")
     .forEach(
-      link=>{
+      link => {
 
         link.href =
           "tel:"
           +
-          cleanPhone(
-            g.rancho_phone
-          );
+          cleanPhone(g.rancho_phone);
 
       }
     );
-
 
 
   /* RANCHO HOURS */
@@ -649,7 +594,6 @@ function applySharedSiteInfo(){
   );
 
 
-
   /* SAN BERNARDINO HOURS */
 
   setText(
@@ -673,12 +617,11 @@ function applySharedSiteInfo(){
   );
 
 
-
-  /* FOOTER RANCHO HOURS */
+  /* FOOTER RANCHO CUCAMONGA HOURS */
 
   setText(
     "footer-rancho-hours-mon-thu",
-    "Rancho: "
+    "Rancho Cucamonga: "
     +
     g.rancho_hours_mon_thu
   );
@@ -697,7 +640,6 @@ function applySharedSiteInfo(){
     "footer-rancho-hours-sun",
     g.rancho_hours_sun
   );
-
 
 
   /* FOOTER SAN BERNARDINO HOURS */
@@ -725,7 +667,6 @@ function applySharedSiteInfo(){
   );
 
 
-
   /* MAPS */
 
   const ranchoMap =
@@ -733,7 +674,7 @@ function applySharedSiteInfo(){
       "rancho-map"
     );
 
-  if(ranchoMap){
+  if (ranchoMap) {
 
     ranchoMap.src =
       googleMapEmbed(
@@ -743,13 +684,12 @@ function applySharedSiteInfo(){
   }
 
 
-
   const sbMap =
     document.getElementById(
       "sb-map"
     );
 
-  if(sbMap){
+  if (sbMap) {
 
     sbMap.src =
       googleMapEmbed(
@@ -759,7 +699,6 @@ function applySharedSiteInfo(){
   }
 
 
-
   /* DIRECTIONS */
 
   const ranchoDirections =
@@ -767,7 +706,7 @@ function applySharedSiteInfo(){
       "rancho-directions"
     );
 
-  if(ranchoDirections){
+  if (ranchoDirections) {
 
     ranchoDirections.href =
       googleDirections(
@@ -777,13 +716,12 @@ function applySharedSiteInfo(){
   }
 
 
-
   const sbDirections =
     document.getElementById(
       "sb-directions"
     );
 
-  if(sbDirections){
+  if (sbDirections) {
 
     sbDirections.href =
       googleDirections(
@@ -795,54 +733,51 @@ function applySharedSiteInfo(){
 }
 
 
-
 /* =========================================================
    LOAD GENERAL SETTINGS
    ========================================================= */
 
-async function loadSiteSettings(){
+async function loadSiteSettings() {
 
-try{
+  try {
 
-const response =
-  await fetch(
-    "content/settings/general.json",
-    {
-      cache:"no-store"
+    const response =
+      await fetch(
+        "content/settings/general.json",
+        {
+          cache: "no-store"
+        }
+      );
+
+    if (!response.ok) {
+
+      applySharedSiteInfo();
+      return;
+
     }
-  );
 
-if(!response.ok){
+    const settings =
+      await response.json();
 
-  applySharedSiteInfo();
-  return;
+    window.SITE_INFO = {
 
-}
+      ...window.SITE_INFO,
+      ...settings
 
-const settings =
-  await response.json();
+    };
 
-window.SITE_INFO = {
+    applySharedSiteInfo();
 
-  ...window.SITE_INFO,
-  ...settings
+  } catch (error) {
 
-};
+    applySharedSiteInfo();
 
-applySharedSiteInfo();
-
-}catch(error){
-
-applySharedSiteInfo();
+  }
 
 }
-
-}
-
 
 
 loadSiteSettings();
-
 
 
 /* =========================================================
@@ -859,34 +794,32 @@ const TICKER_CACHE_KEY =
   "rancho-metal-ticker-v1";
 
 
-
-function tickerMoney(value){
+function tickerMoney(value) {
 
   return new Intl.NumberFormat(
     "en-US",
     {
-      style:"currency",
-      currency:"USD",
-      minimumFractionDigits:2,
-      maximumFractionDigits:2
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     }
   ).format(value);
 
 }
 
 
-
-async function getMetalPrice(symbol){
+async function getMetalPrice(symbol) {
 
   const response =
     await fetch(
       METAL_API + symbol,
       {
-        cache:"no-store"
+        cache: "no-store"
       }
     );
 
-  if(!response.ok){
+  if (!response.ok) {
 
     throw new Error(
       "Metal price request failed"
@@ -904,7 +837,7 @@ async function getMetalPrice(symbol){
       data.bid
     );
 
-  if(!Number.isFinite(price)){
+  if (!Number.isFinite(price)) {
 
     throw new Error(
       "Invalid metal price"
@@ -917,57 +850,59 @@ async function getMetalPrice(symbol){
 }
 
 
+async function getMetalDirections() {
 
-async function getMetalDirections(){
+  try {
 
-try{
+    const response =
+      await fetch(
+        DIRECTION_API,
+        {
+          cache: "no-store"
+        }
+      );
 
-const response =
-  await fetch(
-    DIRECTION_API,
-    {
-      cache:"no-store"
+    if (!response.ok) {
+      return {};
     }
-  );
 
-if(!response.ok){
-  return {};
-}
+    return await response.json();
 
-return await response.json();
+  } catch (error) {
 
-}catch(error){
+    return {};
 
-return {};
-
-}
+  }
 
 }
 
 
+/* =========================================================
+   DIRECTION HELPERS
+   ========================================================= */
 
 function directionValue(
   directions,
   symbol
-){
+) {
 
-  if(!directions){
+  if (!directions) {
     return null;
   }
 
-  if(
+  if (
     directions[symbol] !== undefined
-  ){
+  ) {
 
     return directions[symbol];
 
   }
 
-  if(
+  if (
     directions[
       symbol.toLowerCase()
     ] !== undefined
-  ){
+  ) {
 
     return directions[
       symbol.toLowerCase()
@@ -977,9 +912,9 @@ function directionValue(
 
   const names = {
 
-    XAU:"gold",
-    XAG:"silver",
-    XPT:"platinum"
+    XAU: "gold",
+    XAG: "silver",
+    XPT: "platinum"
 
   };
 
@@ -990,42 +925,65 @@ function directionValue(
 }
 
 
+function tickerDirectionHTML(value) {
 
-function tickerArrow(value){
-
-  if(
+  if (
     value === undefined ||
     value === null ||
     value === ""
-  ){
+  ) {
 
     return "";
 
   }
 
-  const text =
-    String(value)
-      .toLowerCase();
+  let raw = value;
 
-  if(
-    text.includes("up") ||
-    text.includes("higher") ||
-    text === "1" ||
-    text === "+"
-  ){
+  if (
+    typeof value === "object"
+  ) {
 
-    return " ▲";
+    raw =
+      value.direction ??
+      value.trend ??
+      value.change ??
+      value.value ??
+      "";
 
   }
 
-  if(
+  const text =
+    String(raw)
+      .toLowerCase()
+      .trim();
+
+  if (
+    text.includes("up") ||
+    text.includes("higher") ||
+    text.includes("positive") ||
+    text === "1" ||
+    text === "+" ||
+    Number(raw) > 0
+  ) {
+
+    return (
+      ' <span style="color:#35c76f;font-weight:900;">▲</span>'
+    );
+
+  }
+
+  if (
     text.includes("down") ||
     text.includes("lower") ||
+    text.includes("negative") ||
     text === "-1" ||
-    text === "-"
-  ){
+    text === "-" ||
+    Number(raw) < 0
+  ) {
 
-    return " ▼";
+    return (
+      ' <span style="color:#ff5b5b;font-weight:900;">▼</span>'
+    );
 
   }
 
@@ -1034,36 +992,34 @@ function tickerArrow(value){
 }
 
 
-
 /* =========================================================
    DISPLAY TICKER
    ========================================================= */
 
-function displayMetalTicker(data){
+function displayMetalTicker(data) {
 
-  if(!data)return;
+  if (!data) return;
 
   document
-    .querySelectorAll(
-      ".ticker"
-    )
+    .querySelectorAll(".ticker")
     .forEach(
-      ticker=>{
+      ticker => {
 
         const spans =
           ticker.querySelectorAll(
-            "span"
+            ":scope > span"
           );
 
-        if(spans.length<3){
+        if (spans.length < 3) {
           return;
         }
 
-        if(
+
+        if (
           Number.isFinite(
             Number(data.gold)
           )
-        ){
+        ) {
 
           spans[0].innerHTML =
             "GOLD <b>"
@@ -1072,7 +1028,7 @@ function displayMetalTicker(data){
               Number(data.gold)
             )
             +
-            tickerArrow(
+            tickerDirectionHTML(
               data.goldDirection
             )
             +
@@ -1080,11 +1036,12 @@ function displayMetalTicker(data){
 
         }
 
-        if(
+
+        if (
           Number.isFinite(
             Number(data.silver)
           )
-        ){
+        ) {
 
           spans[1].innerHTML =
             "SILVER <b>"
@@ -1093,7 +1050,7 @@ function displayMetalTicker(data){
               Number(data.silver)
             )
             +
-            tickerArrow(
+            tickerDirectionHTML(
               data.silverDirection
             )
             +
@@ -1101,11 +1058,12 @@ function displayMetalTicker(data){
 
         }
 
-        if(
+
+        if (
           Number.isFinite(
             Number(data.platinum)
           )
-        ){
+        ) {
 
           spans[2].innerHTML =
             "PLATINUM <b>"
@@ -1114,7 +1072,7 @@ function displayMetalTicker(data){
               Number(data.platinum)
             )
             +
-            tickerArrow(
+            tickerDirectionHTML(
               data.platinumDirection
             )
             +
@@ -1128,104 +1086,101 @@ function displayMetalTicker(data){
 }
 
 
-
 /* =========================================================
    LOAD CACHED TICKER
    ========================================================= */
 
-try{
+try {
 
-const cached =
-  localStorage.getItem(
-    TICKER_CACHE_KEY
-  );
+  const cached =
+    localStorage.getItem(
+      TICKER_CACHE_KEY
+    );
 
-if(cached){
+  if (cached) {
 
-  displayMetalTicker(
-    JSON.parse(cached)
-  );
+    displayMetalTicker(
+      JSON.parse(cached)
+    );
 
-}
+  }
 
-}catch(error){}
-
+} catch (error) {}
 
 
 /* =========================================================
    UPDATE TICKER
    ========================================================= */
 
-async function updateMetalTicker(){
+async function updateMetalTicker() {
 
-try{
+  try {
 
-const [
-  gold,
-  silver,
-  platinum,
-  directions
-] =
-  await Promise.all([
+    const [
+      gold,
+      silver,
+      platinum,
+      directions
+    ] =
+      await Promise.all([
 
-    getMetalPrice("XAU"),
-    getMetalPrice("XAG"),
-    getMetalPrice("XPT"),
-    getMetalDirections()
+        getMetalPrice("XAU"),
+        getMetalPrice("XAG"),
+        getMetalPrice("XPT"),
+        getMetalDirections()
 
-  ]);
+      ]);
 
-const data = {
+    const data = {
 
-  gold,
-  silver,
-  platinum,
+      gold,
+      silver,
+      platinum,
 
-  goldDirection:
-    directionValue(
-      directions,
-      "XAU"
-    ),
+      goldDirection:
+        directionValue(
+          directions,
+          "XAU"
+        ),
 
-  silverDirection:
-    directionValue(
-      directions,
-      "XAG"
-    ),
+      silverDirection:
+        directionValue(
+          directions,
+          "XAG"
+        ),
 
-  platinumDirection:
-    directionValue(
-      directions,
-      "XPT"
-    ),
+      platinumDirection:
+        directionValue(
+          directions,
+          "XPT"
+        ),
 
-  updated:
-    Date.now()
+      updated:
+        Date.now()
 
-};
+    };
 
-displayMetalTicker(data);
+    displayMetalTicker(data);
 
-try{
+    try {
 
-  localStorage.setItem(
-    TICKER_CACHE_KEY,
-    JSON.stringify(data)
-  );
+      localStorage.setItem(
+        TICKER_CACHE_KEY,
+        JSON.stringify(data)
+      );
 
-}catch(error){}
+    } catch (error) {}
 
-}catch(error){
+  } catch (error) {
 
-/*
-  If the live API is temporarily unavailable,
-  the cached ticker remains visible.
-*/
+    /*
+      If the live API is temporarily unavailable,
+      the cached ticker remains visible.
+    */
+
+  }
 
 }
-
-}
-
 
 
 updateMetalTicker();
