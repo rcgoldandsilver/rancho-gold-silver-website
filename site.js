@@ -183,8 +183,6 @@ document.addEventListener(
 );
 
 
-/* Close mobile menu after choosing a page */
-
 document.addEventListener(
   "click",
   event => {
@@ -208,9 +206,7 @@ document.addEventListener(
 /* =========================================================
    IMPORTANT:
    PRODUCT VIEW DETAILS IS NOT HANDLED HERE.
-
    sell.html controls product View Details itself.
-   This prevents the previous double-toggle problem.
    ========================================================= */
 
 
@@ -220,19 +216,18 @@ document.addEventListener(
 
 
 /*
-   GENERAL CALL NOW BUTTONS:
-   ALWAYS CALL RANCHO CUCAMONGA
+   This function is kept only for compatibility
+   with any older buttons that still use pickCall().
 */
 
 function pickCall() {
 
-  const info =
-    window.SITE_INFO;
+  /*
+    Intentionally empty.
 
-  window.location.href =
-    "tel:"
-    +
-    cleanPhone(info.rancho_phone);
+    Normal Call Now links are converted below
+    to regular tel: links.
+  */
 
 }
 
@@ -299,6 +294,36 @@ function applySharedSiteInfo() {
             "tel:"
             +
             cleanPhone(g.rancho_phone);
+
+        }
+
+      }
+    );
+
+
+  /* GENERAL CALL NOW LINKS */
+
+  document
+    .querySelectorAll(
+      '[onclick*="pickCall"]'
+    )
+    .forEach(
+      element => {
+
+        element.removeAttribute(
+          "onclick"
+        );
+
+        if (
+          element.tagName === "A"
+        ) {
+
+          element.href =
+            "tel:"
+            +
+            cleanPhone(
+              g.rancho_phone
+            );
 
         }
 
@@ -495,7 +520,7 @@ function applySharedSiteInfo() {
   }
 
 
-  /* CALL BUTTONS */
+  /* STORE-SPECIFIC CALL BUTTONS */
 
   const ranchoCallButton =
     document.getElementById(
@@ -508,6 +533,10 @@ function applySharedSiteInfo() {
       "tel:"
       +
       cleanPhone(g.rancho_phone);
+
+    ranchoCallButton.removeAttribute(
+      "onclick"
+    );
 
   }
 
@@ -523,6 +552,10 @@ function applySharedSiteInfo() {
       "tel:"
       +
       cleanPhone(g.sb_phone);
+
+    sbCallButton.removeAttribute(
+      "onclick"
+    );
 
   }
 
@@ -544,6 +577,10 @@ function applySharedSiteInfo() {
       +
       cleanPhone(g.rancho_phone);
 
+    sellCallButton.removeAttribute(
+      "onclick"
+    );
+
   }
 
 
@@ -558,6 +595,10 @@ function applySharedSiteInfo() {
           "tel:"
           +
           cleanPhone(g.rancho_phone);
+
+        link.removeAttribute(
+          "onclick"
+        );
 
       }
     );
@@ -868,10 +909,6 @@ async function getMetalDirections() {
 
 }
 
-
-/* =========================================================
-   DIRECTION HELPERS
-   ========================================================= */
 
 function directionValue(
   directions,
