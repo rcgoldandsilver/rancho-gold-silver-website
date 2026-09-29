@@ -59,14 +59,6 @@ window.SITE_INFO = {
    BASIC HELPERS
    ========================================================= */
 
-function cleanPhone(phone) {
-
-  return String(phone || "")
-    .replace(/\D/g, "");
-
-}
-
-
 function setText(id, value) {
 
   if (
@@ -204,38 +196,50 @@ document.addEventListener(
 
 
 /* =========================================================
+   PRODUCT VIEW DETAILS
+
    IMPORTANT:
-   PRODUCT VIEW DETAILS IS NOT HANDLED HERE.
-   sell.html controls product View Details itself.
+   Product View Details is controlled by sell.html.
+   Do not add product toggle code here.
    ========================================================= */
 
 
 /* =========================================================
-   CALL / DIRECTIONS
+   PHONE CALLS
+
+   IMPORTANT:
+   JAVASCRIPT DOES NOT CONTROL PHONE CALLS.
+
+   Phone numbers and Call Now buttons must use normal HTML:
+
+   Rancho:
+   href="tel:+19096762900"
+
+   San Bernardino:
+   href="tel:+19096562600"
+
+   This prevents JavaScript from automatically trying
+   to launch the iPhone phone application.
    ========================================================= */
 
 
 /*
-   This function is kept only for compatibility
-   with any older buttons that still use pickCall().
+   Kept only so an older page does not produce
+   a JavaScript error if it still references pickCall().
+   It DOES NOT start a phone call.
 */
 
 function pickCall() {
 
-  /*
-    Intentionally empty.
-
-    Normal Call Now links are converted below
-    to regular tel: links.
-  */
+  return false;
 
 }
 
 
-/*
-   GENERAL GET DIRECTIONS:
-   ALWAYS RANCHO CUCAMONGA
-*/
+/* =========================================================
+   GENERAL GET DIRECTIONS
+   ALWAYS GOES TO RANCHO CUCAMONGA
+   ========================================================= */
 
 function pickDir() {
 
@@ -278,7 +282,11 @@ function applySharedSiteInfo() {
   }
 
 
-  /* HEADER PHONE */
+  /*
+     HEADER PHONE TEXT ONLY.
+
+     DO NOT MODIFY PHONE HREF WITH JAVASCRIPT.
+  */
 
   document
     .querySelectorAll(".header .phone")
@@ -287,45 +295,6 @@ function applySharedSiteInfo() {
 
         element.textContent =
           g.rancho_phone;
-
-        if (element.tagName === "A") {
-
-          element.href =
-            "tel:"
-            +
-            cleanPhone(g.rancho_phone);
-
-        }
-
-      }
-    );
-
-
-  /* GENERAL CALL NOW LINKS */
-
-  document
-    .querySelectorAll(
-      '[onclick*="pickCall"]'
-    )
-    .forEach(
-      element => {
-
-        element.removeAttribute(
-          "onclick"
-        );
-
-        if (
-          element.tagName === "A"
-        ) {
-
-          element.href =
-            "tel:"
-            +
-            cleanPhone(
-              g.rancho_phone
-            );
-
-        }
 
       }
     );
@@ -402,7 +371,11 @@ function applySharedSiteInfo() {
   );
 
 
-  /* FOOTER PHONES */
+  /*
+     PHONE NUMBER TEXT ONLY.
+
+     These sections intentionally DO NOT change href.
+  */
 
   const footerRanchoPhone =
     document.getElementById(
@@ -413,11 +386,6 @@ function applySharedSiteInfo() {
 
     footerRanchoPhone.textContent =
       g.rancho_phone;
-
-    footerRanchoPhone.href =
-      "tel:"
-      +
-      cleanPhone(g.rancho_phone);
 
   }
 
@@ -432,57 +400,19 @@ function applySharedSiteInfo() {
     footerSBPhone.textContent =
       g.sb_phone;
 
-    footerSBPhone.href =
-      "tel:"
-      +
-      cleanPhone(g.sb_phone);
-
   }
 
-
-  /* LOCATION PAGE PHONES */
 
   setText(
     "rancho-location-phone",
     g.rancho_phone
   );
 
-  const ranchoLocationPhoneLink =
-    document.getElementById(
-      "rancho-location-phone-link"
-    );
-
-  if (ranchoLocationPhoneLink) {
-
-    ranchoLocationPhoneLink.href =
-      "tel:"
-      +
-      cleanPhone(g.rancho_phone);
-
-  }
-
-
   setText(
     "sb-location-phone",
     g.sb_phone
   );
 
-  const sbLocationPhoneLink =
-    document.getElementById(
-      "sb-location-phone-link"
-    );
-
-  if (sbLocationPhoneLink) {
-
-    sbLocationPhoneLink.href =
-      "tel:"
-      +
-      cleanPhone(g.sb_phone);
-
-  }
-
-
-  /* INDIVIDUAL STORE PHONES */
 
   const ranchoPhone =
     document.getElementById(
@@ -493,11 +423,6 @@ function applySharedSiteInfo() {
 
     ranchoPhone.textContent =
       g.rancho_phone;
-
-    ranchoPhone.href =
-      "tel:"
-      +
-      cleanPhone(g.rancho_phone);
 
   }
 
@@ -512,96 +437,14 @@ function applySharedSiteInfo() {
     sbPhone.textContent =
       g.sb_phone;
 
-    sbPhone.href =
-      "tel:"
-      +
-      cleanPhone(g.sb_phone);
-
   }
 
 
-  /* STORE-SPECIFIC CALL BUTTONS */
-
-  const ranchoCallButton =
-    document.getElementById(
-      "rancho-call-button"
-    );
-
-  if (ranchoCallButton) {
-
-    ranchoCallButton.href =
-      "tel:"
-      +
-      cleanPhone(g.rancho_phone);
-
-    ranchoCallButton.removeAttribute(
-      "onclick"
-    );
-
-  }
-
-
-  const sbCallButton =
-    document.getElementById(
-      "sb-call-button"
-    );
-
-  if (sbCallButton) {
-
-    sbCallButton.href =
-      "tel:"
-      +
-      cleanPhone(g.sb_phone);
-
-    sbCallButton.removeAttribute(
-      "onclick"
-    );
-
-  }
-
-
-  const sellCallButton =
-    document.getElementById(
-      "sell-call-button"
-    );
-
-  if (sellCallButton) {
-
-    sellCallButton.textContent =
-      "Rancho: "
-      +
-      g.rancho_phone;
-
-    sellCallButton.href =
-      "tel:"
-      +
-      cleanPhone(g.rancho_phone);
-
-    sellCallButton.removeAttribute(
-      "onclick"
-    );
-
-  }
-
-
-  /* PRODUCT CALL BUTTONS */
-
-  document
-    .querySelectorAll(".product-call")
-    .forEach(
-      link => {
-
-        link.href =
-          "tel:"
-          +
-          cleanPhone(g.rancho_phone);
-
-        link.removeAttribute(
-          "onclick"
-        );
-
-      }
-    );
+  /*
+     NO CALL BUTTON HREF IS CREATED HERE.
+     CALL BUTTONS MUST HAVE THEIR tel: LINK
+     DIRECTLY INSIDE EACH HTML FILE.
+  */
 
 
   /* RANCHO HOURS */
@@ -650,7 +493,7 @@ function applySharedSiteInfo() {
   );
 
 
-  /* FOOTER RANCHO CUCAMONGA HOURS */
+  /* FOOTER RANCHO HOURS */
 
   setText(
     "footer-rancho-hours-mon-thu",
@@ -896,7 +739,9 @@ async function getMetalDirections() {
       );
 
     if (!response.ok) {
+
       return {};
+
     }
 
     return await response.json();
@@ -916,7 +761,9 @@ function directionValue(
 ) {
 
   if (!directions) {
+
     return null;
+
   }
 
   if (
@@ -939,6 +786,7 @@ function directionValue(
 
   }
 
+
   const names = {
 
     XAU: "gold",
@@ -946,6 +794,7 @@ function directionValue(
     XPT: "platinum"
 
   };
+
 
   return directions[
     names[symbol]
@@ -966,7 +815,9 @@ function tickerDirectionHTML(value) {
 
   }
 
+
   let raw = value;
+
 
   if (
     typeof value === "object"
@@ -981,10 +832,12 @@ function tickerDirectionHTML(value) {
 
   }
 
+
   const text =
     String(raw)
       .toLowerCase()
       .trim();
+
 
   if (
     text.includes("up") ||
@@ -1001,6 +854,7 @@ function tickerDirectionHTML(value) {
 
   }
 
+
   if (
     text.includes("down") ||
     text.includes("lower") ||
@@ -1016,6 +870,7 @@ function tickerDirectionHTML(value) {
 
   }
 
+
   return "";
 
 }
@@ -1029,6 +884,7 @@ function displayMetalTicker(data) {
 
   if (!data) return;
 
+
   document
     .querySelectorAll(".ticker")
     .forEach(
@@ -1039,8 +895,11 @@ function displayMetalTicker(data) {
             ":scope > span"
           );
 
+
         if (spans.length < 3) {
+
           return;
+
         }
 
 
@@ -1126,6 +985,7 @@ try {
       TICKER_CACHE_KEY
     );
 
+
   if (cached) {
 
     displayMetalTicker(
@@ -1154,16 +1014,22 @@ async function updateMetalTicker() {
       await Promise.all([
 
         getMetalPrice("XAU"),
+
         getMetalPrice("XAG"),
+
         getMetalPrice("XPT"),
+
         getMetalDirections()
 
       ]);
 
+
     const data = {
 
       gold,
+
       silver,
+
       platinum,
 
       goldDirection:
@@ -1189,7 +1055,9 @@ async function updateMetalTicker() {
 
     };
 
+
     displayMetalTicker(data);
+
 
     try {
 
@@ -1200,11 +1068,12 @@ async function updateMetalTicker() {
 
     } catch (error) {}
 
+
   } catch (error) {
 
     /*
-      If the live API is temporarily unavailable,
-      the cached ticker remains visible.
+       If the live API is temporarily unavailable,
+       keep the last cached prices visible.
     */
 
   }
@@ -1213,6 +1082,7 @@ async function updateMetalTicker() {
 
 
 updateMetalTicker();
+
 
 setInterval(
   updateMetalTicker,
