@@ -111,9 +111,6 @@ PLATINUM <b>Live Bid</b>
 
 <div class="wrap hero-actions">
 
-
-<!-- DIRECT PHONE LINK - NO JAVASCRIPT -->
-
 <a
   class="btn"
   href="tel:+19096762900"
@@ -128,7 +125,6 @@ Call Now
 >
 Get Directions
 </button>
-
 
 </div>
 
@@ -145,7 +141,7 @@ Get Directions
 <div class="wrap center">
 
 <h1 id="homepage-heading">
-Your Local Gold & Silver Dealer
+Gold & Silver Buyer & Seller
 </h1>
 
 
@@ -160,7 +156,7 @@ Rancho Cucamonga Gold & Silver and San Bernardino Gold & Silver are family-owned
 <p>
 
 <strong id="homepage-appraisal">
-Free Appraisals • No Obligation to Sell
+Free Appraisals • Professional Testing • Immediate Payment
 </strong>
 
 </p>
@@ -217,12 +213,12 @@ Immediate Payment
 <div class="pad center">
 
 <h2 id="homepage-buy-heading">
-WE BUY
+What We Buy
 </h2>
 
 
 <p id="homepage-buy-description">
-Jewelry, Coins, Bars, Silverware, Dental Gold & Scrap
+Gold, silver, platinum, jewelry, coins, bars, bullion, sterling silver, dental gold and scrap.
 </p>
 
 
@@ -253,17 +249,19 @@ What We Buy
 <div class="pad center">
 
 <h2 id="homepage-sell-heading">
-WE SELL
+What We Sell
 </h2>
 
 
 <p id="homepage-sell-description">
-Gold & Silver Coins, Bars & Bullion
+Gold and silver coins, bars and bullion. Call for current price and availability.
 </p>
 
 
+<!-- SAME NAVY BUTTON AS WHAT WE BUY -->
+
 <a
-  class="btn alt"
+  class="btn"
   href="sell.html"
 >
 What We Sell
@@ -301,9 +299,6 @@ Featured Bullion
   id="featured-products"
   class="grid4"
 >
-
-<!-- Products selected in Admin load here -->
-
 </div>
 
 
@@ -336,8 +331,6 @@ View All Products
 
 <div class="wrap grid2">
 
-
-<!-- XRF -->
 
 <div class="card">
 
@@ -376,8 +369,6 @@ Learn More
 </div>
 
 
-
-<!-- MELTING -->
 
 <div class="card">
 
@@ -543,8 +534,6 @@ Our Locations
 <div class="grid2">
 
 
-<!-- RANCHO CUCAMONGA -->
-
 <div class="location">
 
 <h2 id="home-rancho-name">
@@ -561,8 +550,6 @@ Rancho Cucamonga, CA 91730
 
 <br>
 
-
-<!-- DIRECT PHONE LINK - NO JAVASCRIPT -->
 
 <a
   id="home-rancho-phone"
@@ -597,8 +584,6 @@ View Location
 
 
 
-<!-- SAN BERNARDINO -->
-
 <div class="location">
 
 <h2 id="home-sb-name">
@@ -615,8 +600,6 @@ San Bernardino, CA 92410
 
 <br>
 
-
-<!-- DIRECT PHONE LINK - NO JAVASCRIPT -->
 
 <a
   id="home-sb-phone"
@@ -782,8 +765,6 @@ Rancho Cucamonga, CA 91730
 <br>
 
 
-<!-- DIRECT RANCHO PHONE - NO JAVASCRIPT -->
-
 <a
   id="footer-rancho-phone"
   href="tel:+19096762900"
@@ -810,8 +791,6 @@ San Bernardino, CA 92410
 
 <br>
 
-
-<!-- DIRECT SAN BERNARDINO PHONE - NO JAVASCRIPT -->
 
 <a
   id="footer-sb-phone"
@@ -944,17 +923,9 @@ San Bernardino Gold & Silver
 
 
 
-<!-- =========================================
-     SHARED JAVASCRIPT
-     ========================================= -->
-
 <script src="site.js"></script>
 
 
-
-<!-- =========================================
-     HOMEPAGE ADMIN SETTINGS
-     ========================================= -->
 
 <script>
 
@@ -1039,9 +1010,7 @@ function showAddress(element,address){
 
 
 
-/* =========================================
-   HEADER
-   ========================================= */
+/* HEADER */
 
 setImage(
   "header-logo",
@@ -1050,9 +1019,7 @@ setImage(
 
 
 
-/* =========================================
-   HOMEPAGE INTRO
-   ========================================= */
+/* HOMEPAGE INTRO */
 
 setImage(
   "homepage-hero",
@@ -1103,9 +1070,7 @@ setText(
 
 
 
-/* =========================================
-   BUY / SELL
-   ========================================= */
+/* BUY / SELL */
 
 setImage(
   "homepage-buy-image",
@@ -1144,9 +1109,7 @@ setText(
 
 
 
-/* =========================================
-   FEATURED HEADING
-   ========================================= */
+/* FEATURED */
 
 setText(
   "homepage-featured-heading",
@@ -1155,9 +1118,7 @@ setText(
 
 
 
-/* =========================================
-   TESTING
-   ========================================= */
+/* TESTING */
 
 setText(
   "homepage-xrf-heading",
@@ -1189,7 +1150,6 @@ if(g.melting_text){
   );
 
 }
-
 
 
 if(g.xrf_video){
@@ -1312,9 +1272,7 @@ if(g.melting_video){
 
 
 
-/* =========================================
-   REVIEWS
-   ========================================= */
+/* REVIEWS */
 
 setText(
   "homepage-reviews-heading",
@@ -1339,9 +1297,7 @@ for(let i=1;i<=4;i++){
 
 
 
-/* =========================================
-   FAQ
-   ========================================= */
+/* FAQ */
 
 setText(
   "homepage-faq-heading",
@@ -1366,9 +1322,7 @@ for(let i=1;i<=5;i++){
 
 
 
-/* =========================================
-   LOCATIONS
-   ========================================= */
+/* LOCATIONS */
 
 setText(
   "home-rancho-name",
@@ -1477,13 +1431,7 @@ if(g.sb_address){
 
 
 
-/* =========================================
-   PHONE DISPLAY TEXT ONLY
-
-   IMPORTANT:
-   JavaScript does NOT change any tel: links.
-   The direct phone links stay in the HTML.
-   ========================================= */
+/* PHONE DISPLAY TEXT ONLY */
 
 if(g.rancho_phone){
 
@@ -1551,9 +1499,7 @@ if(g.sb_phone){
 
 
 
-/* =========================================
-   HOURS
-   ========================================= */
+/* HOURS */
 
 setText(
   "footer-rancho-hours-mon-thu",
