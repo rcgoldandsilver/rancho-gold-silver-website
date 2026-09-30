@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": "100%",
+  "metal_content": "Silver",
   "name": "Canadian Gold Maple Leaf",
-  "category": "Gold Coins",
-  "image": "/assets/673e2cc0-88bf-47f1-a07d-d5b56060d4c4.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 30
+  "order": 0,
+  "visible": true,
+  "sizes": "1oz",
+  "image2": "/assets/uploads/whatsapp-image-2026-09-29-at-6.58.25-pm.jpeg",
+  "weight": "31.1G",
+  "mint_country": "Canada",
+  "image": "/assets/uploads/whatsapp-image-2026-06-03-at-3.52.47-pm-3-.jpeg",
+  "description": "Canadian Maples",
+  "category": "Gold Coins"
 }
