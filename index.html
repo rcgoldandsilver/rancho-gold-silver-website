@@ -1036,6 +1036,24 @@ setImage(
 );
 
 
+if(g.hero_image_mobile){
+
+  const mobileHero=
+    document.getElementById(
+      "homepage-hero-mobile"
+    );
+
+
+  if(mobileHero){
+
+    mobileHero.srcset=
+      g.hero_image_mobile;
+
+  }
+
+}
+
+
 setText(
   "homepage-heading",
   g.homepage_heading
