@@ -1,14 +1,15 @@
 {
-  "visible": true,
+  "purity": "21.6K",
+  "metal_content": "Gold",
   "name": "Mexican 50 Pesos Centenario",
-  "category": "Gold Coins",
-  "image": "/assets/IMG_9511.jpeg",
-  "image2": "",
+  "order": 0,
+  "visible": true,
+  "sizes": "50 Peso",
+  "image2": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.29-pm-3-.jpeg",
+  "weight": "41.67G",
+  "mint_country": "Mexico",
+  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.29-pm-2-.jpeg",
   "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 40
+  "category": "Gold Coins",
+  "featured_homepage": true
 }
