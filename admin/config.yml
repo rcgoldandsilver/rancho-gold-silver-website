@@ -127,6 +127,10 @@ collections:
             widget: "image"
             required: false
 
+          - label: "Homepage Mobile Hero Image"
+            name: "hero_image_mobile"
+            widget: "image"
+            required: false
           - label: "Homepage Main Heading"
             name: "homepage_heading"
             widget: "string"
