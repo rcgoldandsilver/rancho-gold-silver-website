@@ -1,14 +1,14 @@
 {
-  "purity": "",
-  "metal_content": "",
+  "purity": "24K",
+  "metal_content": "Pure Gold",
   "name": "American Gold Buffalo",
-  "order": 20,
+  "order": 1,
   "visible": true,
-  "sizes": "",
-  "image2": "",
-  "weight": "",
-  "mint_country": "",
-  "image": "/assets/uploads/whatsapp-image-2026-06-06-at-12.12.52-pm-3-.jpeg",
+  "sizes": "1oz",
+  "image2": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.28-pm-2-.jpeg",
+  "weight": "31.1G",
+  "mint_country": "USA",
+  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.58.14-pm.jpeg",
   "description": "",
   "category": "Gold Coins"
 }
