@@ -199,35 +199,16 @@ document.addEventListener(
    PRODUCT VIEW DETAILS
 
    IMPORTANT:
-   Product View Details is controlled by sell.html.
-   Do not add product toggle code here.
+   sell.html controls View Details.
    ========================================================= */
 
 
 /* =========================================================
    PHONE CALLS
 
-   IMPORTANT:
-   JAVASCRIPT DOES NOT CONTROL PHONE CALLS.
-
-   Phone numbers and Call Now buttons must use normal HTML:
-
-   Rancho:
-   href="tel:+19096762900"
-
-   San Bernardino:
-   href="tel:+19096562600"
-
-   This prevents JavaScript from automatically trying
-   to launch the iPhone phone application.
+   JavaScript does NOT control phone calls.
+   Phone links remain normal HTML tel: links.
    ========================================================= */
-
-
-/*
-   Kept only so an older page does not produce
-   a JavaScript error if it still references pickCall().
-   It DOES NOT start a phone call.
-*/
 
 function pickCall() {
 
@@ -238,7 +219,7 @@ function pickCall() {
 
 /* =========================================================
    GENERAL GET DIRECTIONS
-   ALWAYS GOES TO RANCHO CUCAMONGA
+   ALWAYS RANCHO CUCAMONGA
    ========================================================= */
 
 function pickDir() {
@@ -282,11 +263,7 @@ function applySharedSiteInfo() {
   }
 
 
-  /*
-     HEADER PHONE TEXT ONLY.
-
-     DO NOT MODIFY PHONE HREF WITH JAVASCRIPT.
-  */
+  /* HEADER PHONE TEXT */
 
   document
     .querySelectorAll(".header .phone")
@@ -371,11 +348,7 @@ function applySharedSiteInfo() {
   );
 
 
-  /*
-     PHONE NUMBER TEXT ONLY.
-
-     These sections intentionally DO NOT change href.
-  */
+  /* PHONE DISPLAY TEXT ONLY */
 
   const footerRanchoPhone =
     document.getElementById(
@@ -438,13 +411,6 @@ function applySharedSiteInfo() {
       g.sb_phone;
 
   }
-
-
-  /*
-     NO CALL BUTTON HREF IS CREATED HERE.
-     CALL BUTTONS MUST HAVE THEIR tel: LINK
-     DIRECTLY INSIDE EACH HTML FILE.
-  */
 
 
   /* RANCHO HOURS */
@@ -663,12 +629,13 @@ loadSiteSettings();
 const METAL_API =
   "https://api.gold-api.com/price/";
 
-const DIRECTION_API =
-  "https://rancho-gold-admin-auth.rcgoldandsilverllc.workers.dev/metal-direction";
-
 const TICKER_CACHE_KEY =
-  "rancho-metal-ticker-v1";
+  "rancho-metal-ticker-v2";
 
+
+/* =========================================================
+   MONEY FORMAT
+   ========================================================= */
 
 function tickerMoney(value) {
 
@@ -684,6 +651,10 @@ function tickerMoney(value) {
 
 }
 
+
+/* =========================================================
+   GET METAL PRICE
+   ========================================================= */
 
 async function getMetalPrice(symbol) {
 
@@ -726,89 +697,25 @@ async function getMetalPrice(symbol) {
 }
 
 
-async function getMetalDirections() {
+/* =========================================================
+   PRICE DIRECTION
+   ========================================================= */
 
-  try {
-
-    const response =
-      await fetch(
-        DIRECTION_API,
-        {
-          cache: "no-store"
-        }
-      );
-
-    if (!response.ok) {
-
-      return {};
-
-    }
-
-    return await response.json();
-
-  } catch (error) {
-
-    return {};
-
-  }
-
-}
-
-
-function directionValue(
-  directions,
-  symbol
+function getPriceDirection(
+  currentPrice,
+  previousPrice
 ) {
 
-  if (!directions) {
+  const current =
+    Number(currentPrice);
 
-    return null;
+  const previous =
+    Number(previousPrice);
 
-  }
 
   if (
-    directions[symbol] !== undefined
-  ) {
-
-    return directions[symbol];
-
-  }
-
-  if (
-    directions[
-      symbol.toLowerCase()
-    ] !== undefined
-  ) {
-
-    return directions[
-      symbol.toLowerCase()
-    ];
-
-  }
-
-
-  const names = {
-
-    XAU: "gold",
-    XAG: "silver",
-    XPT: "platinum"
-
-  };
-
-
-  return directions[
-    names[symbol]
-  ];
-
-}
-
-
-function tickerDirectionHTML(value) {
-
-  if (
-    value === undefined ||
-    value === null ||
-    value === ""
+    !Number.isFinite(current) ||
+    !Number.isFinite(previous)
   ) {
 
     return "";
@@ -816,56 +723,44 @@ function tickerDirectionHTML(value) {
   }
 
 
-  let raw = value;
+  if (current > previous) {
 
-
-  if (
-    typeof value === "object"
-  ) {
-
-    raw =
-      value.direction ??
-      value.trend ??
-      value.change ??
-      value.value ??
-      "";
+    return "up";
 
   }
 
 
-  const text =
-    String(raw)
-      .toLowerCase()
-      .trim();
+  if (current < previous) {
+
+    return "down";
+
+  }
 
 
-  if (
-    text.includes("up") ||
-    text.includes("higher") ||
-    text.includes("positive") ||
-    text === "1" ||
-    text === "+" ||
-    Number(raw) > 0
-  ) {
+  return "";
+
+}
+
+
+/* =========================================================
+   ARROW HTML
+   ========================================================= */
+
+function tickerDirectionHTML(direction) {
+
+  if (direction === "up") {
 
     return (
-      ' <span style="color:#35c76f;font-weight:900;">▲</span>'
+      ' <span style="color:#35c76f;font-weight:900;font-size:15px;">▲</span>'
     );
 
   }
 
 
-  if (
-    text.includes("down") ||
-    text.includes("lower") ||
-    text.includes("negative") ||
-    text === "-1" ||
-    text === "-" ||
-    Number(raw) < 0
-  ) {
+  if (direction === "down") {
 
     return (
-      ' <span style="color:#ff5b5b;font-weight:900;">▼</span>'
+      ' <span style="color:#ff5b5b;font-weight:900;font-size:15px;">▼</span>'
     );
 
   }
@@ -903,6 +798,8 @@ function displayMetalTicker(data) {
         }
 
 
+        /* GOLD */
+
         if (
           Number.isFinite(
             Number(data.gold)
@@ -925,6 +822,8 @@ function displayMetalTicker(data) {
         }
 
 
+        /* SILVER */
+
         if (
           Number.isFinite(
             Number(data.silver)
@@ -946,6 +845,8 @@ function displayMetalTicker(data) {
 
         }
 
+
+        /* PLATINUM */
 
         if (
           Number.isFinite(
@@ -975,41 +876,80 @@ function displayMetalTicker(data) {
 
 
 /* =========================================================
-   LOAD CACHED TICKER
+   READ PREVIOUS TICKER DATA
    ========================================================= */
 
-try {
+function getPreviousTickerData() {
 
-  const cached =
-    localStorage.getItem(
-      TICKER_CACHE_KEY
-    );
+  try {
+
+    const saved =
+      localStorage.getItem(
+        TICKER_CACHE_KEY
+      );
 
 
-  if (cached) {
+    if (!saved) {
 
-    displayMetalTicker(
-      JSON.parse(cached)
-    );
+      return null;
+
+    }
+
+
+    return JSON.parse(saved);
+
+
+  } catch (error) {
+
+    return null;
 
   }
 
-} catch (error) {}
+}
 
 
 /* =========================================================
-   UPDATE TICKER
+   SHOW CACHED PRICES IMMEDIATELY
+   ========================================================= */
+
+const previousTickerData =
+  getPreviousTickerData();
+
+
+if (previousTickerData) {
+
+  displayMetalTicker(
+    previousTickerData
+  );
+
+}
+
+
+/* =========================================================
+   UPDATE LIVE TICKER
    ========================================================= */
 
 async function updateMetalTicker() {
 
   try {
 
+    /*
+       Get the prices that were stored BEFORE
+       requesting the new prices.
+    */
+
+    const previous =
+      getPreviousTickerData();
+
+
+    /*
+       Request all three current prices.
+    */
+
     const [
       gold,
       silver,
-      platinum,
-      directions
+      platinum
     ] =
       await Promise.all([
 
@@ -1017,12 +957,46 @@ async function updateMetalTicker() {
 
         getMetalPrice("XAG"),
 
-        getMetalPrice("XPT"),
-
-        getMetalDirections()
+        getMetalPrice("XPT")
 
       ]);
 
+
+    /*
+       Compare the new prices against the
+       previously stored prices.
+    */
+
+    const goldDirection =
+      previous
+        ? getPriceDirection(
+            gold,
+            previous.gold
+          )
+        : "";
+
+
+    const silverDirection =
+      previous
+        ? getPriceDirection(
+            silver,
+            previous.silver
+          )
+        : "";
+
+
+    const platinumDirection =
+      previous
+        ? getPriceDirection(
+            platinum,
+            previous.platinum
+          )
+        : "";
+
+
+    /*
+       Build the new ticker information.
+    */
 
     const data = {
 
@@ -1032,23 +1006,11 @@ async function updateMetalTicker() {
 
       platinum,
 
-      goldDirection:
-        directionValue(
-          directions,
-          "XAU"
-        ),
+      goldDirection,
 
-      silverDirection:
-        directionValue(
-          directions,
-          "XAG"
-        ),
+      silverDirection,
 
-      platinumDirection:
-        directionValue(
-          directions,
-          "XPT"
-        ),
+      platinumDirection,
 
       updated:
         Date.now()
@@ -1056,8 +1018,17 @@ async function updateMetalTicker() {
     };
 
 
+    /*
+       Display it.
+    */
+
     displayMetalTicker(data);
 
+
+    /*
+       Save it so the NEXT update can compare
+       against these prices.
+    */
 
     try {
 
@@ -1072,8 +1043,8 @@ async function updateMetalTicker() {
   } catch (error) {
 
     /*
-       If the live API is temporarily unavailable,
-       keep the last cached prices visible.
+       If the live API temporarily fails,
+       leave the last successful prices visible.
     */
 
   }
@@ -1081,8 +1052,16 @@ async function updateMetalTicker() {
 }
 
 
+/* =========================================================
+   FIRST LIVE UPDATE
+   ========================================================= */
+
 updateMetalTicker();
 
+
+/* =========================================================
+   REFRESH EVERY 5 MINUTES
+   ========================================================= */
 
 setInterval(
   updateMetalTicker,
