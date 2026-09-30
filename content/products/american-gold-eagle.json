@@ -10,5 +10,6 @@
   "mint_country": "USA",
   "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.58.24-pm.jpeg",
   "description": "Gold American Eagle from 1986-Present",
-  "category": "Gold Coins"
+  "category": "Gold Coins",
+  "featured_homepage": true
 }
