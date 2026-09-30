@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": "100%",
+  "metal_content": "Silver",
   "name": "Canadian Silver Maple Leaf",
-  "category": "Silver Coins & Rounds",
-  "image": "/assets/AE5A39B1-ACF7-422B-8FC2-DB2595DDEEA9(1).jpeg",
-  "image2": "",
+  "order": 0,
+  "visible": true,
+  "sizes": "1oz",
+  "image2": "/assets/uploads/whatsapp-image-2026-06-03-at-3.52.47-pm-3-.jpeg",
+  "weight": "31.1G",
+  "mint_country": "Canada",
+  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.58.25-pm.jpeg",
   "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 80
+  "category": "Silver Coins & Rounds"
 }
