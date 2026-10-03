@@ -1,15 +1,15 @@
 {
-  "purity": "21.6K",
-  "metal_content": "Gold",
-  "name": "Mexican 50 Pesos Centenario",
+  "purity": "21.6K Gold (.900)",
+  "metal_content": "37.5 grams pure gold — 1.2057 troy oz",
+  "name": "Mexican 50 Pesos Gold Centenario",
   "order": 0,
   "visible": true,
   "sizes": "50 Peso",
-  "image2": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.29-pm-3-.jpeg",
-  "weight": "41.67G",
+  "image2": "/assets/uploads/mexican-50-pesos-coin-showcase.png",
+  "weight": "41.67 grams",
   "mint_country": "Mexico",
-  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.29-pm-2-.jpeg",
-  "description": "",
+  "image": "/assets/uploads/mexican-50-pesos-gold-coins.png",
+  "description": "The Mexican 50 Pesos Centenario is one of Mexico’s most recognized gold coins. It features the Winged Victory with the volcanoes Popocatépetl and Iztaccíhuatl on one side and Mexico’s eagle with a snake on the other. First issued in 1921 to commemorate the 100th anniversary of Mexican independence, the coin is popular with both bullion investors and collectors.",
   "category": "Gold Coins",
   "featured_homepage": true
 }
