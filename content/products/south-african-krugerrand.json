@@ -1,14 +1,14 @@
 {
-  "visible": true,
-  "name": "South African Krugerrand",
-  "category": "Gold Coins",
-  "image": "/assets/df1a1af3-cf54-4268-b1e5-95b220ba0c48.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
   "purity": "",
   "metal_content": "",
-  "mint_country": "",
+  "name": "South African Krugerrand",
+  "order": 50,
+  "visible": true,
   "sizes": "",
-  "order": 50
+  "image2": "",
+  "weight": "",
+  "mint_country": "",
+  "image": "/assets/uploads/gold-krugerrand-coin-pair.png",
+  "description": "",
+  "category": "Gold Coins"
 }
