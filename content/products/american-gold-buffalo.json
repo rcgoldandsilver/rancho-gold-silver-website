@@ -1,14 +1,15 @@
 {
   "purity": ".9999 Fine Gold (24K)",
   "metal_content": "1 troy oz pure gold",
-  "name": "American Gold Buffalo $50",
+  "name": "American Gold Buffalo",
   "order": 0,
   "visible": true,
   "sizes": "1oz",
-  "image2": "/assets/uploads/american-gold-buffalo-sunset-showcase.png",
+  "image2": "/assets/uploads/989acb04-3ea6-408a-8998-88e603c2e6cd.png",
   "weight": "1 troy oz (31.1035 g)",
   "mint_country": "United States — U.S. Mint",
-  "image": "/assets/uploads/a9ce9619-8f97-4d0c-bc19-5e526340df23.jpeg",
+  "image": "/assets/uploads/271c7661-ed93-470e-a837-b3c672490431.png",
   "description": "The American Gold Buffalo is a U.S. gold bullion coin first issued in 2006. It features the classic Native American profile on the obverse and the American buffalo on the reverse. Struck in .9999 fine gold, it is a popular choice for both investors and collectors.",
-  "category": "Gold Coins"
+  "category": "Gold Coins",
+  "featured_homepage": true
 }
