@@ -1,14 +1,15 @@
 {
-  "purity": "100%",
-  "metal_content": "Silver",
+  "purity": ".999 Fine Silver",
+  "metal_content": "1 troy oz pure silver",
   "name": "American Silver Eagle $1",
   "order": 0,
   "visible": true,
   "sizes": "1oz",
-  "image2": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.26-pm.jpeg",
-  "weight": "31.1G",
-  "mint_country": "USA",
-  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.25-pm.jpeg",
-  "description": "Mintage 1986-Present",
-  "category": "Silver Coins & Rounds"
+  "image2": "/assets/uploads/f7281e63-91c3-461b-a027-d67f33c43278.png",
+  "weight": "1 troy oz (31.1035 g)",
+  "mint_country": "United States — U.S. Mint",
+  "image": "/assets/uploads/6594f70a-0b44-4016-af91-d27b2c79c5a1.png",
+  "description": "The American Silver Eagle is the official silver bullion coin of the United States and was first issued by the U.S. Mint in 1986. It features the famous Walking Liberty design on the obverse and an American eagle design on the reverse. Struck in .999 fine silver, it is one of the most recognized and widely traded silver bullion coins in the world.",
+  "category": "Silver Coins & Rounds",
+  "featured_homepage": true
 }
