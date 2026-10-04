@@ -1,15 +1,15 @@
 {
-  "purity": "22K",
-  "metal_content": "90%",
+  "purity": "22K Gold (.9167)",
+  "metal_content": " 1 troy oz (31.1035 g) pure gold",
   "name": "American Gold Eagle $50",
   "order": 0,
   "visible": true,
-  "sizes": "1oz, 1/2oz, 1/4oz, 1/10oz",
-  "image2": "/assets/uploads/whatsapp-image-2026-09-29-at-6.53.29-pm-11-.jpeg",
-  "weight": "33.9G",
-  "mint_country": "USA",
-  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.58.24-pm.jpeg",
-  "description": "Gold American Eagle from 1986-Present",
+  "sizes": "1 oz, 1/2 oz, 1/4 oz, 1/10 oz ",
+  "image2": "/assets/uploads/bf507bd7-d09b-44b7-acd2-6ab4963ce710.png",
+  "weight": "1 troy oz gold — 33.93 g total weight",
+  "mint_country": "United States — U.S. Mint",
+  "image": "/assets/uploads/e86aa7c4-6fc5-4edf-9bb4-75698c838c83.png",
+  "description": "The American Gold Eagle is the official U.S. gold bullion coin, first issued in 1986. It features Augustus Saint-Gaudens’ classic Lady Liberty design on the obverse and an American eagle design on the reverse. Made from 22K gold for added durability, it is one of the most recognized and widely traded gold coins in the United States.",
   "category": "Gold Coins",
   "featured_homepage": true
 }
