@@ -1,14 +1,14 @@
 {
-  "purity": "100%",
-  "metal_content": "Silver",
+  "purity": ".9999 Fine Silver",
+  "metal_content": "1 troy oz pure silver",
   "name": "Canadian Silver Maple Leaf",
   "order": 0,
   "visible": true,
-  "sizes": "1oz",
-  "image2": "/assets/uploads/whatsapp-image-2026-06-03-at-3.52.47-pm-3-.jpeg",
-  "weight": "31.1G",
-  "mint_country": "Canada",
-  "image": "/assets/uploads/whatsapp-image-2026-09-29-at-6.58.25-pm.jpeg",
-  "description": "",
+  "sizes": "1 oz",
+  "image2": "/assets/uploads/a808693b-99de-4a88-acc0-1c1745e0725c.png",
+  "weight": "1 troy oz (31.1035 g)",
+  "mint_country": "Royal Canadian Mint — Canada",
+  "image": "/assets/uploads/1d262962-fa5e-4f94-8c43-b8d3741a6bef.png",
+  "description": "The Canadian Silver Maple Leaf is one of the world’s most recognized silver bullion coins. First issued in 1988 by the Royal Canadian Mint, it features Canada’s iconic maple leaf on the reverse. Struck in .9999 fine silver, it is known for its high purity and detailed design and is popular with both bullion investors and collectors.",
   "category": "Silver Coins & Rounds"
 }
