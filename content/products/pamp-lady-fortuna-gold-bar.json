@@ -1,14 +1,15 @@
 {
-  "visible": true,
+  "purity": ".9999 Fine Gold (24K)",
+  "metal_content": "1 troy oz pure gold",
   "name": "PAMP Lady Fortuna Gold Bar",
+  "order": 0,
+  "visible": true,
+  "sizes": "1 oz",
+  "image2": "/assets/uploads/0e7f6ce6-b866-4d0e-8148-ccc1bc299f50.png",
+  "weight": "1 troy oz (31.1035 g)",
+  "mint_country": "PAMP Suisse — Switzerland",
+  "image": "/assets/uploads/08558a5d-ef79-4258-b942-5d42a3ba25f4.png",
+  "description": "The PAMP Lady Fortuna gold bar is one of the world’s most recognized investment gold bars. Produced by PAMP Suisse in Switzerland, it features Lady Fortuna, the Roman goddess of fortune and prosperity. Each bar is struck in .9999 fine gold and includes identifying information such as its weight, purity, and serial number.",
   "category": "Gold Bars",
-  "image": "/assets/IMG_9464.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 60
+  "featured_homepage": true
 }
