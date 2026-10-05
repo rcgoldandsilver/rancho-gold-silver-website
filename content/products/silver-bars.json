@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": ".999 Fine Silver",
+  "metal_content": "Based on bar weight",
   "name": "Silver Bars",
-  "category": "Silver Bars",
-  "image": "/assets/a3725037-9ac2-4334-aad8-b64d2c03eba9.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 130
+  "order": 0,
+  "visible": true,
+  "sizes": "1 oz, 5 oz, 10 oz, 1 kg, 100 oz",
+  "image2": "/assets/uploads/c547669c-509b-4be7-9bae-2210abe58937.png",
+  "weight": "Based on bar weight",
+  "mint_country": "Various Private Mints",
+  "image": "/assets/uploads/630ad595-37ab-4345-a4da-e93faf976ddf.png",
+  "description": "Generic silver bars are privately minted bullion bars produced by various refiners and mints. Designs and brands may vary, but each bar is valued primarily for its silver content. Available in several sizes, they are a simple and popular way to own physical silver.",
+  "category": "Silver Bars"
 }
