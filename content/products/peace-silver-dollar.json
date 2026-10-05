@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": "90% Silver (.900)",
+  "metal_content": "0.7734 troy oz pure silver",
   "name": "Peace Silver Dollar",
-  "category": "Silver Coins & Rounds",
-  "image": "/assets/IMG_9487.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 110
+  "order": 0,
+  "visible": true,
+  "sizes": "$1 Peace Silver Dollar",
+  "image2": "/assets/uploads/87f2fb67-524b-47aa-9199-0e66a490817a.png",
+  "weight": "26.73 grams",
+  "mint_country": "United States — U.S. Mint",
+  "image": "/assets/uploads/b2d4968c-6ce6-417c-b89d-c88f04918c30.png",
+  "description": "The Peace Silver Dollar is a historic U.S. silver coin first issued in 1921 to symbolize peace following World War I. It features Lady Liberty on the obverse and an American eagle resting above the word “PEACE” on the reverse. Its classic design and 90% silver composition make it popular with both silver buyers and collectors.",
+  "category": "Silver Coins & Rounds"
 }
