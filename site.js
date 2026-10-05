@@ -595,7 +595,7 @@ async function loadSiteSettings() {
 
     const response =
       await fetch(
-        "content/settings/general.json",
+        "content/settings/general.json?v=" + Date.now(),
         {
           cache: "no-store"
         }
