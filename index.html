@@ -1742,7 +1742,11 @@ featured.forEach(product=>{
 
 
   const image=
-    product.image || "";
+  product.image
+    ? product.image
+      + (product.image.includes("?") ? "&" : "?")
+      + "v=" + Date.now()
+    : "";
 
 
   card.innerHTML=
