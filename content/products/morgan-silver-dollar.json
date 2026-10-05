@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": "90% Silver (.900)",
+  "metal_content": "0.7734 troy oz pure silver",
   "name": "Morgan Silver Dollar",
-  "category": "Silver Coins & Rounds",
-  "image": "/assets/IMG_6784.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 100
+  "order": 0,
+  "visible": true,
+  "sizes": "$1 Morgan Silver Dollar",
+  "image2": "/assets/uploads/dffd147f-1e87-4f8d-8b36-54af85d43024.png",
+  "weight": "26.73 grams",
+  "mint_country": "United States — U.S. Mint",
+  "image": "/assets/uploads/6066e0f3-72b7-4475-b093-09d9a159a67f.png",
+  "description": "The Morgan Silver Dollar is one of the most recognized historic U.S. silver coins. Originally minted from 1878 to 1904 and again in 1921, it features Lady Liberty on the obverse and an American eagle with a wreath on the reverse. Its classic design, 90% silver composition, and history make it popular with both silver buyers and collectors.",
+  "category": "Silver Coins & Rounds"
 }
