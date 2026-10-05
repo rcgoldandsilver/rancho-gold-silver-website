@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": ".999 Fine Silver",
+  "metal_content": "1 troy oz pure silver",
   "name": "Mexican Silver Libertad",
-  "category": "Silver Coins & Rounds",
-  "image": "/assets/c4d57af2-8ee5-490c-bafe-da562ba56ebb.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 90
+  "order": 0,
+  "visible": true,
+  "sizes": "1 oz",
+  "image2": "/assets/uploads/921b9d3b-2027-46dc-82f3-e0bda2fc2c1d.png",
+  "weight": "1 troy oz (31.1035 g)",
+  "mint_country": "Mexico — Mexican Mint",
+  "image": "/assets/uploads/2ad94922-942b-4560-84a3-df73792710db.png",
+  "description": "The Mexican Silver Libertad is Mexico’s official silver bullion coin, first introduced in 1982 by the Mexican Mint. Its design features the Winged Victory, a symbol of Mexican independence, with the Popocatépetl and Iztaccíhuatl volcanoes in the background. The reverse displays Mexico’s national coat of arms. Struck in .999 fine silver, the Libertad is popular with both bullion investors and collectors.",
+  "category": "Silver Coins & Rounds"
 }
