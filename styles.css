@@ -459,8 +459,12 @@ font-size:34px
 }
 
 .ticker span{
-margin:0 5px;
-font-size:12px
+margin:0 3px;
+font-size:12px;
+white-space:nowrap;
+display:inline-flex;
+align-items:center;
+gap:3px;
 }
 
 .head{
