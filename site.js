@@ -87,7 +87,16 @@ function setImage(id, value) {
     document.getElementById(id);
 
   if (element) {
-    element.src = value;
+
+    const separator =
+      value.includes("?") ? "&" : "?";
+
+    element.src =
+      value +
+      separator +
+      "v=" +
+      Date.now();
+
   }
 
 }
