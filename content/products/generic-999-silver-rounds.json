@@ -1,14 +1,14 @@
 {
-  "visible": true,
+  "purity": ".999 Fine Silver",
+  "metal_content": "Troy oz Pure Silver",
   "name": "Generic .999 Silver Rounds",
-  "category": "Silver Coins & Rounds",
-  "image": "/assets/IMG_9528.jpeg",
-  "image2": "",
-  "description": "",
-  "weight": "",
-  "purity": "",
-  "metal_content": "",
-  "mint_country": "",
-  "sizes": "",
-  "order": 120
+  "order": 0,
+  "visible": true,
+  "sizes": "1 oz",
+  "image2": "/assets/uploads/ef764b2b-fba0-4ba0-8e47-2c6926ee6dc2.png",
+  "weight": "1 Troy oz",
+  "mint_country": "Various Private Mints",
+  "image": "/assets/uploads/7d65d66e-58cb-4760-8b3e-2d424f7975df.png",
+  "description": "Generic .999 Silver Rounds are privately minted silver bullion pieces produced in many different designs and styles. Unlike government-issued coins, they are valued primarily for their silver content and are a simple, popular way to own physical silver.",
+  "category": "Silver Coins & Rounds"
 }
