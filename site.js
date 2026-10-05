@@ -1076,3 +1076,27 @@ setInterval(
   updateMetalTicker,
   300000
 );
+/* FORCE FRESH IMAGES SITE-WIDE */
+function refreshAllImages() {
+  document.querySelectorAll("img").forEach(img => {
+    const src = img.getAttribute("src");
+
+    if (!src || src.startsWith("data:") || src.startsWith("blob:")) {
+      return;
+    }
+
+    const cleanSrc = src
+      .replace(/([?&])v=\d+/g, "$1")
+      .replace(/[?&]$/, "");
+
+    const separator = cleanSrc.includes("?") ? "&" : "?";
+
+    img.src =
+      cleanSrc +
+      separator +
+      "v=" +
+      Date.now();
+  });
+}
+
+window.addEventListener("load", refreshAllImages);
