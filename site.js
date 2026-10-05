@@ -265,7 +265,8 @@ function applySharedSiteInfo() {
       .querySelectorAll("#header-logo")
       .forEach(
         logo => {
-          logo.src = g.header_logo;
+          const separator = g.header_logo.includes("?") ? "&" : "?";
+logo.src = g.header_logo + separator + "v=" + Date.now();
         }
       );
 
