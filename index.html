@@ -107,11 +107,12 @@ PLATINUM <b>Live Bid</b>
 <source
   id="homepage-hero-mobile"
   media="(max-width:600px)"
+  srcset="/assets/uploads/chatgpt-image-sep-29-2026-05_35_46-pm.png"
 >
 
 <img
   id="homepage-hero"
-  src="assets/673e2cc0-88bf-47f1-a07d-d5b56060d4c4.jpeg"
+  src="/assets/uploads/chatgpt-image-sep-29-2026-05_26_40-pm.png"
   alt="Rancho Cucamonga Gold & Silver"
 >
 
@@ -214,7 +215,7 @@ Immediate Payment
 
 <img
   id="homepage-buy-image"
-  src="assets/IMG_8099(3).jpeg"
+  src="/assets/uploads/0f6766f6-2cc6-48c9-91b1-93005169482f.png"
   alt="Gold and silver we buy"
 >
 
@@ -250,7 +251,7 @@ What We Buy
 
 <img
   id="homepage-sell-image"
-  src="assets/IMG_9492.jpeg"
+  src="/assets/uploads/de17b64f-4512-4350-993b-25fb2f88e2e8.png"
   alt="Gold and silver bullion for sale"
 >
 
@@ -266,8 +267,6 @@ What We Sell
 Gold and silver coins, bars and bullion. Call for current price and availability.
 </p>
 
-
-<!-- SAME NAVY BUTTON AS WHAT WE BUY -->
 
 <a
   class="btn"
@@ -347,7 +346,7 @@ View All Products
 
 <img
   id="homepage-xrf-image"
-  src="assets/IMG_9464.jpeg"
+  src="/assets/uploads/f1ccb2e3-9f02-4a22-9507-4866d2bf4757.png"
   alt="XRF precious metal testing"
 >
 
@@ -385,7 +384,7 @@ Learn More
 
 <img
   id="homepage-melting-image"
-  src="assets/AE5A39B1-ACF7-422B-8FC2-DB2595DDEEA9(1).jpeg"
+  src="/assets/uploads/9b45bcf3-f4b2-467c-905e-4f6c5f298bdf.png"
   alt="Precious metal assay and melting"
 >
 
@@ -439,7 +438,6 @@ Customer Reviews
 </div>
 
 
-
 <div class="reviews">
 
 
@@ -460,7 +458,6 @@ Google Customer
 </div>
 
 
-
 <div class="review">
 
 <div class="stars">
@@ -478,7 +475,6 @@ Google Customer
 </div>
 
 
-
 <div class="review">
 
 <div class="stars">
@@ -494,7 +490,6 @@ Google Customer
 </strong>
 
 </div>
-
 
 
 <div class="review">
@@ -537,7 +532,6 @@ Our Locations
 </h2>
 
 </div>
-
 
 
 <div class="grid2">
@@ -590,7 +584,6 @@ View Location
 </p>
 
 </div>
-
 
 
 <div class="location">
@@ -667,7 +660,6 @@ Frequently Asked Questions
 </div>
 
 
-
 <details>
 
 <summary id="homepage-faq-1-question">
@@ -679,7 +671,6 @@ No. Walk-ins are welcome at both locations.
 </p>
 
 </details>
-
 
 
 <details>
@@ -695,7 +686,6 @@ Yes. Appraisals are free and there is no obligation to sell.
 </details>
 
 
-
 <details>
 
 <summary id="homepage-faq-3-question">
@@ -709,7 +699,6 @@ We use professional methods including XRF, Sigma verification and traditional te
 </details>
 
 
-
 <details>
 
 <summary id="homepage-faq-4-question">
@@ -721,7 +710,6 @@ Yes. We buy many forms of precious metals, including broken items and scrap.
 </p>
 
 </details>
-
 
 
 <details>
@@ -782,7 +770,6 @@ Rancho Cucamonga, CA 91730
 </a>
 
 
-
 <br><br>
 
 
@@ -809,7 +796,6 @@ San Bernardino, CA 92410
 </a>
 
 </div>
-
 
 
 <div>
@@ -847,7 +833,6 @@ Live Prices
 </div>
 
 
-
 <div>
 
 <h3>
@@ -879,7 +864,6 @@ Sat 10–7
 <span id="footer-rancho-hours-sun">
 Sun Closed
 </span>
-
 
 
 <br><br>
@@ -914,7 +898,6 @@ Sun Closed
 
 
 </div>
-
 
 
 <div
@@ -1289,7 +1272,7 @@ if(g.melting_video){
     video.style.objectFit=
       "cover";
 
-video.style.objectPosition=
+    video.style.objectPosition=
       "center center";
 
 
@@ -1751,11 +1734,11 @@ featured.forEach(product=>{
 
 
   const image=
-  product.image
-    ? product.image
-      + (product.image.includes("?") ? "&" : "?")
-      + "v=" + Date.now()
-    : "";
+    product.image
+      ? product.image
+        + (product.image.includes("?") ? "&" : "?")
+        + "v=" + Date.now()
+      : "";
 
 
   card.innerHTML=
@@ -1776,7 +1759,7 @@ featured.forEach(product=>{
       +
       image
       +
-     '" alt="" style="width:100%;height:300px;object-fit:contain;background:white;">'
+      '" alt="" style="width:100%;height:300px;object-fit:contain;background:white;">'
       :
       ''
     )
