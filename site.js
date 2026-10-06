@@ -220,9 +220,7 @@ document.addEventListener(
    ========================================================= */
 
 function pickCall() {
-
-  return false;
-
+    window.location.href = "tel:+19096762900";
 }
 
 
