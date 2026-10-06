@@ -600,8 +600,11 @@ if(g.xrf_video){
     video.src =
       g.xrf_video;
 
-    video.controls=true;
-    video.playsInline=true;
+    video.autoplay=true;
+video.muted=true;
+video.loop=true;
+video.playsInline=true;
+video.controls=false;
 
     video.style.width="100%";
     video.style.height="100%";
