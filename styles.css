@@ -292,19 +292,58 @@ border:0;
 border-radius:8px
 }
 
+/* AUTOMATIC CUSTOMER REVIEWS */
+
 .reviews{
 display:flex;
-overflow:auto;
 gap:14px;
-padding:6px 0
+overflow:hidden;
+padding:6px 0;
+scrollbar-width:none;
+}
+
+.reviews::-webkit-scrollbar{
+display:none;
+}
+
+.reviews-track{
+display:flex;
+gap:14px;
+width:max-content;
+animation:reviews-scroll 35s linear infinite;
 }
 
 .review{
+width:300px;
 min-width:300px;
+flex-shrink:0;
 background:#fff;
 border:1px solid #e3d9ca;
 border-radius:10px;
-padding:16px
+padding:16px;
+}
+
+.reviews:hover .reviews-track,
+.reviews:focus-within .reviews-track{
+animation-play-state:paused;
+}
+
+@keyframes reviews-scroll{
+from{
+transform:translateX(0);
+}
+to{
+transform:translateX(calc(-50% - 7px));
+}
+}
+
+@media(prefers-reduced-motion:reduce){
+.reviews-track{
+animation:none;
+}
+.reviews{
+overflow-x:auto;
+}
 }
 
 .stars{
