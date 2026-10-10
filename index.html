@@ -255,6 +255,7 @@ For appropriate larger lots, melting and homogenizing can help determine consist
 </div>
 
 <div class="reviews">
+<div class="reviews-track" id="reviews-track">
 
 <div class="review">
 <div class="stars">★★★★★</div>
@@ -287,7 +288,8 @@ Clean shop, professional testing and excellent customer service.
 </p>
 <strong id="homepage-review-4-name">Google Customer</strong>
 </div>
-
+</div>
+  
 </div>
 </div>
 </section>
@@ -956,6 +958,21 @@ function escapeHTML(value){
 
 }
 
+</script>
+
+<script>
+(function(){
+  const track = document.getElementById("reviews-track");
+  if (!track) return;
+
+  const reviews = Array.from(track.children);
+
+  reviews.forEach(review => {
+    const duplicate = review.cloneNode(true);
+    duplicate.setAttribute("aria-hidden", "true");
+    track.appendChild(duplicate);
+  });
+})();
 </script>
 
 </body>
