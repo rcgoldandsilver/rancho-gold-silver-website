@@ -13,6 +13,20 @@
 <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+<style>
+/* FEATURED BULLION: one-row, moving carousel */
+.featured-carousel{display:flex;align-items:center;gap:10px;margin-top:22px;min-width:0}
+.featured-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x;flex:1;min-width:0;padding:6px 2px 16px;scroll-behavior:auto}
+.featured-track::-webkit-scrollbar{display:none}
+.featured-track .featured-card{flex:0 0 calc((100% - 48px)/4);min-width:0;cursor:pointer}
+.featured-track .featured-card img{width:100%;height:245px;object-fit:contain;background:#fff;display:block}
+.featured-track .featured-card h3{font-size:19px;overflow-wrap:anywhere}
+.featured-track .featured-card:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.featured-arrow{flex:0 0 36px;width:36px;height:44px;background:var(--navy);color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:22px}
+.featured-arrow:hover{background:var(--burg)}
+@media(max-width:900px){.featured-track .featured-card{flex-basis:calc((100% - 16px)/2)}}
+@media(max-width:600px){.featured-track .featured-card{flex-basis:76%}.featured-arrow{flex-basis:28px;width:28px;font-size:17px}.featured-track .featured-card img{height:230px}}
+</style>
 </head>
 
 <body>
@@ -180,7 +194,14 @@ Gold and Silver Coins, Bars and Bullion. Call for current price and availability
 <h2 id="homepage-featured-heading">Featured Bullion</h2>
 </div>
 
-<div id="featured-products" class="grid4"></div>
+<div class="featured-carousel" id="featured-carousel">
+  <button class="featured-arrow" id="featured-prev" type="button" aria-label="Previous bullion product">&#10094;</button>
+  <div id="featured-products" class="featured-track" aria-label="Featured bullion products"></div>
+  <button class="featured-arrow" id="featured-next" type="button" aria-label="Next bullion product">&#10095;</button>
+</div>
+<div class="center" style="margin-top:12px">
+  <button class="btn" id="featured-resume" type="button" hidden>Resume Scrolling &#9654;</button>
+</div>
 
 <div class="center" style="margin-top:24px">
 <a class="btn" href="sell.html">View All Products</a>
@@ -837,114 +858,107 @@ setText("footer-sb-hours-sun",g.sb_hours_sun);
 
 })();
 
-/* FEATURED PRODUCTS */
+/* FEATURED PRODUCTS: AUTO-SCROLLING CAROUSEL */
 
 (async()=>{
-
 try{
-
-const API=
-  "https://api.github.com/repos/rcgoldandsilver/rancho-gold-silver-website/contents/content/products";
-
-const response=await fetch(API,{cache:"no-store"});
-
-if(!response.ok)return;
-
-const files=await response.json();
-
-const products=await Promise.all(
-
-  files
-    .filter(file=>file.name.endsWith(".json"))
-    .map(async file=>{
-
+  const API="https://api.github.com/repos/rcgoldandsilver/rancho-gold-silver-website/contents/content/products";
+  const response=await fetch(API,{cache:"no-store"});
+  if(!response.ok)return;
+  const files=await response.json();
+  const products=await Promise.all(
+    files.filter(file=>file.name.endsWith(".json")).map(async file=>{
       try{
-
-        const r=await fetch(
-          file.download_url,
-          {cache:"no-store"}
-        );
-
+        const r=await fetch(file.download_url,{cache:"no-store"});
         if(!r.ok)return null;
-
         const product=await r.json();
         product.__file=file.name;
-
         return product;
-
-      }catch(e){
-        return null;
-      }
-
+      }catch(e){return null;}
     })
+  );
+  const featured=products.filter(product=>
+    product && product.visible!==false && product.featured_homepage===true
+  ).sort((a,b)=>Number(a.order||100)-Number(b.order||100));
 
-);
+  const track=document.getElementById("featured-products");
+  const carousel=document.getElementById("featured-carousel");
+  const resume=document.getElementById("featured-resume");
+  const prev=document.getElementById("featured-prev");
+  const next=document.getElementById("featured-next");
+  if(!track||!carousel)return;
+  if(!featured.length){carousel.style.display="none";return;}
 
-const featured=products
+  function makeCard(product){
+    const card=document.createElement("div");
+    card.className="card featured-card";
+    card.tabIndex=0;
+    card.setAttribute("aria-label","Pause scrolling for "+(product.name||"product"));
+    const slug=product.__file.replace(/\.json$/i,"");
+    const img=product.image ? '<img src="'+escapeHTML(product.image)+'" alt="'+escapeHTML(product.name||"Bullion")+'" loading="lazy">' : '';
+    card.innerHTML=img+'<div class="pad center"><h3>'+escapeHTML(product.name||"")+'</h3><a class="btn" href="sell.html#'+encodeURIComponent(slug)+'">View Details</a></div>';
+    return card;
+  }
 
-  .filter(product=>
-    product &&
-    product.visible!==false &&
-    product.featured_homepage===true
-  )
+  featured.forEach(product=>track.appendChild(makeCard(product)));
+  // Duplicate cards for seamless circular movement; original products remain unchanged.
+  if(featured.length>1){
+    featured.forEach(product=>{
+      const clone=makeCard(product);
+      clone.setAttribute("aria-hidden","true");
+      clone.tabIndex=-1;
+      track.appendChild(clone);
+    });
+  }
 
-  .sort((a,b)=>
-    Number(a.order||100)-Number(b.order||100)
-  )
+  let paused=featured.length===1;
+  let lastTime=0;
+  const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+  if(reducedMotion.matches)paused=true;
+  const speed=22; // pixels per second: slow continuous movement
 
-  .slice(0,4);
-
-const container=document.getElementById("featured-products");
-
-if(!container)return;
-
-if(featured.length===0){
-  container.style.display="none";
-  return;
-}
-
-container.innerHTML="";
-
-featured.forEach(product=>{
-
-  const card=document.createElement("div");
-  card.className="card";
-
-  const slug=product.__file.replace(/\.json$/i,"");
-
-  const image=product.image
-    ? product.image+
-      (product.image.includes("?")?"&":"?")+
-      "v="+Date.now()
-    : "";
-
-  card.innerHTML=
-
-    '<a href="sell.html#'+
-    encodeURIComponent(slug)+
-    '" style="text-decoration:none;color:inherit">'+
-
-    (
-      image
-        ? '<img src="'+image+
-          '" alt="" style="width:100%;height:300px;object-fit:contain;background:white;">'
-        : ''
-    )+
-
-    '<div class="pad center">'+
-    '<h3>'+escapeHTML(product.name||"")+'</h3>'+
-    '<span class="btn">View Details</span>'+
-    '</div>'+
-    '</a>';
-
-  container.appendChild(card);
-
-});
-
-}catch(e){
-  console.error("Featured products error:",e);
-}
-
+  function cycleWidth(){
+    if(featured.length<2)return 0;
+    return track.children[featured.length].offsetLeft-track.children[0].offsetLeft;
+  }
+  function normalize(){
+    const cycle=cycleWidth();
+    if(cycle>0 && track.scrollLeft>=cycle)track.scrollLeft-=cycle;
+    if(cycle>0 && track.scrollLeft<0)track.scrollLeft+=cycle;
+  }
+  function pause(){paused=true;resume.hidden=false;}
+  function start(){paused=false;resume.hidden=true;lastTime=0;}
+  resume.addEventListener("click",start);
+  track.addEventListener("click",event=>{
+    if(event.target.closest(".featured-card"))pause();
+  });
+  track.addEventListener("keydown",event=>{
+    if((event.key==="Enter"||event.key===" ") && event.target.classList.contains("featured-card")){
+      event.preventDefault();pause();
+    }
+  });
+  track.addEventListener("pointerdown",pause,{passive:true});
+  function move(direction){
+    pause();
+    const card=track.querySelector(".featured-card");
+    if(!card)return;
+    const gap=parseFloat(getComputedStyle(track).gap)||16;
+    track.scrollBy({left:direction*(card.offsetWidth+gap),behavior:"smooth"});
+  }
+  prev.addEventListener("click",()=>move(-1));
+  next.addEventListener("click",()=>move(1));
+  function tick(time){
+    if(lastTime && !paused && document.visibilityState==="visible"){
+      const dt=Math.min((time-lastTime)/1000,0.05);
+      track.scrollLeft+=speed*dt;
+      normalize();
+    }
+    lastTime=time;
+    requestAnimationFrame(tick);
+  }
+  if(featured.length>1)requestAnimationFrame(tick);
+  if(paused)resume.hidden=false;
+}catch(e){console.error("Featured products error:",e);}
 })();
 
 function escapeHTML(value){
