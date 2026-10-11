@@ -16,7 +16,7 @@
 <style>
 /* FEATURED BULLION: continuously moving, draggable single row */
 .featured-carousel{margin-top:22px;min-width:0}
-.featured-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-y;min-width:0;padding:6px 2px 16px;scroll-behavior:auto;cursor:grab;user-select:none;-webkit-user-select:none}
+.featured-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;min-width:0;padding:6px 2px 16px;scroll-behavior:auto;cursor:grab;user-select:none;-webkit-user-select:none}
 .featured-track.dragging{cursor:grabbing;scroll-behavior:auto}
 .featured-track::-webkit-scrollbar{display:none}
 .featured-track .featured-card{flex:0 0 calc((100% - 48px)/4);min-width:0}
@@ -958,38 +958,40 @@ try{
     track.classList.remove("dragging");
     lastTime=0;
   }
-  // iPhone/Safari: use native touch events, independently of mouse pointer events.
-  // A short tap still follows View Details; swiping moves the carousel.
-  let touchActive=false, touchX=0, touchStartX=0;
+  // Let iOS/Android perform native, smooth horizontal finger swipes.
+  // The previous custom touchmove handler fought Safari's scrolling.
+  // Autoplay pauses while touching and briefly during momentum scrolling.
+  let touchActive=false;
+  let touchStartX=0, touchStartY=0;
+  let touchMoved=false;
+  let resumeAfter=0;
   track.addEventListener("touchstart",event=>{
     if(event.touches.length!==1)return;
     touchActive=true;
     pressed=true;
-    touchX=touchStartX=event.touches[0].clientX;
+    dragging=false;
+    touchMoved=false;
+    touchStartX=event.touches[0].clientX;
+    touchStartY=event.touches[0].clientY;
     suppressNextClick=false;
     lastTime=0;
   },{passive:true});
   track.addEventListener("touchmove",event=>{
     if(!touchActive || event.touches.length!==1)return;
-    const x=event.touches[0].clientX;
-    const delta=x-touchX;
-    if(Math.abs(x-touchStartX)>8){
-      dragging=true;
-      track.classList.add("dragging");
+    const dx=event.touches[0].clientX-touchStartX;
+    const dy=event.touches[0].clientY-touchStartY;
+    if(Math.abs(dx)>10 && Math.abs(dx)>Math.abs(dy)){
+      touchMoved=true;
     }
-    if(dragging){
-      track.scrollLeft-=delta;
-      normalize();
-    }
-    touchX=x;
+    // No preventDefault and no scrollLeft changes here: native swipe works.
   },{passive:true});
   function endTouch(){
     if(!touchActive)return;
-    if(dragging)suppressNextClick=true;
     touchActive=false;
     pressed=false;
     dragging=false;
-    track.classList.remove("dragging");
+    // Give Safari's natural swipe momentum time to finish before autoplay.
+    resumeAfter=performance.now()+(touchMoved?900:100);
     lastTime=0;
   }
   track.addEventListener("touchend",endTouch,{passive:true});
@@ -1012,7 +1014,7 @@ try{
   // whole pixels; adding 0.3px per frame directly can result in no movement.
   let pendingPixels=0;
   function tick(time){
-    if(lastTime && !pressed &&
+    if(lastTime && !pressed && time>=resumeAfter &&
        document.visibilityState==="visible" && featured.length>1){
       const dt=Math.min((time-lastTime)/1000,0.05);
       pendingPixels+=speed*dt;
