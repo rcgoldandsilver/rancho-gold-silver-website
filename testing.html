@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -13,12 +14,12 @@
 >
 
 <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+
 </head>
 
 <body>
-
 
 <!-- HEADER -->
 
@@ -66,7 +67,6 @@ GOLD & SILVER
 </header>
 
 
-
 <!-- LIVE METAL PRICES -->
 
 <a
@@ -88,7 +88,6 @@ PLATINUM <b>Live Bid</b>
 </span>
 
 </a>
-
 
 
 <!-- PAGE HEADER -->
@@ -113,13 +112,11 @@ Professional methods, clear explanations and testing you can see.
 </section>
 
 
-
 <!-- XRF TESTING -->
 
 <section class="section">
 
 <div class="wrap grid2">
-
 
 <div
   id="xrf-media"
@@ -133,7 +130,6 @@ Professional methods, clear explanations and testing you can see.
 >
 
 </div>
-
 
 <div>
 
@@ -151,11 +147,9 @@ Professional-grade XRF technology analyzes metal composition without damaging th
 
 </div>
 
-
 </div>
 
 </section>
-
 
 
 <!-- SIGMA METALYTICS -->
@@ -163,7 +157,6 @@ Professional-grade XRF technology analyzes metal composition without damaging th
 <section class="section tinted">
 
 <div class="wrap grid2">
-
 
 <div>
 
@@ -181,8 +174,10 @@ We use professional precious-metal verification equipment to help evaluate coins
 
 </div>
 
-
-<div class="card">
+<div
+  id="sigma-media"
+  class="card"
+>
 
 <img
   id="sigma-image"
@@ -192,11 +187,9 @@ We use professional precious-metal verification equipment to help evaluate coins
 
 </div>
 
-
 </div>
 
 </section>
-
 
 
 <!-- ACID TESTING -->
@@ -204,7 +197,6 @@ We use professional precious-metal verification equipment to help evaluate coins
 <section class="section">
 
 <div class="wrap grid2">
-
 
 <div class="card">
 
@@ -215,7 +207,6 @@ We use professional precious-metal verification equipment to help evaluate coins
 >
 
 </div>
-
 
 <div>
 
@@ -233,11 +224,9 @@ Traditional acid testing may be used when appropriate alongside professional equ
 
 </div>
 
-
 </div>
 
 </section>
-
 
 
 <!-- ASSAY & MELTING -->
@@ -245,7 +234,6 @@ Traditional acid testing may be used when appropriate alongside professional equ
 <section class="section tinted">
 
 <div class="wrap grid2">
-
 
 <div>
 
@@ -263,7 +251,6 @@ For appropriate larger lots, we can melt and homogenize precious metals to help 
 
 </div>
 
-
 <div
   id="melting-media"
   class="card"
@@ -277,11 +264,9 @@ For appropriate larger lots, we can melt and homogenize precious metals to help 
 
 </div>
 
-
 </div>
 
 </section>
-
 
 
 <!-- CALL TO ACTION -->
@@ -319,13 +304,11 @@ Get Directions
 </section>
 
 
-
 <!-- FOOTER -->
 
 <footer class="footer">
 
 <div class="wrap footgrid">
-
 
 <div>
 
@@ -353,9 +336,7 @@ Rancho Cucamonga, CA 91730
 (909) 676-2900
 </a>
 
-
 <br><br>
-
 
 <b id="footer-sb-name">
 San Bernardino Gold & Silver
@@ -378,7 +359,6 @@ San Bernardino, CA 92410
 </a>
 
 </div>
-
 
 
 <div>
@@ -412,12 +392,10 @@ Live Prices
 </div>
 
 
-
 <div>
 
 <h3>
-Hours
-</h3>
+Hours</h3>
 
 <span id="footer-rancho-hours-mon-thu">
 Rancho: Mon–Thu 10–7
@@ -441,9 +419,7 @@ Sat 10–7
 Sun Closed
 </span>
 
-
 <br><br>
-
 
 <span id="footer-sb-hours-mon-thu">
 San Bernardino: Mon–Thu 11–7
@@ -469,9 +445,7 @@ Sun Closed
 
 </div>
 
-
 </div>
-
 
 <div
   class="wrap center"
@@ -487,16 +461,13 @@ San Bernardino Gold & Silver
 </footer>
 
 
-
 <script src="site.js"></script>
-
 
 <script>
 
 (async()=>{
 
 try{
-
 
 const response =
   await fetch(
@@ -508,11 +479,11 @@ const response =
 
 if(!response.ok)return;
 
-
 const g =
   await response.json();
 
 
+/* HELPERS */
 
 function setText(id,value){
 
@@ -526,8 +497,6 @@ function setText(id,value){
   }
 
 }
-
-
 
 function setImage(id,value){
 
@@ -543,6 +512,86 @@ function setImage(id,value){
 }
 
 
+/* AUTOPLAY VIDEO HELPER */
+
+function createAutoplayVideo(mediaId,videoUrl,imageId,imageUrl){
+
+  const media =
+    document.getElementById(mediaId);
+
+  if(!media)return;
+
+  if(!videoUrl){
+
+    setImage(imageId,imageUrl);
+    return;
+
+  }
+
+  const video =
+    document.createElement("video");
+
+  video.autoplay = true;
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.controls = false;
+  video.preload = "auto";
+
+  video.setAttribute("autoplay","");
+  video.setAttribute("muted","");
+  video.setAttribute("loop","");
+  video.setAttribute("playsinline","");
+  video.setAttribute("webkit-playsinline","");
+
+  video.style.width = "100%";
+  video.style.height = "100%";
+  video.style.minHeight = "300px";
+  video.style.objectFit = "cover";
+  video.style.display = "block";
+
+  video.src = videoUrl;
+
+  media.replaceChildren(video);
+
+  function tryPlay(){
+
+    if(
+      video.paused &&
+      document.visibilityState === "visible"
+    ){
+
+      video.play().catch(()=>{});
+
+    }
+
+  }
+
+  video.addEventListener(
+    "loadeddata",
+    tryPlay
+  );
+
+  video.addEventListener(
+    "canplay",
+    tryPlay
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    tryPlay
+  );
+
+  window.addEventListener(
+    "pageshow",
+    tryPlay
+  );
+
+  tryPlay();
+
+}
+
 
 /* HEADER */
 
@@ -550,7 +599,6 @@ setImage(
   "header-logo",
   g.header_logo
 );
-
 
 
 /* PAGE */
@@ -564,7 +612,6 @@ setText(
   "testing-page-intro",
   g.testing_page_intro
 );
-
 
 
 /* XRF */
@@ -584,56 +631,15 @@ setText(
   g.xrf_text
 );
 
-
-if(g.xrf_video){
-
-  const media =
-    document.getElementById(
-      "xrf-media"
-    );
-
-  if(media){
-
-    media.innerHTML="";
-
-    const video =
-      document.createElement("video");
-
-    video.src =
-      g.xrf_video;
-
-    video.autoplay=true;
-    video.muted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.controls=false;
-
-    video.style.width="100%";
-    video.style.height="100%";
-    video.style.minHeight="300px";
-    video.style.objectFit="cover";
-
-    media.appendChild(video);
-
-  }
-
-}else{
-
-  setImage(
-    "xrf-image",
-    g.xrf_image
-  );
-
-}
-
+createAutoplayVideo(
+  "xrf-media",
+  g.xrf_video,
+  "xrf-image",
+  g.xrf_image
+);
 
 
 /* SIGMA */
-
-setImage(
-  "sigma-image",
-  g.sigma_image
-);
 
 setText(
   "sigma-heading",
@@ -650,6 +656,12 @@ setText(
   g.sigma_text
 );
 
+createAutoplayVideo(
+  "sigma-media",
+  g.sigma_video,
+  "sigma-image",
+  g.sigma_image
+);
 
 
 /* ACID */
@@ -675,7 +687,6 @@ setText(
 );
 
 
-
 /* MELTING */
 
 setText(
@@ -693,57 +704,26 @@ setText(
   g.melting_text
 );
 
+createAutoplayVideo(
+  "melting-media",
+  g.melting_video,
+  "melting-image",
+  g.melting_image
+);
 
-if(g.melting_video){
 
-  const media =
-    document.getElementById(
-      "melting-media"
-    );
+}catch(e){
 
-  if(media){
-
-    media.innerHTML="";
-
-    const video =
-      document.createElement("video");
-
-    video.src =
-      g.melting_video;
-
-    video.autoplay=true;
-    video.muted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.controls=false;
-
-    video.style.width="100%";
-    video.style.height="100%";
-    video.style.minHeight="300px";
-    video.style.objectFit="cover";
-
-    media.appendChild(video);
-
-    video.play().catch(()=>{});
-
-  }
-
-}else{
-
-  setImage(
-    "melting-image",
-    g.melting_image
+  console.error(
+    "Unable to load testing page settings",
+    e
   );
 
 }
 
-
-}catch(e){}
-
 })();
 
 </script>
-
 
 </body>
 </html>
