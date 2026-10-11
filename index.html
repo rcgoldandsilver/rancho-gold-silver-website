@@ -895,11 +895,12 @@ try{
 
   featured.forEach(product=>track.appendChild(makeCard(product)));
   if(featured.length>1){
-    // Two copies keep the row seamless when it wraps.
-    featured.forEach(product=>track.appendChild(makeCard(product,true)));
+    // Extra copies keep the row seamless on narrow and wide screens.
+    for(let copy=0;copy<3;copy++){
+      featured.forEach(product=>track.appendChild(makeCard(product,true)));
+    }
   }
 
-  const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
   const speed=20; // pixels per second, both desktop and mobile
   let pressed=false;
   let dragging=false;
@@ -922,7 +923,7 @@ try{
 
   // A tap/click on View Details is a real link. Only a drag is intercepted.
   track.addEventListener("pointerdown",event=>{
-    if(event.pointerType==="mouse" && event.button!==0)return;
+    if(event.pointerType!=="mouse" || event.button!==0)return;
     pressed=true;
     dragging=false;
     pointerId=event.pointerId;
@@ -957,6 +958,43 @@ try{
     track.classList.remove("dragging");
     lastTime=0;
   }
+  // iPhone/Safari: use native touch events, independently of mouse pointer events.
+  // A short tap still follows View Details; swiping moves the carousel.
+  let touchActive=false, touchX=0, touchStartX=0;
+  track.addEventListener("touchstart",event=>{
+    if(event.touches.length!==1)return;
+    touchActive=true;
+    pressed=true;
+    touchX=touchStartX=event.touches[0].clientX;
+    suppressNextClick=false;
+    lastTime=0;
+  },{passive:true});
+  track.addEventListener("touchmove",event=>{
+    if(!touchActive || event.touches.length!==1)return;
+    const x=event.touches[0].clientX;
+    const delta=x-touchX;
+    if(Math.abs(x-touchStartX)>8){
+      dragging=true;
+      track.classList.add("dragging");
+    }
+    if(dragging){
+      track.scrollLeft-=delta;
+      normalize();
+    }
+    touchX=x;
+  },{passive:true});
+  function endTouch(){
+    if(!touchActive)return;
+    if(dragging)suppressNextClick=true;
+    touchActive=false;
+    pressed=false;
+    dragging=false;
+    track.classList.remove("dragging");
+    lastTime=0;
+  }
+  track.addEventListener("touchend",endTouch,{passive:true});
+  track.addEventListener("touchcancel",endTouch,{passive:true});
+
   track.addEventListener("pointerup",finish);
   track.addEventListener("pointercancel",finish);
   track.addEventListener("lostpointercapture",finish);
@@ -971,7 +1009,7 @@ try{
   },true);
 
   function tick(time){
-    if(lastTime && !pressed && !reducedMotion.matches &&
+    if(lastTime && !pressed &&
        document.visibilityState==="visible" && featured.length>1){
       const dt=Math.min((time-lastTime)/1000,0.05);
       track.scrollLeft+=speed*dt;
