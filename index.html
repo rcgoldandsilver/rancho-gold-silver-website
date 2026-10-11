@@ -14,18 +14,17 @@
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
 <style>
-/* FEATURED BULLION: one-row, moving carousel */
-.featured-carousel{display:flex;align-items:center;gap:10px;margin-top:22px;min-width:0}
-.featured-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x;flex:1;min-width:0;padding:6px 2px 16px;scroll-behavior:auto}
+/* FEATURED BULLION: continuously moving, draggable single row */
+.featured-carousel{margin-top:22px;min-width:0}
+.featured-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x;min-width:0;padding:6px 2px 16px;scroll-behavior:auto;cursor:grab;user-select:none;-webkit-user-select:none}
+.featured-track.dragging{cursor:grabbing;scroll-behavior:auto}
 .featured-track::-webkit-scrollbar{display:none}
-.featured-track .featured-card{flex:0 0 calc((100% - 48px)/4);min-width:0;cursor:pointer}
-.featured-track .featured-card img{width:100%;height:245px;object-fit:contain;background:#fff;display:block}
-.featured-track .featured-card h3{font-size:19px;overflow-wrap:anywhere}
-.featured-track .featured-card:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.featured-arrow{flex:0 0 36px;width:36px;height:44px;background:var(--navy);color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:22px}
-.featured-arrow:hover{background:var(--burg)}
+.featured-track .featured-card{flex:0 0 calc((100% - 48px)/4);min-width:0}
+.featured-track .featured-card img{width:100%;height:220px;object-fit:contain;background:#fff;display:block;pointer-events:none}
+.featured-track .featured-card h3{font-size:18px;overflow-wrap:anywhere}
+.featured-track .featured-card .pad{padding:14px}
 @media(max-width:900px){.featured-track .featured-card{flex-basis:calc((100% - 16px)/2)}}
-@media(max-width:600px){.featured-track .featured-card{flex-basis:76%}.featured-arrow{flex-basis:28px;width:28px;font-size:17px}.featured-track .featured-card img{height:230px}}
+@media(max-width:600px){.featured-track{gap:12px}.featured-track .featured-card{flex-basis:70%}.featured-track .featured-card img{height:170px}.featured-track .featured-card h3{font-size:17px}.featured-track .featured-card .pad{padding:12px}.featured-track .featured-card .btn{padding:10px 12px}}
 </style>
 </head>
 
@@ -195,12 +194,7 @@ Gold and Silver Coins, Bars and Bullion. Call for current price and availability
 </div>
 
 <div class="featured-carousel" id="featured-carousel">
-  <button class="featured-arrow" id="featured-prev" type="button" aria-label="Previous bullion product">&#10094;</button>
   <div id="featured-products" class="featured-track" aria-label="Featured bullion products"></div>
-  <button class="featured-arrow" id="featured-next" type="button" aria-label="Next bullion product">&#10095;</button>
-</div>
-<div class="center" style="margin-top:12px">
-  <button class="btn" id="featured-resume" type="button" hidden>Resume Scrolling &#9654;</button>
 </div>
 
 <div class="center" style="margin-top:24px">
@@ -858,7 +852,7 @@ setText("footer-sb-hours-sun",g.sb_hours_sun);
 
 })();
 
-/* FEATURED PRODUCTS: AUTO-SCROLLING CAROUSEL */
+/* FEATURED PRODUCTS: CONTINUOUS SCROLL + DRAG / SWIPE */
 
 (async()=>{
 try{
@@ -883,39 +877,37 @@ try{
 
   const track=document.getElementById("featured-products");
   const carousel=document.getElementById("featured-carousel");
-  const resume=document.getElementById("featured-resume");
-  const prev=document.getElementById("featured-prev");
-  const next=document.getElementById("featured-next");
   if(!track||!carousel)return;
   if(!featured.length){carousel.style.display="none";return;}
 
-  function makeCard(product){
+  function makeCard(product,duplicate=false){
     const card=document.createElement("div");
     card.className="card featured-card";
-    card.tabIndex=0;
-    card.setAttribute("aria-label","Pause scrolling for "+(product.name||"product"));
     const slug=product.__file.replace(/\.json$/i,"");
-    const img=product.image ? '<img src="'+escapeHTML(product.image)+'" alt="'+escapeHTML(product.name||"Bullion")+'" loading="lazy">' : '';
+    const img=product.image ? '<img src="'+escapeHTML(product.image)+'" alt="'+escapeHTML(product.name||"Bullion")+'" loading="lazy" draggable="false">' : '';
     card.innerHTML=img+'<div class="pad center"><h3>'+escapeHTML(product.name||"")+'</h3><a class="btn" href="sell.html#'+encodeURIComponent(slug)+'">View Details</a></div>';
+    if(duplicate){
+      card.setAttribute("aria-hidden","true");
+      card.querySelectorAll("a").forEach(a=>a.tabIndex=-1);
+    }
     return card;
   }
 
   featured.forEach(product=>track.appendChild(makeCard(product)));
-  // Duplicate cards for seamless circular movement; original products remain unchanged.
   if(featured.length>1){
-    featured.forEach(product=>{
-      const clone=makeCard(product);
-      clone.setAttribute("aria-hidden","true");
-      clone.tabIndex=-1;
-      track.appendChild(clone);
-    });
+    // Two copies keep the row seamless when it wraps.
+    featured.forEach(product=>track.appendChild(makeCard(product,true)));
   }
 
-  let paused=featured.length===1;
-  let lastTime=0;
   const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
-  if(reducedMotion.matches)paused=true;
-  const speed=22; // pixels per second: slow continuous movement
+  const speed=20; // slow, pixels per second
+  let holding=false;
+  let dragging=false;
+  let startX=0;
+  let startScroll=0;
+  let activePointer=null;
+  let suppressClick=false;
+  let lastTime=0;
 
   function cycleWidth(){
     if(featured.length<2)return 0;
@@ -923,32 +915,67 @@ try{
   }
   function normalize(){
     const cycle=cycleWidth();
-    if(cycle>0 && track.scrollLeft>=cycle)track.scrollLeft-=cycle;
-    if(cycle>0 && track.scrollLeft<0)track.scrollLeft+=cycle;
+    if(cycle<=0)return;
+    if(track.scrollLeft>=cycle)track.scrollLeft%=cycle;
+    if(track.scrollLeft<0)track.scrollLeft=((track.scrollLeft%cycle)+cycle)%cycle;
   }
-  function pause(){paused=true;resume.hidden=false;}
-  function start(){paused=false;resume.hidden=true;lastTime=0;}
-  resume.addEventListener("click",start);
-  track.addEventListener("click",event=>{
-    if(event.target.closest(".featured-card"))pause();
-  });
-  track.addEventListener("keydown",event=>{
-    if((event.key==="Enter"||event.key===" ") && event.target.classList.contains("featured-card")){
-      event.preventDefault();pause();
+
+  // On phones, native horizontal swiping works; on desktop, drag with the mouse.
+  track.addEventListener("pointerdown",event=>{
+    if(event.pointerType==="mouse" && event.button!==0)return;
+    holding=true;
+    dragging=false;
+    startX=event.clientX;
+    startScroll=track.scrollLeft;
+    activePointer=event.pointerId;
+    if(event.pointerType==="mouse"){
+      track.setPointerCapture(event.pointerId);
     }
   });
-  track.addEventListener("pointerdown",pause,{passive:true});
-  function move(direction){
-    pause();
-    const card=track.querySelector(".featured-card");
-    if(!card)return;
-    const gap=parseFloat(getComputedStyle(track).gap)||16;
-    track.scrollBy({left:direction*(card.offsetWidth+gap),behavior:"smooth"});
+
+  track.addEventListener("pointermove",event=>{
+    if(!holding||event.pointerId!==activePointer)return;
+    const delta=event.clientX-startX;
+    if(Math.abs(delta)>6){
+      dragging=true;
+      suppressClick=true;
+    }
+    if(event.pointerType==="mouse" && dragging){
+      track.classList.add("dragging");
+      track.scrollLeft=startScroll-delta;
+      normalize();
+    }
+  });
+
+  function release(){
+    holding=false;
+    activePointer=null;
+    track.classList.remove("dragging");
+    // Suppress the click generated by a drag, but allow ordinary View Details clicks.
+    if(dragging){
+      suppressClick=true;
+    }
+    dragging=false;
+    lastTime=0;
   }
-  prev.addEventListener("click",()=>move(-1));
-  next.addEventListener("click",()=>move(1));
+  track.addEventListener("pointerup",release);
+  track.addEventListener("pointercancel",release);
+  track.addEventListener("lostpointercapture",release);
+  window.addEventListener("pointerup",()=>{if(holding)release();});
+
+  track.addEventListener("click",event=>{
+    if(suppressClick){
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick=false;
+    }
+  },true);
+  // Reset drag suppression if the next action isn't a click.
+  track.addEventListener("pointerdown",()=>{suppressClick=false;});
+
   function tick(time){
-    if(lastTime && !paused && document.visibilityState==="visible"){
+    if(lastTime && !holding && !reducedMotion.matches &&
+       document.visibilityState==="visible" && featured.length>1){
       const dt=Math.min((time-lastTime)/1000,0.05);
       track.scrollLeft+=speed*dt;
       normalize();
@@ -957,7 +984,6 @@ try{
     requestAnimationFrame(tick);
   }
   if(featured.length>1)requestAnimationFrame(tick);
-  if(paused)resume.hidden=false;
 }catch(e){console.error("Featured products error:",e);}
 })();
 
