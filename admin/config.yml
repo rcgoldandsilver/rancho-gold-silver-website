@@ -642,6 +642,11 @@ collections:
             widget: "text"
             default: "We use professional precious-metal verification equipment to help evaluate coins and bullion."
 
+          - label: "Sigma Metalytics - Video"
+            name: "sigma_video"
+            widget: "file"
+            required: false
+
 
           # ACID TESTING
 
