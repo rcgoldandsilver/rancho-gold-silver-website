@@ -1008,12 +1008,20 @@ try{
     }
   },true);
 
+  // Accumulate sub-pixel movement. Mobile Safari may round scrollLeft to
+  // whole pixels; adding 0.3px per frame directly can result in no movement.
+  let pendingPixels=0;
   function tick(time){
     if(lastTime && !pressed &&
        document.visibilityState==="visible" && featured.length>1){
       const dt=Math.min((time-lastTime)/1000,0.05);
-      track.scrollLeft+=speed*dt;
-      normalize();
+      pendingPixels+=speed*dt;
+      const wholePixels=Math.floor(pendingPixels);
+      if(wholePixels>=1){
+        pendingPixels-=wholePixels;
+        track.scrollLeft+=wholePixels;
+        normalize();
+      }
     }
     lastTime=time;
     requestAnimationFrame(tick);
