@@ -1075,3 +1075,22 @@ setInterval(
   updateMetalTicker,
   300000
 );
+
+/* CLOSE MOBILE MENU WHEN TAPPING OUTSIDE */
+
+document.addEventListener("click", function(event) {
+
+  if (
+    !event.target.closest(".nav") &&
+    !event.target.closest(".menuBtn")
+  ) {
+
+    document.querySelectorAll(".nav.show")
+      .forEach(function(nav) {
+        nav.classList.remove("show");
+      });
+
+  }
+
+});
+
