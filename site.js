@@ -1075,3 +1075,47 @@ setInterval(
   updateMetalTicker,
   300000
 );
+
+/* MOBILE HEADER AND MENU IMPROVEMENTS */
+
+@media (max-width:900px){
+
+  .header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#fff;
+  }
+
+  .ticker{
+    position:relative;
+    top:auto;
+    z-index:1;
+  }
+
+  .nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    margin:0;
+    max-height:calc(100dvh - 76px);
+    overflow-y:auto;
+    background:#fff;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+  }
+
+  .nav.show{
+    display:flex;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .nav{
+    max-height:calc(100dvh - 70px);
+  }
+
+}
+
