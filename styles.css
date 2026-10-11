@@ -326,10 +326,6 @@ border-radius:10px;
 padding:16px;
 }
 
-.reviews:hover .reviews-track,
-.reviews:focus-within .reviews-track{
-animation-play-state:paused;
-}
 
 @keyframes reviews-scroll{
 from{
