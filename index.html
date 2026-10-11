@@ -14,6 +14,9 @@
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
 <style>
+/* Homepage video loading area: do not flash a static image before the video loads. */
+#homepage-xrf-media,#homepage-melting-media{min-height:230px;background:#f4f4f4;overflow:hidden}
+#homepage-xrf-media video,#homepage-melting-media video{display:block;width:100%;height:230px;object-fit:cover}
 /* FEATURED BULLION: continuously moving, draggable single row */
 .featured-carousel{margin-top:22px;min-width:0}
 .featured-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;min-width:0;padding:6px 2px 16px;scroll-behavior:auto;cursor:grab;user-select:none;-webkit-user-select:none}
@@ -212,11 +215,6 @@ Gold and Silver Coins, Bars and Bullion. Call for current price and availability
 <div class="card">
 
 <div id="homepage-xrf-media">
-<img
-  id="homepage-xrf-image"
-  src="/assets/uploads/f1ccb2e3-9f02-4a22-9507-4866d2bf4757.png"
-  alt="XRF precious metal testing"
->
 </div>
 
 <div class="pad">
@@ -235,11 +233,6 @@ Professional precious-metal testing helps us evaluate metal composition clearly 
 <div class="card">
 
 <div id="homepage-melting-media">
-<img
-  id="homepage-melting-image"
-  src="/assets/uploads/9b45bcf3-f4b2-467c-905e-4f6c5f298bdf.png"
-  alt="Precious metal assay and melting"
->
 </div>
 
 <div class="pad">
@@ -662,62 +655,82 @@ if(g.melting_text){
   setText("homepage-melting-text",g.melting_text);
 }
 
-if(g.xrf_video){
+/* Reliable muted inline autoplay for the two homepage videos. */
+function loadHomepageVideo(mediaId,videoUrl,imageUrl,alt,position){
+  const media=document.getElementById(mediaId);
+  if(!media)return;
 
-  const media=document.getElementById("homepage-xrf-media");
-
-  if(media){
-
-    media.innerHTML="";
-
-    const video=document.createElement("video");
-
-    video.src=g.xrf_video;
-    video.autoplay=true;
-    video.muted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.controls=false;
-
-    video.style.width="100%";
-    video.style.height="230px";
-    video.style.objectFit="cover";
-
-    media.appendChild(video);
+  if(!videoUrl){
+    if(imageUrl){
+      const img=document.createElement("img");
+      img.src=imageUrl;
+      img.alt=alt;
+      img.style.width="100%";
+      img.style.height="230px";
+      img.style.objectFit="cover";
+      media.replaceChildren(img);
+    }
+    return;
   }
 
-}else{
-  setImage("homepage-xrf-image",g.xrf_image);
-}
+  const video=document.createElement("video");
+  video.autoplay=true;
+  video.muted=true;
+  video.defaultMuted=true;
+  video.loop=true;
+  video.playsInline=true;
+  video.controls=false;
+  video.preload="auto";
+  video.setAttribute("autoplay","");
+  video.setAttribute("muted","");
+  video.setAttribute("loop","");
+  video.setAttribute("playsinline","");
+  video.setAttribute("webkit-playsinline","");
+  video.style.objectPosition=position;
+  video.src=videoUrl;
+  media.replaceChildren(video);
 
-if(g.melting_video){
-
-  const media=document.getElementById("homepage-melting-media");
-
-  if(media){
-
-    media.innerHTML="";
-
-    const video=document.createElement("video");
-
-    video.src=g.melting_video;
-    video.autoplay=true;
-    video.muted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.controls=false;
-
-    video.style.width="100%";
-    video.style.height="230px";
-    video.style.objectFit="cover";
-    video.style.objectPosition="center center";
-
-    media.appendChild(video);
+  let inView=false;
+  function tryPlay(){
+    if(document.visibilityState!=="visible")return;
+    if(video.paused){
+      const result=video.play();
+      if(result && typeof result.catch==="function")result.catch(()=>{});
+    }
   }
+  video.addEventListener("loadedmetadata",tryPlay);
+  video.addEventListener("loadeddata",tryPlay);
+  video.addEventListener("canplay",tryPlay);
+  video.addEventListener("canplaythrough",tryPlay);
+  document.addEventListener("visibilitychange",tryPlay);
+  window.addEventListener("pageshow",tryPlay);
+  window.addEventListener("focus",tryPlay);
 
-}else{
-  setImage("homepage-melting-image",g.melting_image);
+  if("IntersectionObserver" in window){
+    const observer=new IntersectionObserver(entries=>{
+      for(const entry of entries){
+        inView=entry.isIntersecting;
+        if(inView)tryPlay();
+      }
+    },{threshold:0.01});
+    observer.observe(video);
+  }
+  // Some mobile browsers defer playback until the first user interaction.
+  // Retrying on interaction does not interrupt a video that is already playing.
+  const onInteraction=()=>{if(inView || !video.paused)return;tryPlay();};
+  document.addEventListener("touchstart",onInteraction,{passive:true});
+  document.addEventListener("pointerdown",onInteraction,{passive:true});
+  tryPlay();
 }
+
+loadHomepageVideo(
+  "homepage-xrf-media",g.xrf_video,g.xrf_image,
+  "XRF precious metal testing","center center"
+);
+loadHomepageVideo(
+  "homepage-melting-media",g.melting_video,g.melting_image,
+  "Precious metal assay and melting","center center"
+);
 
 /* REVIEWS */
 
