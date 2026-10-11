@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -13,59 +14,111 @@
 >
 
 <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+
+<style>
+/* WHAT WE SELL - PRODUCT GRID */
+
+.sell-product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  margin-top:24px;
+  align-items:start;
+}
+
+.sell-product-grid .card{
+  min-width:0;
+}
+
+.sell-product-grid .card h3{
+  font-size:19px;
+}
+
+.sell-product-grid .product > img{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  object-position:center;
+  background:#fff;
+  padding:8px;
+}
+
+.sell-product-grid .product.open{
+  grid-column:span 2;
+}
+
+.sell-product-grid .product .details-grid img{
+  width:100%;
+  height:auto;
+  max-height:380px;
+  object-fit:contain;
+}
+
+@media(max-width:900px){
+  .sell-product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:600px){
+  .sell-product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .sell-product-grid .product > img{
+    height:300px;
+  }
+
+  .sell-product-grid .product.open{
+    grid-column:span 1;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
-
 <!-- HEADER -->
 
 <header class="header">
+  <div class="wrap head">
 
-<div class="wrap head">
+    <a class="brand" href="index.html">
+      <img
+        id="header-logo"
+        src="/assets/uploads/rancho_cucamonga_gold_silver_logo_hd-1-.jpg"
+        alt="Rancho Cucamonga Gold & Silver"
+      >
 
-<a class="brand" href="index.html">
+      <span>
+        RANCHO CUCAMONGA<br>
+        GOLD & SILVER
+      </span>
+    </a>
 
-<img
-  id="header-logo"
-  src="/assets/uploads/rancho_cucamonga_gold_silver_logo_hd-1-.jpg"
-  alt="Rancho Cucamonga Gold & Silver"
->
+    <button class="menuBtn btn" aria-label="Menu">
+      ☰
+    </button>
 
-<span>
-RANCHO CUCAMONGA<br>
-GOLD & SILVER
-</span>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="buy.html">What We Buy</a>
+      <a href="sell.html">What We Sell</a>
+      <a href="testing.html">Testing & Verification</a>
+      <a href="about.html">About Us</a>
+      <a href="locations.html">Locations</a>
+      <a href="prices.html">Live Prices</a>
+    </nav>
 
-</a>
+    <span class="phone">
+      (909) 676-2900
+    </span>
 
-<button class="menuBtn btn" aria-label="Menu">
-☰
-</button>
-
-<nav class="nav">
-
-<a href="index.html">Home</a>
-<a href="buy.html">What We Buy</a>
-<a href="sell.html">What We Sell</a>
-<a href="testing.html">Testing & Verification</a>
-<a href="about.html">About Us</a>
-<a href="locations.html">Locations</a>
-<a href="prices.html">Live Prices</a>
-
-</nav>
-
-<span class="phone">
-(909) 676-2900
-</span>
-
-</div>
-
+  </div>
 </header>
-
-
 
 <!-- LIVE METAL PRICES -->
 
@@ -74,450 +127,277 @@ GOLD & SILVER
   class="ticker"
   style="display:block;text-decoration:none"
 >
-
-<span>
-GOLD <b>Live Bid</b>
-</span>
-
-<span>
-SILVER <b>Live Bid</b>
-</span>
-
-<span>
-PLATINUM <b>Live Bid</b>
-</span>
-
+  <span>GOLD <b>Live Bid</b></span>
+  <span>SILVER <b>Live Bid</b></span>
+  <span>PLATINUM <b>Live Bid</b></span>
 </a>
-
-
 
 <!-- PAGE HEADER -->
 
 <section class="pagehero">
+  <div class="wrap">
 
-<div class="wrap">
+    <h1 id="sell-page-heading">
+      What We Sell
+    </h1>
 
-<h1 id="sell-page-heading">
-What We Sell
-</h1>
+    <p class="lead" id="sell-page-intro">
+      Gold and silver coins, bars and bullion.
+      Call Rancho Cucamonga for current price and availability.
+    </p>
 
-<p
-  class="lead"
-  id="sell-page-intro"
->
-Gold and silver coins, bars and bullion. Call Rancho Cucamonga for current price and availability.
-</p>
-
-</div>
-
+  </div>
 </section>
-
-
 
 <!-- CATEGORY LINKS -->
 
 <section class="section" style="padding-bottom:10px">
+  <div class="wrap">
 
-<div class="wrap">
+    <div class="jump">
+      <a href="#gold-products">
+        Gold Coins & Bars
+      </a>
 
-<div class="jump">
+      <a href="#silver-products">
+        Silver Coins & Bars
+      </a>
+    </div>
 
-<a
-  id="jump-gold-coins"
-  href="#gold-coins"
->
-Gold Coins
-</a>
-
-<a
-  id="jump-gold-bars"
-  href="#gold-bars"
->
-Gold Bars
-</a>
-
-<a
-  id="jump-silver-coins"
-  href="#silver-coins"
->
-Silver Coins & Rounds
-</a>
-
-<a
-  id="jump-silver-bars"
-  href="#silver-bars"
->
-Silver Bars
-</a>
-
-</div>
-
-</div>
-
+  </div>
 </section>
 
+<!-- GOLD COINS AND BARS -->
 
+<section class="section" id="gold-products">
+  <div class="wrap">
 
-<!-- GOLD COINS -->
+    <h2 class="center">
+      Gold Coins & Bars
+    </h2>
 
-<section
-  class="section"
-  id="gold-coins"
->
+    <div
+      class="sell-product-grid"
+      data-product-categories="Gold Coins,Gold Bars"
+    ></div>
 
-<div class="wrap">
-
-<h2
-  id="sell-gold-coins-heading"
-  class="center"
->
-Gold Coins
-</h2>
-
-<div
-  class="grid3"
-  data-product-category="Gold Coins"
->
-</div>
-
-</div>
-
+  </div>
 </section>
 
+<!-- SILVER COINS AND BARS -->
 
+<section class="section tinted" id="silver-products">
+  <div class="wrap">
 
-<!-- GOLD BARS -->
+    <h2 class="center">
+      Silver Coins & Bars
+    </h2>
 
-<section
-  class="section tinted"
-  id="gold-bars"
->
+    <div
+      class="sell-product-grid"
+      data-product-categories="Silver Coins & Rounds,Silver Bars"
+    ></div>
 
-<div class="wrap">
-
-<h2
-  id="sell-gold-bars-heading"
-  class="center"
->
-Gold Bars
-</h2>
-
-<div
-  class="grid3"
-  data-product-category="Gold Bars"
->
-</div>
-
-</div>
-
+  </div>
 </section>
-
-
-
-<!-- SILVER COINS -->
-
-<section
-  class="section"
-  id="silver-coins"
->
-
-<div class="wrap">
-
-<h2
-  id="sell-silver-coins-heading"
-  class="center"
->
-Silver Coins & Rounds
-</h2>
-
-<div
-  class="grid3"
-  data-product-category="Silver Coins & Rounds"
->
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- SILVER BARS -->
-
-<section
-  class="section tinted"
-  id="silver-bars"
->
-
-<div class="wrap">
-
-<h2
-  id="sell-silver-bars-heading"
-  class="center"
->
-Silver Bars
-</h2>
-
-<div
-  class="grid3"
-  data-product-category="Silver Bars"
->
-</div>
-
-</div>
-
-</section>
-
-
 
 <!-- POPULAR BRANDS -->
 
 <section class="section">
+  <div class="wrap center">
 
-<div class="wrap center">
+    <h2 id="sell-brands-heading">
+      Popular Brands We Buy & Sell
+    </h2>
 
-<h2 id="sell-brands-heading">
-Popular Brands We Buy & Sell
-</h2>
+    <p class="lead" id="sell-brands-text">
+      PAMP • Valcambi Suisse • Argor-Heraeus •
+      The Perth Mint • Royal Canadian Mint •
+      Scottsdale Mint • Asahi Refining
+    </p>
 
-<p
-  class="lead"
-  id="sell-brands-text"
->
-PAMP • Valcambi Suisse • Argor-Heraeus • The Perth Mint • Royal Canadian Mint • Scottsdale Mint • Asahi Refining
-</p>
-
-</div>
-
+  </div>
 </section>
-
-
 
 <!-- CALL TO ACTION -->
 
 <section class="section tinted">
+  <div class="wrap center">
 
-<div class="wrap center">
+    <h2>
+      Current Price & Availability
+    </h2>
 
-<h2>
-Current Price & Availability
-</h2>
+    <p class="lead">
+      Call Rancho Cucamonga Gold & Silver for
+      current bullion price and availability.
+    </p>
 
-<p class="lead">
-Call Rancho Cucamonga Gold & Silver for current bullion price and availability.
-</p>
+    <a
+      id="sell-call-button"
+      class="btn"
+      href="tel:19096762900"
+    >
+      Call: (909) 676-2900
+    </a>
 
-<a
-  id="sell-call-button"
-  class="btn"
-  href="tel:19096762900"
->
-Call: (909) 676-2900
-</a>
-
-</div>
-
+  </div>
 </section>
-
-
 
 <!-- FOOTER -->
 
 <footer class="footer">
 
-<div class="wrap footgrid">
+  <div class="wrap footgrid">
 
+    <div>
 
-<div>
+      <h3>Our Locations</h3>
 
-<h3>
-Our Locations
-</h3>
+      <b id="footer-rancho-name">
+        Rancho Cucamonga Gold & Silver
+      </b>
 
-<b id="footer-rancho-name">
-Rancho Cucamonga Gold & Silver
-</b>
+      <br>
 
-<br>
+      <span id="footer-rancho-address">
+        9836 Foothill Blvd, Suite 6<br>
+        Rancho Cucamonga, CA 91730
+      </span>
 
-<span id="footer-rancho-address">
-9836 Foothill Blvd, Suite 6<br>
-Rancho Cucamonga, CA 91730
-</span>
+      <br>
 
-<br>
+      <a
+        id="footer-rancho-phone"
+        href="tel:19096762900"
+      >
+        (909) 676-2900
+      </a>
 
-<a
-  id="footer-rancho-phone"
-  href="tel:19096762900"
->
-(909) 676-2900
-</a>
+      <br><br>
 
+      <b id="footer-sb-name">
+        San Bernardino Gold & Silver
+      </b>
 
-<br><br>
+      <br>
 
+      <span id="footer-sb-address">
+        1292 W Mill St, Suite 107<br>
+        San Bernardino, CA 92410
+      </span>
 
-<b id="footer-sb-name">
-San Bernardino Gold & Silver
-</b>
+      <br>
 
-<br>
+      <a
+        id="footer-sb-phone"
+        href="tel:19096562600"
+      >
+        (909) 656-2600
+      </a>
 
-<span id="footer-sb-address">
-1292 W Mill St, Suite 107<br>
-San Bernardino, CA 92410
-</span>
+    </div>
 
-<br>
+    <div>
 
-<a
-  id="footer-sb-phone"
-  href="tel:19096562600"
->
-(909) 656-2600
-</a>
+      <h3>Quick Links</h3>
 
-</div>
+      <a href="buy.html">What We Buy</a>
+      <br>
 
+      <a href="sell.html">What We Sell</a>
+      <br>
 
+      <a href="testing.html">Testing</a>
+      <br>
 
-<div>
+      <a href="prices.html">Live Prices</a>
 
-<h3>
-Quick Links
-</h3>
+    </div>
 
-<a href="buy.html">
-What We Buy
-</a>
+    <div>
 
-<br>
+      <h3>Hours</h3>
 
-<a href="sell.html">
-What We Sell
-</a>
+      <span id="footer-rancho-hours-mon-thu">
+        Rancho: Mon–Thu 10–7
+      </span>
 
-<br>
+      <br>
 
-<a href="testing.html">
-Testing
-</a>
+      <span id="footer-rancho-hours-fri">
+        Fri 10–1, 2–7
+      </span>
 
-<br>
+      <br>
 
-<a href="prices.html">
-Live Prices
-</a>
+      <span id="footer-rancho-hours-sat">
+        Sat 10–7
+      </span>
 
-</div>
+      <br>
 
+      <span id="footer-rancho-hours-sun">
+        Sun Closed
+      </span>
 
+      <br><br>
 
-<div>
+      <span id="footer-sb-hours-mon-thu">
+        San Bernardino: Mon–Thu 11–7
+      </span>
 
-<h3>
-Hours
-</h3>
+      <br>
 
-<span id="footer-rancho-hours-mon-thu">
-Rancho: Mon–Thu 10–7
-</span>
+      <span id="footer-sb-hours-fri">
+        Fri 11–1, 3–7
+      </span>
 
-<br>
+      <br>
 
-<span id="footer-rancho-hours-fri">
-Fri 10–1, 2–7
-</span>
+      <span id="footer-sb-hours-sat">
+        Sat 11–7
+      </span>
 
-<br>
+      <br>
 
-<span id="footer-rancho-hours-sat">
-Sat 10–7
-</span>
+      <span id="footer-sb-hours-sun">
+        Sun Closed
+      </span>
 
-<br>
+    </div>
 
-<span id="footer-rancho-hours-sun">
-Sun Closed
-</span>
+  </div>
 
-
-<br><br>
-
-
-<span id="footer-sb-hours-mon-thu">
-San Bernardino: Mon–Thu 11–7
-</span>
-
-<br>
-
-<span id="footer-sb-hours-fri">
-Fri 11–1, 3–7
-</span>
-
-<br>
-
-<span id="footer-sb-hours-sat">
-Sat 11–7
-</span>
-
-<br>
-
-<span id="footer-sb-hours-sun">
-Sun Closed
-</span>
-
-</div>
-
-
-</div>
-
-
-<div
-  class="wrap center"
-  style="margin-top:28px"
->
-
-© 2026 Rancho Cucamonga Gold & Silver
-•
-San Bernardino Gold & Silver
-
-</div>
+  <div
+    class="wrap center"
+    style="margin-top:28px"
+  >
+    © 2026 Rancho Cucamonga Gold & Silver
+    • San Bernardino Gold & Silver
+  </div>
 
 </footer>
 
-
-
 <script src="site.js"></script>
-
 
 <script>
 
 const PRODUCTS_API =
   "https://api.github.com/repos/rcgoldandsilver/rancho-gold-silver-website/contents/content/products";
 
-
-
-/* =========================================
-   HELPERS
-   ========================================= */
+/* HELPERS */
 
 function escapeHTML(value){
-
   return String(value || "")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
-
 }
 
-
-
 function setText(id,value){
-
   if(!value)return;
 
   const element =
@@ -526,13 +406,9 @@ function setText(id,value){
   if(element){
     element.textContent=value;
   }
-
 }
 
-
-
 function setImage(id,value){
-
   if(!value)return;
 
   const element =
@@ -541,687 +417,579 @@ function setImage(id,value){
   if(element){
     element.src=value;
   }
-
 }
-
-
 
 function cleanPhone(phone){
-
   return String(phone || "")
     .replace(/\D/g,"");
-
 }
 
-
-
-/* =========================================
-   ADMIN SETTINGS
-   ========================================= */
+/* ADMIN SETTINGS */
 
 (async()=>{
 
-try{
+  try{
 
-const response =
-  await fetch(
-    "content/settings/general.json",
-    {
-      cache:"no-store"
-    }
-  );
+    const response =
+      await fetch(
+        "content/settings/general.json",
+        {
+          cache:"no-store"
+        }
+      );
 
-if(!response.ok)return;
+    if(!response.ok)return;
 
-const g =
-  await response.json();
+    const g = await response.json();
 
+    /* HEADER */
 
-
-/* HEADER */
-
-setImage(
-  "header-logo",
-  g.header_logo
-);
-
-
-
-/* PAGE */
-
-setText(
-  "sell-page-heading",
-  g.sell_page_heading
-);
-
-setText(
-  "sell-page-intro",
-  g.sell_page_intro
-);
-
-
-
-/* CATEGORY HEADINGS */
-
-setText(
-  "sell-gold-coins-heading",
-  g.sell_gold_coins_heading
-);
-
-setText(
-  "sell-gold-bars-heading",
-  g.sell_gold_bars_heading
-);
-
-setText(
-  "sell-silver-coins-heading",
-  g.sell_silver_coins_heading
-);
-
-setText(
-  "sell-silver-bars-heading",
-  g.sell_silver_bars_heading
-);
-
-
-
-/* JUMP LINKS */
-
-setText(
-  "jump-gold-coins",
-  g.sell_gold_coins_heading
-);
-
-setText(
-  "jump-gold-bars",
-  g.sell_gold_bars_heading
-);
-
-setText(
-  "jump-silver-coins",
-  g.sell_silver_coins_heading
-);
-
-setText(
-  "jump-silver-bars",
-  g.sell_silver_bars_heading
-);
-
-
-
-/* BRANDS */
-
-setText(
-  "sell-brands-heading",
-  g.sell_brands_heading
-);
-
-setText(
-  "sell-brands-text",
-  g.sell_brands_text
-);
-
-
-
-/* CALL BUTTON */
-
-if(g.rancho_phone){
-
-  const button =
-    document.getElementById(
-      "sell-call-button"
+    setImage(
+      "header-logo",
+      g.header_logo
     );
 
-  if(button){
+    /* PAGE */
 
-    button.textContent =
-      "Rancho: " + g.rancho_phone;
+    setText(
+      "sell-page-heading",
+      g.sell_page_heading
+    );
 
-    button.href =
-      "tel:" +
-      cleanPhone(g.rancho_phone);
+    setText(
+      "sell-page-intro",
+      g.sell_page_intro
+    );
 
+    /* BRANDS */
+
+    setText(
+      "sell-brands-heading",
+      g.sell_brands_heading
+    );
+
+    setText(
+      "sell-brands-text",
+      g.sell_brands_text
+    );
+
+    /* CALL BUTTON */
+
+    if(g.rancho_phone){
+
+      const button =
+        document.getElementById(
+          "sell-call-button"
+        );
+
+      if(button){
+
+        button.textContent =
+          "Rancho: " + g.rancho_phone;
+
+        button.href =
+          "tel:" +
+          cleanPhone(g.rancho_phone);
+
+      }
+
+    }
+
+  }catch(e){
+    console.error("Settings error:",e);
   }
-
-}
-
-
-}catch(e){}
 
 })();
 
-
-
-/* =========================================
-   LOAD PRODUCTS
-   ========================================= */
+/* LOAD PRODUCTS */
 
 (async()=>{
 
-try{
+  try{
 
-const response =
-  await fetch(
-    PRODUCTS_API,
-    {
-      cache:"no-store"
-    }
-  );
-
-if(!response.ok)return;
-
-
-const files =
-  await response.json();
-
-
-const products =
-  await Promise.all(
-
-    files
-
-      .filter(
-        file =>
-          file.name.endsWith(".json")
-      )
-
-      .map(
-        async file => {
-
-          try{
-
-            const response =
-              await fetch(
-                file.download_url,
-                {
-                  cache:"no-store"
-                }
-              );
-
-            if(!response.ok)return null;
-
-            const product =
-              await response.json();
-
-            product.__slug =
-              file.name.replace(
-                /\.json$/i,
-                ""
-              );
-
-            return product;
-
-          }catch(e){
-
-            return null;
-
-          }
-
+    const response =
+      await fetch(
+        PRODUCTS_API,
+        {
+          cache:"no-store"
         }
+      );
+
+    if(!response.ok)return;
+
+    const files =
+      await response.json();
+
+    if(!Array.isArray(files))return;
+
+    const products =
+      await Promise.all(
+
+        files
+          .filter(
+            file =>
+              file.name.endsWith(".json")
+          )
+          .map(
+            async file => {
+
+              try{
+
+                const response =
+                  await fetch(
+                    file.download_url,
+                    {
+                      cache:"no-store"
+                    }
+                  );
+
+                if(!response.ok)return null;
+
+                const product =
+                  await response.json();
+
+                product.__slug =
+                  file.name.replace(
+                    /\.json$/i,
+                    ""
+                  );
+
+                return product;
+
+              }catch(e){
+                return null;
+              }
+
+            }
+          )
+
+      );
+
+    const visibleProducts =
+      products
+        .filter(
+          product =>
+            product &&
+            product.visible !== false
+        )
+        .sort(
+          (a,b) =>
+            Number(a.order || 100)
+            -
+            Number(b.order || 100)
+        );
+
+    /* COMBINED GOLD AND SILVER CATEGORIES */
+
+    document
+      .querySelectorAll(
+        "[data-product-categories]"
       )
+      .forEach(container=>{
 
-  );
+        const categories =
+          container.dataset.productCategories
+            .split(",")
+            .map(
+              category => category.trim()
+            );
 
+        const matching =
+          visibleProducts.filter(
+            product =>
+              categories.includes(
+                product.category
+              )
+          );
 
-const visibleProducts =
-  products
+        container.innerHTML="";
 
-    .filter(
-      product =>
-        product &&
-        product.visible !== false
-    )
+        matching.forEach(product=>{
 
-    .sort(
-      (a,b) =>
-        Number(a.order || 100)
-        -
-        Number(b.order || 100)
-    );
+          container.appendChild(
+            buildProductCard(product)
+          );
 
-
-
-document
-  .querySelectorAll(
-    "[data-product-category]"
-  )
-  .forEach(container=>{
-
-    const category =
-      container.dataset.productCategory;
-
-
-    const matching =
-      visibleProducts.filter(
-        product =>
-          product.category === category
-      );
-
-
-    container.innerHTML="";
-
-
-    matching.forEach(product=>{
-
-      container.appendChild(
-        buildProductCard(product)
-      );
-
-    });
-
-
-    if(matching.length===0){
-
-      const empty =
-        document.createElement("p");
-
-      empty.textContent =
-        "Call for current availability.";
-
-      container.appendChild(empty);
-
-    }
-
-  });
-
-
-
-/* OPEN PRODUCT FROM HOMEPAGE LINK */
-
-const hash =
-  decodeURIComponent(
-    window.location.hash.replace("#","")
-  );
-
-
-if(hash){
-
-  const product =
-    document.getElementById(hash);
-
-  if(product){
-
-    product.classList.add("open");
-
-    const button =
-      product.querySelector(
-        "[data-details]"
-      );
-
-    if(button){
-
-      button.textContent =
-        "Hide Details";
-
-    }
-
-
-    setTimeout(
-      ()=>{
-
-        product.scrollIntoView({
-          behavior:"smooth",
-          block:"center"
         });
 
-      },
-      150
+        if(matching.length===0){
+
+          const empty =
+            document.createElement("p");
+
+          empty.textContent =
+            "Call for current availability.";
+
+          container.appendChild(empty);
+
+        }
+
+      });
+
+    /* OPEN PRODUCT FROM HOMEPAGE LINK */
+
+    const hash =
+      decodeURIComponent(
+        window.location.hash.replace("#","")
+      );
+
+    if(hash){
+
+      const product =
+        document.getElementById(hash);
+
+      if(product){
+
+        product.classList.add("open");
+
+        const button =
+          product.querySelector(
+            "[data-details]"
+          );
+
+        if(button){
+          button.textContent =
+            "Hide Details";
+        }
+
+        setTimeout(
+          ()=>{
+
+            product.scrollIntoView({
+              behavior:"smooth",
+              block:"center"
+            });
+
+          },
+          150
+        );
+
+      }
+
+    }
+
+  }catch(e){
+
+    console.error(
+      "Unable to load products",
+      e
     );
 
   }
 
-}
-
-
-}catch(e){
-
-  console.error(
-    "Unable to load products",
-    e
-  );
-
-}
-
 })();
 
-
-
-/* =========================================
-   PRODUCT CARD
-   ========================================= */
+/* PRODUCT CARD */
 
 function buildProductCard(product){
 
-const article =
-  document.createElement("article");
+  const article =
+    document.createElement("article");
 
-article.className =
-  "card product";
+  article.className =
+    "card product";
 
-article.id =
-  product.__slug;
+  article.id =
+    product.__slug;
 
+  const mainImage =
+    product.image || "";
 
+  const secondImage =
+    product.image2 ||
+    product.image ||
+    "";
 
-const mainImage =
-  product.image || "";
+  let specs = "";
 
+  if(product.weight){
 
-const secondImage =
-  product.image2 ||
-  product.image ||
-  "";
+    specs +=
+      "<li><strong>Weight:</strong> "
+      +
+      escapeHTML(product.weight)
+      +
+      "</li>";
 
+  }
 
-let specs = "";
+  if(product.purity){
 
+    specs +=
+      "<li><strong>Purity:</strong> "
+      +
+      escapeHTML(product.purity)
+      +
+      "</li>";
 
-if(product.weight){
+  }
 
-  specs +=
-    "<li><strong>Weight:</strong> "
+  if(product.metal_content){
+
+    specs +=
+      "<li><strong>Actual Precious Metal Content:</strong> "
+      +
+      escapeHTML(product.metal_content)
+      +
+      "</li>";
+
+  }
+
+  if(product.mint_country){
+
+    specs +=
+      "<li><strong>Mint / Country:</strong> "
+      +
+      escapeHTML(product.mint_country)
+      +
+      "</li>";
+
+  }
+
+  if(product.sizes){
+
+    specs +=
+      "<li><strong>Available Sizes:</strong> "
+      +
+      escapeHTML(product.sizes)
+      +
+      "</li>";
+
+  }
+
+  article.innerHTML =
+
+    (
+      mainImage
+        ?
+          '<img src="'
+          +
+          escapeHTML(mainImage)
+          +
+          '" alt="'
+          +
+          escapeHTML(product.name || "")
+          +
+          '">'
+        :
+          ""
+    )
+
     +
-    escapeHTML(product.weight)
+
+    '<div class="pad center">'
+
     +
-    "</li>";
 
-}
-
-
-if(product.purity){
-
-  specs +=
-    "<li><strong>Purity:</strong> "
+    '<h3>'
     +
-    escapeHTML(product.purity)
+    escapeHTML(product.name || "")
     +
-    "</li>";
+    '</h3>'
 
-}
-
-
-if(product.metal_content){
-
-  specs +=
-    "<li><strong>Actual Precious Metal Content:</strong> "
     +
-    escapeHTML(product.metal_content)
+
+    '<button class="btn" data-details>'
     +
-    "</li>";
-
-}
-
-
-if(product.mint_country){
-
-  specs +=
-    "<li><strong>Mint / Country:</strong> "
+    'View Details'
     +
-    escapeHTML(product.mint_country)
+    '</button>'
+
     +
-    "</li>";
 
-}
+    '</div>'
 
-
-if(product.sizes){
-
-  specs +=
-    "<li><strong>Available Sizes:</strong> "
     +
-    escapeHTML(product.sizes)
+
+    '<div class="details">'
+
     +
-    "</li>";
 
-}
+    '<div class="details-grid">'
 
+    +
 
+    '<div>'
 
-article.innerHTML =
+    +
 
-  (
-    mainImage
-      ?
-      '<img src="'
-      +
-      escapeHTML(mainImage)
-      +
-      '" alt="'
-      +
-      escapeHTML(product.name || "")
-      +
-      '">'
-      :
-      ""
-  )
+    (
+      secondImage
+        ?
+          '<img src="'
+          +
+          escapeHTML(secondImage)
+          +
+          '" alt="'
+          +
+          escapeHTML(product.name || "")
+          +
+          '">'
+        :
+          ""
+    )
 
-  +
+    +
 
-  '<div class="pad center">'
+    '</div>'
 
-  +
+    +
 
-  '<h3>'
-  +
-  escapeHTML(product.name || "")
-  +
-  '</h3>'
+    '<div>'
 
-  +
+    +
 
-  '<button class="btn" data-details>'
-  +
-  'View Details'
-  +
-  '</button>'
+    (
+      product.description
+        ?
+          '<p>'
+          +
+          escapeHTML(product.description)
+          +
+          '</p>'
+        :
+          ""
+    )
 
-  +
+    +
 
-  '</div>'
-
-  +
-
-  '<div class="details">'
-
-  +
-
-  '<div class="details-grid">'
-
-  +
-
-  '<div>'
-
-  +
-
-  (
-    secondImage
-      ?
-      '<img src="'
-      +
-      escapeHTML(secondImage)
-      +
-      '" alt="'
-      +
-      escapeHTML(product.name || "")
-      +
-      '">'
-      :
-      ""
-  )
-
-  +
-
-  '</div>'
-
-  +
-
-  '<div>'
-
-  +
-
-  (
-    product.description
-      ?
-      '<p>'
-      +
-      escapeHTML(product.description)
-      +
-      '</p>'
-      :
-      ""
-  )
-
-  +
-
-  (
-    specs
-      ?
-      '<ul class="specs">'
-      +
+    (
       specs
-      +
-      '</ul>'
-      :
-      ""
-  )
+        ?
+          '<ul class="specs">'
+          +
+          specs
+          +
+          '</ul>'
+        :
+          ""
+    )
 
-  +
+    +
 
-  '<p style="margin-top:20px">'
+    '<p style="margin-top:20px">'
 
-  +
+    +
 
-  '<a class="btn product-call" href="tel:19096762900">'
-  +
-  'Call for Price & Availability'
-  +
-  '</a>'
+    '<a class="btn product-call" href="tel:19096762900">'
+    +
+    'Call for Price & Availability'
+    +
+    '</a>'
 
-  +
+    +
 
-  '</p>'
+    '</p>'
 
-  +
+    +
 
-  '</div>'
+    '</div>'
 
-  +
+    +
 
-  '</div>'
+    '</div>'
 
-  +
+    +
 
-  '</div>';
+    '</div>';
 
+  const detailsButton =
+    article.querySelector(
+      "[data-details]"
+    );
 
+  if(detailsButton){
 
-const detailsButton =
-  article.querySelector(
-    "[data-details]"
-  );
+    detailsButton.addEventListener(
+      "click",
+      ()=>{
 
+        article.classList.toggle("open");
 
-if(detailsButton){
+        detailsButton.textContent =
+          article.classList.contains("open")
+            ? "Hide Details"
+            : "View Details";
 
-  detailsButton.addEventListener(
-    "click",
-    ()=>{
+      }
+    );
 
-      article.classList.toggle("open");
+  }
 
-      detailsButton.textContent =
-        article.classList.contains("open")
-          ? "Hide Details"
-          : "View Details";
-
-    }
-  );
+  return article;
 
 }
 
-
-return article;
-
-}
-
-
-
-/* =========================================
-   UPDATE DYNAMIC PRODUCT PHONE LINKS
-   ========================================= */
+/* UPDATE DYNAMIC PRODUCT PHONE LINKS */
 
 (async()=>{
 
-try{
+  try{
 
-const response =
-  await fetch(
-    "content/settings/general.json",
-    {
-      cache:"no-store"
-    }
-  );
+    const response =
+      await fetch(
+        "content/settings/general.json",
+        {
+          cache:"no-store"
+        }
+      );
 
-if(!response.ok)return;
+    if(!response.ok)return;
 
-const g =
-  await response.json();
+    const g =
+      await response.json();
 
-if(!g.rancho_phone)return;
+    if(!g.rancho_phone)return;
 
+    const phone =
+      cleanPhone(g.rancho_phone);
 
-const phone =
-  cleanPhone(g.rancho_phone);
+    const updateLinks = ()=>{
 
+      document
+        .querySelectorAll(
+          ".product-call"
+        )
+        .forEach(link=>{
 
-const updateLinks = ()=>{
+          const newHref =
+            "tel:" + phone;
 
-  document
-    .querySelectorAll(
-      ".product-call"
-    )
-    .forEach(link=>{
+          if(link.getAttribute("href") !== newHref){
+            link.href = newHref;
+          }
 
-      link.href =
-        "tel:" + phone;
+        });
 
-    });
+    };
 
-};
+    updateLinks();
 
+    const observer =
+      new MutationObserver(
+        updateLinks
+      );
 
-updateLinks();
+    observer.observe(
+      document.body,
+      {
+        childList:true,
+        subtree:true
+      }
+    );
 
+    setTimeout(
+      ()=>{
+        observer.disconnect();
+      },
+      5000
+    );
 
-const observer =
-  new MutationObserver(
-    updateLinks
-  );
-
-
-observer.observe(
-  document.body,
-  {
-    childList:true,
-    subtree:true
-  }
-);
-
-
-setTimeout(
-  ()=>{
-    observer.disconnect();
-  },
-  5000
-);
-
-
-}catch(e){}
+  }catch(e){}
 
 })();
 
 </script>
-
 
 </body>
 </html>
