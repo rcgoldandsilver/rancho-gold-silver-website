@@ -615,7 +615,7 @@ text-align:center
   }
 
   /* Control hero image size */
-  .hero picture{
+ .hero picture{
   display:block;
   width:100%;
   max-height:none;
@@ -626,9 +626,8 @@ text-align:center
   display:block;
   width:100%;
   height:auto;
-  max-height:650px;
+  max-height:none;
   object-fit:contain;
-  object-position:center;
 }
   /* Improve section spacing */
   .section{
