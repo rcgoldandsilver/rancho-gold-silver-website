@@ -1104,6 +1104,60 @@ a{color:inherit;text-decoration:none}
     animation-duration:7.2s;
   }
 }
+
+/* GOLD LAB MOBILE: FURNACE STAYS IN VIEW WHILE ADDING METALS */
+@media (max-width: 850px) {
+  .shell {padding: 10px 10px 40px;}
+  .hero {padding: 12px 0 4px;}
+  .hero h1 {font-size: 34px; margin: 3px 0;}
+  .hero p {font-size: 11px; line-height: 1.35;}
+  .eyebrow {font-size: 9px; letter-spacing: .14em;}
+  .goldline {margin: 7px auto;}
+  .topstatus {margin: 6px 0 10px; gap: 4px;}
+  .topstatus .chip:nth-child(n+3) {display:none;}
+  .section-label {margin: 9px 0 7px;}
+  .workspace {display:flex; flex-direction:column; gap: 8px; align-items:stretch;}
+  .workspace > .stage {
+    position:sticky; top:0; z-index:35;
+    min-height: 215px; height:215px;
+    flex:none; border-radius:12px;
+    box-shadow:0 8px 22px #0008;
+  }
+  .stagehead {top:7px;left:10px;}
+  .stagehead span {font-size:8px;letter-spacing:.08em;}
+  .stagehead b {font-size:11px;margin:0;}
+  .stage-note {bottom:4px;font-size:9px;}
+  .scene {inset: 15px 0 0; overflow:hidden;}
+  .machine {
+    width:570px;min-width:570px;height:405px;
+    transform:scale(.43); transform-origin:center center;
+    flex-shrink:0;
+  }
+  .casting {inset: 20px 0 15px;}
+  .casting-cup {transform:scale(.72);}
+  .casting-mold {top:56%;height:58px;}
+  .casting-caption {font-size:10px;bottom:2px;}
+  .metals {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}
+  .metal {min-height:100px;padding:5px 3px 6px;border-radius:9px;}
+  .jar {width:64px;height:46px;margin:4px auto 2px;}
+  .metal-name {font-size:10px;letter-spacing:0;}
+  .metal-desc {display:none;}
+  .metal .hint {font-size:8px;margin-top:1px;}
+  .metal .symbol,.metal .qty {top:3px;font-size:9px;}
+  .metal .symbol {left:5px;}
+  .metal .qty {right:5px;}
+  .panel {padding:12px;gap:10px;}
+  .panel h2 {font-size:21px;}
+  .stats {grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;}
+  .stat {padding:7px 4px;text-align:center;}
+  .stat small {font-size:8px;}
+  .stat strong {font-size:15px;}
+  .stat strong em {font-size:9px;}
+  .recipe {min-height:35px;}
+  .site-ticker {display:flex;justify-content:space-around;gap:4px;padding:7px 3px;}
+  .site-ticker span {margin:0;font-size:10px;white-space:nowrap;}
+}
+
 </style>
 </head>
 <body>
@@ -1144,7 +1198,7 @@ a{color:inherit;text-decoration:none}
 </header>
 
 <!-- WEBSITE LIVE PRICE STRIP -->
-<a href="prices.html" class="site-ticker">
+<a href="prices.html" class="site-ticker ticker">
   <span>GOLD <b>Live Bid</b></span>
   <span>SILVER <b>Live Bid</b></span>
   <span>PLATINUM <b>Live Bid</b></span>
@@ -1354,7 +1408,35 @@ a{color:inherit;text-decoration:none}
 
 <div class="toast" id="toast" role="status"></div>
 
-<!-- GAME JAVASCRIPT CONTINUES IN PART 3 -->
+<script>
+
+/* Put the metal controls directly below the sticky furnace on phones. */
+(function () {
+  const picker = document.getElementById('metals');
+  const label = picker && picker.previousElementSibling;
+  const workspace = document.querySelector('.workspace');
+  const panel = workspace && workspace.querySelector('.panel');
+  if (!picker || !label || !workspace || !panel) return;
+  const marker = document.createComment('desktop metal picker location');
+  label.parentNode.insertBefore(marker, label);
+  function layoutGoldLab() {
+    if (window.matchMedia('(max-width: 850px)').matches) {
+      workspace.insertBefore(label, panel);
+      workspace.insertBefore(picker, panel);
+      label.textContent = '01 / Tap a metal to fill the crucible above';
+    } else {
+      marker.parentNode.insertBefore(label, marker.nextSibling);
+      label.after(picker);
+      label.textContent = '01 / Select your raw materials';
+    }
+  }
+  layoutGoldLab();
+  window.addEventListener('resize', layoutGoldLab);
+})();
+
+</script>
+<!-- Live ticker uses the same shared site.js as the main website. -->
+<script src="site.js"></script>
 
 <script>
 window.addEventListener('error',function(e){
