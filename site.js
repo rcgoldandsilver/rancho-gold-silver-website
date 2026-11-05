@@ -1094,3 +1094,17 @@ document.addEventListener("click", function(event) {
 
 });
 
+/* ADD THE GOLD LAB TO ALL WEBSITE MENUS */
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".nav").forEach(function (nav) {
+    if (nav.querySelector('a[href*="smelt.html"]')) return;
+
+    const link = document.createElement("a");
+    link.href = "smelt.html";
+    link.textContent = "The Gold Lab";
+
+    nav.appendChild(link);
+  });
+});
+
